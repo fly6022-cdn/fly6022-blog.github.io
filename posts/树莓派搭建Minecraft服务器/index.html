@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+    
+    <title>树莓派搭建Minecraft服务器 - fly6022</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="fly6022, 技术宅, 编程, code">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    
+
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/png" />
+    <meta name="description" content="树莓派搭建Minecraft服务器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树莓派搭建Minecraft服务器">
+<meta property="og:url" content="https://blog.fly6022.fun/posts/%E6%A0%91%E8%8E%93%E6%B4%BE%E6%90%AD%E5%BB%BAMinecraft%E6%9C%8D%E5%8A%A1%E5%99%A8/index.html">
+<meta property="og:site_name" content="fly6022">
+<meta property="og:description" content="树莓派搭建Minecraft服务器">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.fly6022.fun/images/posts/2021-01-26-01/01.png">
+<meta property="og:image" content="https://blog.fly6022.fun/images/posts/2021-01-26-01/02.png">
+<meta property="og:image" content="https://blog.fly6022.fun/images/posts/2021-01-26-01/03.png">
+<meta property="og:image" content="https://blog.fly6022.fun/images/posts/2021-01-26-01/04.png">
+<meta property="og:image" content="https://blog.fly6022.fun/images/posts/2021-01-26-01/05.png">
+<meta property="og:image" content="https://blog.fly6022.fun/images/posts/2021-01-26-01/06.png">
+<meta property="og:image" content="https://blog.fly6022.fun/images/posts/2021-01-26-01/07.png">
+<meta property="article:published_time" content="2021-01-26T10:58:13.000Z">
+<meta property="article:modified_time" content="2022-04-05T10:09:35.806Z">
+<meta property="article:author" content="fly6022">
+<meta property="article:tag" content="Minecraft">
+<meta property="article:tag" content="服务器">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.fly6022.fun/images/posts/2021-01-26-01/01.png">
+    <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css?v=1659088233405">
+    
+        <link rel="stylesheet" href="//at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css">
+    
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1659088233405">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1659088233405">
+    <link rel="stylesheet" href="/css/style.css?v=1659088233405">
+    
+        <link rel="stylesheet" href="/css/dark.css?v=1659088233405">
+     
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            showProcessingMessages: false,
+            messageStyle: "none"
+          }
+        });
+      </script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
+        </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="/lib/aplayer@1.10.0/aplayer.min.css">
+    <script src="/lib/aplayer@1.10.0/aplayer.min.js" type="text/javascript"></script>
+    
+    <script src="/lib/meting/meting.min.js" type="text/javascript"></script>
+    <meta name="generator" content="Hexo 6.1.0"></head>
+
+<body class="mdui-drawer-body-left">
+    
+    <meting-js style="position: absolute; z-index:99999;" type="playlist" server="netease" id="6622801607" fixed="true"></meting-js>
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(/images/background/25.png)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="fly6022" class="mdui-btn mdui-btn-icon"><img src="/images/logo.png" alt="fly6022"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="fly6022">
+            <img src="/images/logo.png" alt="fly6022" alt="fly6022">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>9</div>
+        <div><span>标签</span>17</div>
+        <div><span>分类</span>3</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/about.html" title="关于博客">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/links.html" title="友情链接">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                友情链接
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/donate.html" title="请杯咖啡">
+            <i class="mdui-list-item-icon nexmoefont icon-coffee"></i>
+            <div class="mdui-list-item-content">
+                请杯咖啡
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        
+            <form id="search_form">
+                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="搜索" style="
+                    font-size: 15px !important;
+                    height: 56px !important;
+                    background-image: none;
+                "></label>
+            </form>
+         
+    </div>
+</div>
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://space.bilibili.com/191078710" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .1);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/fly6022" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .1);">
+            <i class="nexmoefont icon-github"></i>
+        </a><a class="mdui-ripple" href="https://www.zhihu.com/people/fly_6022" target="_blank" mdui-tooltip="{content: '知乎'}" style="color: rgb(30, 136, 229);background-color: rgba(30, 136, 229, .1);">
+            <i class="nexmoefont icon-zhihu"></i>
+        </a>
+    </div>
+</div>
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/学习资料/">学习资料</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/编程开发/">编程开发</a>
+          <span class="category-list-count">5</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/随便写写/">随便写写</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/Ajax/" style="font-size: 20px;">Ajax</a> <a href="/tags/ESP8266/" style="font-size: 10px;">ESP8266</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Minecraft/" style="font-size: 10px;">Minecraft</a> <a href="/tags/NodeMCU/" style="font-size: 10px;">NodeMCU</a> <a href="/tags/Raspberry/" style="font-size: 10px;">Raspberry</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo-renderer-kramed/" style="font-size: 10px;">hexo-renderer-kramed</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF/" style="font-size: 10px;">信息技术</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">博客</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E4%B8%8E%E8%AE%A1%E7%AE%97/" style="font-size: 10px;">数据与计算</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">服务器</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" style="font-size: 10px;">树莓派</a> <a href="/tags/%E7%A1%AC%E4%BB%B6%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">硬件编程</a>
+    </div>
+    
+  </div>
+
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2022 fly6022
+        <br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            <div class="nexmoe-post">
+
+  <article>
+      
+          <div class="nexmoe-post-cover" style="padding-bottom: 52.81249999999999%;"> 
+              <img data-src="/images/background/97.jpg" data-sizes="auto" alt="树莓派搭建Minecraft服务器" class="lazyload">
+              <h1>树莓派搭建Minecraft服务器</h1>
+          </div>
+      
+      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2021年01月26日</a>
+</div>
+
+      
+
+      <p>树莓派搭建Minecraft服务器</p>
+<span id="more"></span>
+<h2 id="本文章适合的人-情况"><a href="#本文章适合的人-情况" class="headerlink" title="本文章适合的人/情况"></a>本文章适合的人/情况</h2><ul>
+<li>希望搭建一个属于自己的同学、基友服务器</li>
+<li>对服务器配置要求不太高的人</li>
+<li>有一定技术基础的人</li>
+<li>希望开一个7*24小时服务器却又担心电费问题的人</li>
+<li>平时玩游戏时间不多，租用服务器觉得不划算的人</li>
+<li>有以上情况且手头正好有一台闲置的树莓派的人</li>
+</ul>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li>树莓派的配置不高且高负荷工作时发热较严重，推荐搭配散热片及散热风扇来使用。</li>
+<li>树莓派的稳定性较差，仅适用于搭建个人小型服务器，不要跑图、设置在线人数过多。</li>
+<li>本文章需要有一定的技术基础，小白请先了解相关知识。</li>
+<li>本教程一些步骤不单单局限于树莓派，可拓展至大部分安装有Linux系统的硬件设备。</li>
+</ol>
+<h2 id="你需要准备"><a href="#你需要准备" class="headerlink" title="你需要准备"></a>你需要准备</h2><ul>
+<li>安装好系统（建议图形界面）且可以联网的树莓派（此处使用的是Ubuntu 20.04 LTS Arm64系统）</li>
+<li>公网映射软件（如：<a target="_blank" rel="noopener" href="https://www.natfrp.com/">Sakura FRP</a>等），局域网开服可略过。</li>
+<li>一台能远程控制树莓派的手机/电脑</li>
+</ul>
+<h2 id="开始搭建"><a href="#开始搭建" class="headerlink" title="开始搭建"></a>开始搭建</h2><h3 id="安装Java"><a href="#安装Java" class="headerlink" title="安装Java"></a>安装Java</h3><p>和客户端一样，服务端也需要Java的支持，请按照以下命令来安装Java：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get install openjdk-16-jdk<br></code></pre></td></tr></table></figure>
+<h3 id="下载开服核心"><a href="#下载开服核心" class="headerlink" title="下载开服核心"></a>下载开服核心</h3><p>首先，搭建Minecraft服务器需要一个开服核心，这是搭建Minecraft服务器的必由之路。</p>
+<p>这里，我推荐使用Spigot（水龙头）核心，原因是这个核心比较稳定，并且适合配置较低的设备。当然，你也可以使用其它核心，比如bukkit。</p>
+<p>访问<a target="_blank" rel="noopener" href="https://getbukkit.org/download/spigot">Getbukkit</a>，下载你需要版本的核心。</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/images/posts/2021-01-26-01/01.png" alt="01" class="lazyload"></p>
+<p>核心是一个<code>.jar</code>文件,此处我使用的核心适用于Minecraft Java版 1.15.2。</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/images/posts/2021-01-26-01/02.png" alt="02" class="lazyload"></p>
+<h3 id="配置服务器环境"><a href="#配置服务器环境" class="headerlink" title="配置服务器环境"></a>配置服务器环境</h3><p>在存有核心文件的目录新建一个<code>run.sh</code>文件，该文件作为服务器的启动脚本。</p>
+<p>打开，在文本编辑器输入以下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo java -Xms768M -Xmx2048M -jar /root/Desktop/Minecraft_server/Server_3/[核心名称].jar nogui<br></code></pre></td></tr></table></figure>
+<p>其中，<strong>文件路径根据具体情况而定</strong>。</p>
+<blockquote>
+<p>sudo：以管理员身份执行<br>-Xms768M：程序运行时最小内存为768M<br>-Xmx2048M：程序运行时最大内存为2048M<br>nogui：即No GUI，无图形界面，可节省内存</p>
+</blockquote>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/images/posts/2021-01-26-01/03.png" alt="03" class="lazyload"></p>
+<p>之后保存文件。</p>
+<p>在终端输入命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /root/Desktop/Minecraft_server/Server_3/<br><br>sh run.sh<br></code></pre></td></tr></table></figure>
+<p>回车。</p>
+<p>命令执行结束，会发现在文件夹中多了几个文件。</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/images/posts/2021-01-26-01/04.png" alt="04" class="lazyload"></p>
+<p>打开文件夹中的<code>eula.txt</code>，将<code>eula</code>的参数由<code>false</code>改为<code>true</code>。</p>
+<p>保存。</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/images/posts/2021-01-26-01/05.png" alt="05" class="lazyload"></p>
+<p>接着，打开文件夹中的<code>server.properties</code>文件（该文件是服务器的配置文件）。</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/images/posts/2021-01-26-01/06.png" alt="06" class="lazyload"></p>
+<p>参考<a target="_blank" rel="noopener" href="https://minecraft-zh.gamepedia.com/Server.properties">Minecraft Wiki</a>.以下是我整理出来的各参数的实际含义：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-comment">#Minecraft server properties</span><br><span class="hljs-comment">#Wed Jan 27 16:46:05 CST 2021</span><br><span class="hljs-string">broadcast-rcon-to-ops=true</span>  <span class="hljs-comment"># 广播RCON信息给OP</span><br><span class="hljs-string">view-distance=10</span>  <span class="hljs-comment"># 视野距离</span><br><span class="hljs-string">max-build-height=256</span>  <span class="hljs-comment"># 建筑最大高度，最大值65534</span><br><span class="hljs-string">server-ip=</span>  <span class="hljs-comment"># 服务器IP（可留空或填localhost）</span><br><span class="hljs-string">level-seed=</span>  <span class="hljs-comment"># 地图种子</span><br><span class="hljs-string">rcon.port=25575</span>  <span class="hljs-comment"># 可忽略，RCON远程连接协议端口</span><br><span class="hljs-string">gamemode=survival</span>  <span class="hljs-comment"># 游戏模式</span><br><span class="hljs-string">server-port=25565</span> <span class="hljs-comment"># 游戏端口，根据个人情况设置，可保持默认值25565</span><br><span class="hljs-string">allow-nether=true</span>  <span class="hljs-comment"># 开放地狱</span><br><span class="hljs-string">enable-command-block=false</span>  <span class="hljs-comment"># 开启命令方块</span><br><span class="hljs-string">enable-rcon=false</span>  <span class="hljs-comment"># 开启RCON功能，建议不开启</span><br><span class="hljs-string">enable-query=false</span>  <span class="hljs-comment"># 允许使用 GameSpy4 协议的服务器监听器</span><br><span class="hljs-string">op-permission-level=4</span>  <span class="hljs-comment"># OP等级，最大值为4，等同于控制台权限</span><br><span class="hljs-string">prevent-proxy-connections=false</span>  <span class="hljs-comment"># 检测异地登陆并阻止进入游戏</span><br><span class="hljs-string">generator-settings=</span>  <span class="hljs-comment"># 生成器设置</span><br><span class="hljs-string">resource-pack=</span>  <span class="hljs-comment"># 服务器使用资源包设置</span><br><span class="hljs-string">level-name=world</span>  <span class="hljs-comment"># 地图名称</span><br><span class="hljs-string">rcon.password=</span>  <span class="hljs-comment"># RCON密码，若不开启RCON功能可忽略</span><br><span class="hljs-string">player-idle-timeout=0</span>  <span class="hljs-comment"># 挂机检测，0表示不开启，单位为分钟</span><br><span class="hljs-string">motd=A</span> <span class="hljs-string">Minecraft</span> <span class="hljs-string">Server</span>  <span class="hljs-comment"># 服务器标题，要求使用Unicode格式文字</span><br><span class="hljs-string">query.port=25565</span>  <span class="hljs-comment"># Query端口，若不开启Query可忽略</span><br><span class="hljs-string">debug=false</span> <span class="hljs-comment"># 调试模式</span><br><span class="hljs-string">force-gamemode=false</span>  <span class="hljs-comment"># 强制游戏模式</span><br><span class="hljs-string">hardcore=false</span>  <span class="hljs-comment"># 极限生存</span><br><span class="hljs-string">white-list=false</span>  <span class="hljs-comment"># 白名单</span><br><span class="hljs-string">broadcast-console-to-ops=true</span>  <span class="hljs-comment"># 广播控制台信息给OP</span><br><span class="hljs-string">pvp=true</span>  <span class="hljs-comment"># 玩家攻击</span><br><span class="hljs-string">spawn-npcs=true</span>  <span class="hljs-comment"># 生成村民</span><br><span class="hljs-string">generate-structures=true</span>  <span class="hljs-comment"># 生成建筑</span><br><span class="hljs-string">spawn-animals=true</span>  <span class="hljs-comment"># 生成动物</span><br><span class="hljs-string">snooper-enabled=true</span>  <span class="hljs-comment"># 允许采集服务器信息</span><br><span class="hljs-string">difficulty=easy</span>  <span class="hljs-comment"># 强制难度选项</span><br><span class="hljs-string">function-permission-level=2</span>  <span class="hljs-comment"># 默认权限等级</span><br><span class="hljs-string">network-compression-threshold=256</span>  <span class="hljs-comment"># 数据包压缩大小</span><br><span class="hljs-string">level-type=default</span>  <span class="hljs-comment"># 种子类型</span><br><span class="hljs-string">spawn-monsters=true</span>  <span class="hljs-comment"># 生成怪物</span><br><span class="hljs-string">max-tick-time=60000</span>  <span class="hljs-comment"># 服务器最大崩溃等待响应时间，单位毫秒</span><br><span class="hljs-string">enforce-whitelist=false</span>  <span class="hljs-comment"># 强制白名单</span><br><span class="hljs-string">use-native-transport=true</span>  <span class="hljs-comment"># 针对Linux的优化</span><br><span class="hljs-string">max-players=20</span>  <span class="hljs-comment"># 最大玩家数量</span><br><span class="hljs-string">resource-pack-sha1=</span>  <span class="hljs-comment"># 资源包验证，使用哈希加密SHA1</span><br><span class="hljs-string">spawn-protection=16</span>  <span class="hljs-comment"># 出生点保护</span><br><span class="hljs-string">online-mode=true</span>  <span class="hljs-comment"># 在线模式（正版模式）</span><br><span class="hljs-string">allow-flight=false</span>  <span class="hljs-comment"># 允许飞行</span><br><span class="hljs-string">max-world-size=29999984</span>  <span class="hljs-comment"># 世界生成上限</span><br></code></pre></td></tr></table></figure>
+<p>配置并保存后，再次运行启动脚本。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sh run.sh<br></code></pre></td></tr></table></figure>
+<p>稍等片刻。</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/images/posts/2021-01-26-01/07.png" alt="07" class="lazyload"></p>
+<p>待命令行出现<code>Done</code>时，即表示我们的服务器已经在本地成功运行了。</p>
+<p>不过，想要邀请你的好朋友一起来玩服务器，还差最后一步——配置公网映射，在这里建议使用Sakura FRP.</p>
+
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>fly6022<br>
+        <strong>本文链接：</strong><a href="https://blog.fly6022.fun/posts/%E6%A0%91%E8%8E%93%E6%B4%BE%E6%90%AD%E5%BB%BAMinecraft%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="https:&#x2F;&#x2F;blog.fly6022.fun&#x2F;posts&#x2F;%E6%A0%91%E8%8E%93%E6%B4%BE%E6%90%AD%E5%BB%BAMinecraft%E6%9C%8D%E5%8A%A1%E5%99%A8&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;blog.fly6022.fun&#x2F;posts&#x2F;%E6%A0%91%E8%8E%93%E6%B4%BE%E6%90%AD%E5%BB%BAMinecraft%E6%9C%8D%E5%8A%A1%E5%99%A8&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" target="_blank">署名-非商业性使用-禁止演绎 4.0 国际 (CC BY-NC-ND 4.0) </a> 协议进行许可，转载请注明原出处。
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/Minecraft/" rel="tag">Minecraft</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a>
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div id="gitalk"></div>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '15111f41fc2a43bae55d',
+        clientSecret: '5306d89245e1fdc0e91351f75c14808e03cadcd2',
+        id: window.location.pathname,
+        repo: 'fly6022.github.io',
+        owner: 'fly6022',
+        admin: 'fly6022'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E6%96%87%E7%AB%A0%E9%80%82%E5%90%88%E7%9A%84%E4%BA%BA-%E6%83%85%E5%86%B5"><span class="toc-number">1.</span> <span class="toc-text">本文章适合的人&#x2F;情况</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">2.</span> <span class="toc-text">注意事项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%A0%E9%9C%80%E8%A6%81%E5%87%86%E5%A4%87"><span class="toc-number">3.</span> <span class="toc-text">你需要准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA"><span class="toc-number">4.</span> <span class="toc-text">开始搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Java"><span class="toc-number">4.1.</span> <span class="toc-text">安装Java</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%BC%80%E6%9C%8D%E6%A0%B8%E5%BF%83"><span class="toc-number">4.2.</span> <span class="toc-text">下载开服核心</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%8E%AF%E5%A2%83"><span class="toc-number">4.3.</span> <span class="toc-text">配置服务器环境</span></a></li></ol></li></ol>
+                                  </div>
+                              </button>
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+     
+    <div id="nexmoe-search-space">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-container">
+                    <input class="search-input" type="text" placeholder="搜索" oninput="sinput();">
+                </div>
+                <a class="search-close" onclick="sclose();">×</a>
+            </div>
+            <div class="search-body"></div>
+        </div>
+    </div>
+
+    <script src="/lib/lazysizes/lazysizes@5.1.0.min.js"></script>
+<script src="/lib/mdui_043tiny/js/mdui.js"></script>
+<script src="/lib/jQuery/jQuery@3.5.1.min.js"></script>
+<script src="/lib/fancybox/jquery.fancybox.min.js"></script>
+<script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js?id=JEOD145Z95thC4GS&ck=JEOD145Z95thC4GS"></script>
+
+ 
+
+<script async src="/js/app.js?v=1659088233419"></script>
+
+
+	<script async src="/js/search.js?v=1659088233419"></script>
+
+
+<script src="/lib/justifiedGallery/jquery.justifiedGallery@3.8.1.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+
+
+    
+
+
+
+
+
+</body>
+
+</html>
