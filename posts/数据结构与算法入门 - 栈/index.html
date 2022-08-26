@@ -4,7 +4,7 @@
 
 <head>
     
-    <title>文章归档：2020/12 - fly6022&#39;s Blog</title>
+    <title>数据结构与算法入门 - 栈 - fly6022&#39;s Blog</title>
     <meta charset="UTF-8">
     <meta name="keywords" content="fly6022, 技术宅, 编程, code">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
@@ -12,25 +12,29 @@
     
 
     <link rel="shortcut icon" href="/images/favicon.png" type="image/png" />
-    <meta name="description" content="ヾ(&#x3D;･ω･&#x3D;)o 这里是fly6022的个人小站。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="fly6022&#39;s Blog">
-<meta property="og:url" content="https://blog.fly6022.fun/archives/2020/12/index.html">
+    <meta name="description" content="在计算机科学中，为了处理大量的、复杂的数据，便需要引入两个具有一定逻辑关系的概念（或工具）来帮助我们，即数据结构、算法. 本文介绍常见的数据结构之一——栈.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法入门 - 栈">
+<meta property="og:url" content="https://blog.fly6022.fun/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8%20-%20%E6%A0%88/index.html">
 <meta property="og:site_name" content="fly6022&#39;s Blog">
-<meta property="og:description" content="ヾ(&#x3D;･ω･&#x3D;)o 这里是fly6022的个人小站。">
+<meta property="og:description" content="在计算机科学中，为了处理大量的、复杂的数据，便需要引入两个具有一定逻辑关系的概念（或工具）来帮助我们，即数据结构、算法. 本文介绍常见的数据结构之一——栈.">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-08-26T08:16:55.000Z">
+<meta property="article:modified_time" content="2022-08-26T09:02:52.480Z">
 <meta property="article:author" content="fly6022">
-<meta property="article:tag" content="fly6022, 技术宅, 编程, code">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="栈">
 <meta name="twitter:card" content="summary">
-    <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css?v=1661504582431">
+    <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css?v=1661504582330">
     
         <link rel="stylesheet" href="//at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css">
     
-    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1661504582431">
-    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1661504582431">
-    <link rel="stylesheet" href="/css/style.css?v=1661504582431">
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1661504582330">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1661504582330">
+    <link rel="stylesheet" href="/css/style.css?v=1661504582330">
     
-        <link rel="stylesheet" href="/css/dark.css?v=1661504582431">
+        <link rel="stylesheet" href="/css/dark.css?v=1661504582330">
      
     
     <script type="text/x-mathjax-config">
@@ -200,35 +204,79 @@
     </div>
     <div id="nexmoe-content">
         <div class="nexmoe-primary">
-            <section class="nexmoe-posts">
-    
-    <div class="nexmoe-post">
-        <a href="/posts/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/">
-            
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 56.25%;"> 
-                    <img data-src="/images/background/40.jpg" data-sizes="auto" alt="记一次博客优化" class="lazyload">
-                    <h1>记一次博客优化</h1>
-                </div>
-            
-        </a>
+            <div class="nexmoe-post">
 
-        <div class="nexmoe-post-meta nexmoe-rainbow">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2020年12月26日</a>
-            
-                <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写</a>
-            
-            
-                <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a>
-            
-        </div>
+  <article>
+      
+          <div class="nexmoe-post-cover" style="padding-bottom: 44.775510204081634%;"> 
+              <img data-src="/images/background/106.jpg" data-sizes="auto" alt="数据结构与算法入门 - 栈" class="lazyload">
+              <h1>数据结构与算法入门 - 栈</h1>
+          </div>
+      
+      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2022年08月26日</a>
+</div>
 
-        <article>
-            <p>233，本次博客优化主要对网站的层叠样式表（CSS）以及字体方面做了微调。</p>
-        </article>
+      
+
+      <p>在计算机科学中，为了处理大量的、复杂的数据，便需要引入两个具有一定逻辑关系的概念（或工具）来帮助我们，即数据结构、算法.</p>
+<p>本文介绍常见的数据结构之一——栈.</p>
+<span id="more"></span>
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><blockquote>
+<p>数据结构是一种具有一定逻辑关系，在计算机中应用某种存储结构，并且封装了相应操作的数据元素集合。数据结构包含三方面的内容，逻辑关系、存储关系及操作.</p>
+</blockquote>
+<h3 id="常见的数据结构"><a href="#常见的数据结构" class="headerlink" title="常见的数据结构"></a>常见的数据结构</h3><h4 id="栈-Stack"><a href="#栈-Stack" class="headerlink" title="栈(Stack)"></a>栈(Stack)</h4><p>栈，又称作堆栈，栈是数据暂时存储的地方，是一种特殊的线性表，它只允许在它的一个固定端进行数据结点的插入和删除.</p>
+<p>我们把栈比作一个无盖的圆柱状薯片桶，把数据比作薯片，我们只能在薯片桶的上方放入或拿出薯片，且在上方的薯片最先被拿出，最后被放入；在下方的薯片最后被拿出，最先被放入，这也引出了栈的另一个性质——栈的先进后出性.</p>
+<p>如何对栈进行操作？在上方的例子中，我们向薯片桶中放入一枚薯片，这个过程叫做<strong>进栈操作（PUSH）</strong>，我们再从薯片桶中拿出这枚薯片，这个过程叫做<strong>退栈操作（POP）</strong>.此时，薯片桶中最上方的薯片称为<strong>栈顶元素</strong>，进栈操作是把新元素放置在栈顶元素之上，并使之成为新的栈顶元素的操作；退栈操作则相反，是把栈顶元素移除，并使栈顶元素之下的元素成为新的栈顶元素的操作.</p>
+<p>将栈抽象为数学结构：当$n$个元素满足以某种顺序进栈，并在满足<strong>先进后出</strong>的前提之下，可任意时刻出栈，所获得的元素排列数目满足函数$Catalan() （卡塔兰数）$的计算，即：</p>
+<script type="math/tex; mode=display">f_n = \frac{1}{n+1} C^{n}_{2n}</script><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>[1] 无聊的CairBin.栈的概念及性质[EB/OL].简书网（ <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/540064de9b63">https://www.jianshu.com/p/540064de9b63</a> ）.2021.09.28-21:40:21</p>
+
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>fly6022<br>
+        <strong>本文链接：</strong><a href="https://blog.fly6022.fun/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8%20-%20%E6%A0%88/" title="https:&#x2F;&#x2F;blog.fly6022.fun&#x2F;posts&#x2F;%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8%20-%20%E6%A0%88&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;blog.fly6022.fun&#x2F;posts&#x2F;%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8%20-%20%E6%A0%88&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" target="_blank">署名-非商业性使用-禁止演绎 4.0 国际 (CC BY-NC-ND 4.0) </a> 协议进行许可，转载请注明原出处。
+        
     </div>
-    
-</section>
 
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">编程开发</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E6%A0%88/" rel="tag">栈</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div id="gitalk"></div>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '7792e6798da4d5db5d2d',
+        clientSecret: 'dabb45aab64c13a9e848c95dcc0b380dbe01c593',
+        id: decodeURI(window.location.pathname),
+        repo: 'fly6022-blog.github.io',
+        owner: 'fly6022-blog',
+        admin: 'fly6022'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+      </div>
+  
+</div>
             <div class="nexmoe-post-right">
               <div class="nexmoe-fixed">
                   <div class="nexmoe-tool"> 
@@ -236,6 +284,13 @@
                       
                         
                           
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">1.1.</span> <span class="toc-text">常见的数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%88-Stack"><span class="toc-number">1.1.1.</span> <span class="toc-text">栈(Stack)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">2.</span> <span class="toc-text">参考</span></a></li></ol>
+                                  </div>
+                              </button>
                           
                           
                       
@@ -267,10 +322,10 @@
 
  
 
-<script async src="/js/app.js?v=1661504582432"></script>
+<script async src="/js/app.js?v=1661504582335"></script>
 
 
-	<script async src="/js/search.js?v=1661504582432"></script>
+	<script async src="/js/search.js?v=1661504582335"></script>
 
 
 <script src="/lib/justifiedGallery/jquery.justifiedGallery@3.8.1.min.js"></script>
