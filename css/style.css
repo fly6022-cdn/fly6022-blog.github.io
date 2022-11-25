@@ -1421,6 +1421,12 @@ photos img {
   color: #fff;
   background-color: rgba(144,144,255,0.7);
 }
+.katex-display {
+/* mathjax 块级公式居中显示 */
+  text-align: center; /* 文字居中 */
+  width: 100%; /* 水平填充 */
+  display: inline-block; /* 父级元素内 */
+}
 @-moz-keyframes shake-it {
   0% {
     text-shadow: 0 0 rgba(0,255,255,0.5), 0 0 rgba(255,0,0,0.5);
