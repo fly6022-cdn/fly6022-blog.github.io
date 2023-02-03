@@ -1,4 +1,5 @@
 @import "https://fonts.googleapis.com/css?family=Noto+Serif+SC:400,700,800";
+@import "https://fonts.googleapis.com/css?family=Noto+Sans+SC:500,700,800";
 @import "https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css";
 @font-face {
   font-family: 'JetBrainsMono';
@@ -807,7 +808,7 @@ body {
   margin: auto !important;
 }
 strong {
-  font-family: Source Han Sans Bold, 'JetBrainsMono', microsoft jhenghei;
+  font-family: Noto Sans SC, 'JetBrainsMono', microsoft jhenghei;
 }
 .medium-zoom-overlay {
   z-index: 9999;
@@ -894,7 +895,7 @@ strong {
 #nexmoe-header .nexmoe-count div span {
   color: #363636;
   display: block;
-  font-family: Source Han Sans Bold, 'JetBrainsMono', microsoft jhenghei;
+  font-family: Noto Sans SC, 'JetBrainsMono', microsoft jhenghei;
 }
 #nexmoe-header .nexmoe-search input {
   border: none !important;
@@ -947,7 +948,7 @@ strong {
 }
 #nexmoe-header .nexmoe-list .nexmoe-list-item .mdui-list-item-content {
   margin-left: 0px;
-  font-family: Source Han Sans Bold, 'JetBrainsMono', microsoft jhenghei;
+  font-family: Noto Sans SC, 'JetBrainsMono', microsoft jhenghei;
   font-weight: 300;
 }
 #nexmoe-header .nexmoe-widget-wrap {
@@ -1131,7 +1132,8 @@ strong {
   z-index: 1;
   margin: 0;
   padding: 25px;
-  font-family: Source Han Sans Bold, 'JetBrainsMono', microsoft jhenghei;
+  font-family: Noto Sans SC;
+  font-weight: 700;
 }
 #nexmoe-content .nexmoe-post .nexmoe-post-cover h1:after {
   background-image: -moz-linear-gradient(to top, rgba(16,16,16,0.35) 25%, rgba(16,16,16,0) 100%);
@@ -1155,7 +1157,7 @@ strong {
 #nexmoe-content .nexmoe-post .nexmoe-post-meta {
   margin: 25px 0px;
   font-size: 0;
-  font-family: Source Han Sans Bold, 'JetBrainsMono', microsoft jhenghei;
+  font-family: Noto Sans SC, 'JetBrainsMono', microsoft jhenghei;
 }
 #nexmoe-content .nexmoe-post .nexmoe-post-meta a {
   border-radius: 20px;
