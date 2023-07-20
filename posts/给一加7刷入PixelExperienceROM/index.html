@@ -20,7 +20,7 @@
 <meta property="og:description" content="OnePlus 7 刷入类原生ROM PixelExperience.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-01-31T01:57:03.000Z">
-<meta property="article:modified_time" content="2023-07-20T11:37:55.668Z">
+<meta property="article:modified_time" content="2023-07-20T11:43:06.196Z">
 <meta property="article:author" content="fly6022">
 <meta property="article:tag" content="一加7">
 <meta property="article:tag" content="类原生">
@@ -28,13 +28,13 @@
 <meta property="article:tag" content="ROM">
 <meta property="article:tag" content="刷机">
 <meta name="twitter:card" content="summary">
-    <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css?v=1689853104535">
+    <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css?v=1689854713914">
     
         <link rel="stylesheet" href="//at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css">
     
-    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1689853104535">
-    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1689853104535">
-    <link rel="stylesheet" href="/css/style.css?v=1689853104535">
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1689854713914">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1689854713914">
+    <link rel="stylesheet" href="/css/style.css?v=1689854713915">
      
     
 
@@ -291,10 +291,11 @@
 <h3 id="打开调试功能"><a class="markdownIt-Anchor" href="#打开调试功能"></a> 打开调试功能</h3>
 <p>设置 --&gt; 关于手机 --&gt; 版本号（快速点击5次）–&gt; 开发者选项 --&gt; 打开USB调试。</p>
 <h2 id="解除-bootloader-锁"><a class="markdownIt-Anchor" href="#解除-bootloader-锁"></a> 解除 BootLoader 锁</h2>
-<p>!!! error 注意<br />
-解除Bootloader锁会清空手机 data 分区，请事先备份好个人数据！</p>
 <p>以下是解锁需要的命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">adb devices // 判断手机是否连接成功；若输出一串字符，则证明手机连接成功<br>adb reboot bootloader // 重启手机至 fastboot 模式<br>fastboot oem unlock // 解除 Bootloader 锁<br></code></pre></td></tr></table></figure>
+<div class="admonition error"><p class="admonition-title">注意
+</p><p>此步骤会清空手机 data 分区，请事先备份好个人数据！</p>
+</div>
 <p>之后手机会弹出一个确认界面，使用音量键勾选确认。</p>
 <p>手机自动重启，解锁完毕。</p>
 <h2 id="刷入第三方-rec-twrp"><a class="markdownIt-Anchor" href="#刷入第三方-rec-twrp"></a> 刷入第三方 REC TWRP</h2>
@@ -444,10 +445,10 @@
 
  
 
-<script async src="/js/app.js?v=1689853104546"></script>
+<script async src="/js/app.js?v=1689854713926"></script>
 
 
-	<script async src="/js/search.js?v=1689853104546"></script>
+	<script async src="/js/search.js?v=1689854713926"></script>
 
 
 <script src="/lib/justifiedGallery/jquery.justifiedGallery@3.8.1.min.js"></script>
