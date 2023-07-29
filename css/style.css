@@ -1,10 +1,11 @@
 @import "https://fonts.googleapis.com/css?family=Noto+Serif+SC:400,700,800";
 @import "https://fonts.googleapis.com/css?family=Noto+Sans+SC:500,700,800";
 @import "https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css";
-@font-face {
-  font-family: 'JetBrainsMono';
-  src: url("/lib/fonts/JetBrainsMono/JetBrainsMono-Medium.ttf");
-}
+@import "https://fonts.googleapis.com/css?family=Roboto";
+/*@font-face {
+    font-family:'JetBrainsMono';
+    src:url('/lib/fonts/JetBrainsMono/JetBrainsMono-Medium.ttf');
+}*/
 .nexmoe-archives .tagcloud {
   margin-bottom: 13px;
   font-size: 0;
@@ -808,7 +809,7 @@ body {
   margin: auto !important;
 }
 strong {
-  font-family: Noto Sans SC, 'JetBrainsMono', microsoft jhenghei;
+  font-family: Roboto, Noto Sans SC;
 }
 .medium-zoom-overlay {
   z-index: 9999;
@@ -895,7 +896,7 @@ strong {
 #nexmoe-header .nexmoe-count div span {
   color: #363636;
   display: block;
-  font-family: Noto Sans SC, 'JetBrainsMono', microsoft jhenghei;
+  font-family: Roboto, Noto Sans SC;
 }
 #nexmoe-header .nexmoe-search input {
   border: none !important;
@@ -948,7 +949,7 @@ strong {
 }
 #nexmoe-header .nexmoe-list .nexmoe-list-item .mdui-list-item-content {
   margin-left: 0px;
-  font-family: Noto Sans SC, 'JetBrainsMono', microsoft jhenghei;
+  font-family: Roboto, Noto Sans SC;
   font-weight: 300;
 }
 #nexmoe-header .nexmoe-widget-wrap {
@@ -1157,7 +1158,7 @@ strong {
 #nexmoe-content .nexmoe-post .nexmoe-post-meta {
   margin: 25px 0px;
   font-size: 0;
-  font-family: Noto Sans SC, 'JetBrainsMono', microsoft jhenghei;
+  font-family: Roboto, Noto Sans SC;
 }
 #nexmoe-content .nexmoe-post .nexmoe-post-meta a {
   border-radius: 20px;
