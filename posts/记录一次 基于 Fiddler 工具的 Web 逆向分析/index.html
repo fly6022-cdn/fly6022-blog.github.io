@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+    
+    <title>记录一次 基于 Fiddler 工具的 Web 逆向分析 - fly6022&#39;s Blog</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="fly6022, 技术宅, 编程, code">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    
+
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/imageurl/fly6022@master/images/favicon.png" type="image/png" />
+    <meta name="description" content="本文章以 百度题库: https:&#x2F;&#x2F;easylearn.baidu.com&#x2F;edu-page&#x2F;tiangong&#x2F;questiondetail 为例，采用 Fiddler 工具及 Python 语言实现 Web 逆向分析。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记录一次 基于 Fiddler 工具的 Web 逆向分析">
+<meta property="og:url" content="https://blog.fly6022.fun/posts/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%20%E5%9F%BA%E4%BA%8E%20Fiddler%20%E5%B7%A5%E5%85%B7%E7%9A%84%20Web%20%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="fly6022&#39;s Blog">
+<meta property="og:description" content="本文章以 百度题库: https:&#x2F;&#x2F;easylearn.baidu.com&#x2F;edu-page&#x2F;tiangong&#x2F;questiondetail 为例，采用 Fiddler 工具及 Python 语言实现 Web 逆向分析。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-07-31T15:06:59.000Z">
+<meta property="article:modified_time" content="2023-07-31T15:54:49.723Z">
+<meta property="article:author" content="fly6022">
+<meta property="article:tag" content="逆向工程">
+<meta property="article:tag" content="Web">
+<meta property="article:tag" content="Fiddler">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+    <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css?v=1690819065312">
+    
+        <link rel="stylesheet" href="//at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css">
+    
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1690819065312">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1690819065312">
+    <link rel="stylesheet" href="/css/style.css?v=1690819065312">
+     
+    
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            showProcessingMessages: false,
+            messageStyle: "none"
+          }
+        });
+      </script>
+
+      <style>
+        .katex-html {
+            display: none;
+        }
+      </style>
+    
+    <script src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="/lib/aplayer@1.10.0/aplayer.min.css">
+    <script src="/lib/aplayer@1.10.0/aplayer.min.js" type="text/javascript"></script>
+    
+    <script src="/lib/meting/meting.min.js" type="text/javascript"></script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6839568581522290"
+     crossorigin="anonymous"></script>
+     
+    <meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="mdui-drawer-body-left">
+    
+    <meting-js style="position: absolute; z-index:99999;" type="playlist" server="netease" id="6622801607" fixed="true"></meting-js>
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/imageurl/fly6022@master/images/background/25.png)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="fly6022" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/imageurl/fly6022@master/images/logo.png" alt="fly6022"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="fly6022">
+            <img src="https://cdn.jsdelivr.net/gh/imageurl/fly6022@master/images/logo.png" alt="fly6022" alt="fly6022">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>11</div>
+        <div><span>标签</span>24</div>
+        <div><span>分类</span>2</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/about.html" title="Me &amp; Blog">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                Me &amp; Blog
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/links.html" title="友情链接">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                友情链接
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/donate.html" title="请杯咖啡">
+            <i class="mdui-list-item-icon nexmoefont icon-coffee"></i>
+            <div class="mdui-list-item-content">
+                请杯咖啡
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        
+            <form id="search_form">
+                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="搜索" style="
+                    font-size: 15px !important;
+                    height: 56px !important;
+                    background-image: none;
+                "></label>
+            </form>
+         
+    </div>
+</div>
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://space.bilibili.com/191078710" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .1);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/fly6022" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .1);">
+            <i class="nexmoefont icon-github"></i>
+        </a><a class="mdui-ripple" href="https://www.zhihu.com/people/fly_6022" target="_blank" mdui-tooltip="{content: '知乎'}" style="color: rgb(30, 136, 229);background-color: rgba(30, 136, 229, .1);">
+            <i class="nexmoefont icon-zhihu"></i>
+        </a>
+    </div>
+</div>
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/编程开发/">编程开发</a>
+          <span class="category-list-count">6</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/随便写写/">随便写写</a>
+          <span class="category-list-count">5</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/Ajax/" style="font-size: 20px;">Ajax</a> <a href="/tags/ESP8266/" style="font-size: 10px;">ESP8266</a> <a href="/tags/Fiddler/" style="font-size: 10px;">Fiddler</a> <a href="/tags/Golang/" style="font-size: 10px;">Golang</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Minecraft/" style="font-size: 10px;">Minecraft</a> <a href="/tags/NodeMCU/" style="font-size: 10px;">NodeMCU</a> <a href="/tags/PixelExperience/" style="font-size: 10px;">PixelExperience</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/ROM/" style="font-size: 10px;">ROM</a> <a href="/tags/Raspberry/" style="font-size: 10px;">Raspberry</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/hexo-renderer-kramed/" style="font-size: 10px;">hexo-renderer-kramed</a> <a href="/tags/%E4%B8%80%E5%8A%A07/" style="font-size: 10px;">一加7</a> <a href="/tags/%E5%88%B7%E6%9C%BA/" style="font-size: 10px;">刷机</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">博客</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">服务器</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" style="font-size: 10px;">树莓派</a> <a href="/tags/%E7%A1%AC%E4%BB%B6%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">硬件编程</a> <a href="/tags/%E7%B1%BB%E5%8E%9F%E7%94%9F/" style="font-size: 10px;">类原生</a> <a href="/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/" style="font-size: 10px;">逆向工程</a>
+    </div>
+    
+  </div>
+
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2023 fly6022
+        <br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            <div class="nexmoe-post">
+
+  <article>
+      
+          <div class="nexmoe-post-cover" style="padding-bottom: 57.02005730659025%;"> 
+              <img data-src="https://cdn.jsdelivr.net/gh/imageurl/fly6022@master/images/posts/fw1/01.jpg" data-sizes="auto" alt="记录一次 基于 Fiddler 工具的 Web 逆向分析" class="lazyload">
+              <h1>记录一次 基于 Fiddler 工具的 Web 逆向分析</h1>
+          </div>
+      
+      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2023年07月31日</a>
+</div>
+
+      
+
+      <p>本文章以 <a target="_blank" rel="noopener" href="https://easylearn.baidu.com/edu-page/tiangong/questiondetail">百度题库: https://easylearn.baidu.com/edu-page/tiangong/questiondetail</a> 为例，采用 Fiddler 工具及 Python 语言实现 Web 逆向分析。</p>
+<span id="more"></span>
+<div class="admonition error"><p class="admonition-title">法律风险告知
+</p><p>本文仅用于编程及相关技术的学习交流及经验分享，请勿利用相关技术手段从事商业侵权以及其它违法犯罪活动！</p>
+</div>
+<h2 id="网页客户端操作逻辑"><a class="markdownIt-Anchor" href="#网页客户端操作逻辑"></a> 网页客户端操作逻辑</h2>
+<p>该网站是学习类网站，主要功能是提供作业习题内容及相关解析，客户端的操作逻辑是：用户将题目输入到搜索框，之后点击“搜索试题”按钮，网页便重定向到对应的页面。与搜索引擎的操作逻辑类似。</p>
+<p><a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/imageurl/fly6022@master/images/posts/fw1/02.png">02</a></p>
+<p>注意到，当按下“搜索试题”按钮后，URL后面多了键名为<code>query</code>，键值为<code>黄河小浪底水利枢纽是治理开发黄河的关键性工程。阅读材料回答问题。(14分) 材料</code>(编码后为：<code>%E9%BB%84%E6%B2%B3%E5%B0%8F%E6%B5%AA%E5%BA%95%E6%B0%B4%E5%88%A9%E6%9E%A2%E7%BA%BD%E6%98%AF%E6%B2%BB%E7%90%86%E5%BC%80%E5%8F%91%E9%BB%84%E6%B2%B3%E7%9A%84%E5%85%B3%E9%94%AE%E6%80%A7%E5%B7%A5%E7%A8%8B%E3%80%82%E9%98%85%E8%AF%BB%E6%9D%90%E6%96%99%E5%9B%9E%E7%AD%94%E9%97%AE%E9%A2%98%E3%80%82%2814%E5%88%86%29%20%E6%9D%90%E6%96%99</code>)的内容。</p>
+<p><a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/imageurl/fly6022@master/images/posts/fw1/04.png">04</a></p>
+<p>点击任意一条信息，我们跳转到了一个新页面，这个页面有一些像 作业帮 的搜题界面。</p>
+<p>此页面展示了习题的题目内容及解答步骤。</p>
+<p>同时，URL也发生了变化，此处的URL为<code>https://easylearn.baidu.com/edu-page/tiangong/questiondetail?id=1714572139188923485&amp;from=jySearch</code>。</p>
+<p>注意到此处出现了一个新参数<code>id</code>，它的值为<code>1714572139188923485</code></p>
+<h2 id="实现原理及逆向工程"><a class="markdownIt-Anchor" href="#实现原理及逆向工程"></a> 实现原理及逆向工程</h2>
+<p>为了弄清以上操作的实际原理，我们使用 Fiddler 工具，对刚才的全部过程进行记录，并且抓取部分请求片段进行分析。</p>
+<p><a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/imageurl/fly6022@master/images/posts/fw1/03.png">03</a></p>
+<p>在刚才的请求操作中，以下请求片段引起了我们的注意：</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs llvm">GET https://easylearn.baidu.com/edu-web/content/search?query<span class="hljs-operator">=</span><span class="hljs-variable">%E9</span><span class="hljs-variable">%BB</span><span class="hljs-variable">%84</span><span class="hljs-variable">%E6</span><span class="hljs-variable">%B2</span><span class="hljs-variable">%B3</span><span class="hljs-variable">%E5</span><span class="hljs-variable">%B0</span><span class="hljs-variable">%8</span>F<span class="hljs-variable">%E6</span><span class="hljs-variable">%B5</span><span class="hljs-variable">%AA</span><span class="hljs-variable">%E5</span><span class="hljs-variable">%BA</span><span class="hljs-variable">%95</span><span class="hljs-variable">%E6</span><span class="hljs-variable">%B0</span><span class="hljs-variable">%B4</span><span class="hljs-variable">%E5</span><span class="hljs-variable">%88</span><span class="hljs-variable">%A9</span><span class="hljs-variable">%E6</span><span class="hljs-variable">%9</span>E<span class="hljs-variable">%A2</span><span class="hljs-variable">%E7</span><span class="hljs-variable">%BA</span><span class="hljs-variable">%BD</span><span class="hljs-variable">%E6</span><span class="hljs-variable">%98</span><span class="hljs-variable">%AF</span><span class="hljs-variable">%E6</span><span class="hljs-variable">%B2</span><span class="hljs-variable">%BB</span><span class="hljs-variable">%E7</span><span class="hljs-variable">%90</span><span class="hljs-variable">%86</span><span class="hljs-variable">%E5</span><span class="hljs-variable">%BC</span><span class="hljs-variable">%80</span><span class="hljs-variable">%E5</span><span class="hljs-variable">%8</span>F<span class="hljs-variable">%91</span><span class="hljs-variable">%E9</span><span class="hljs-variable">%BB</span><span class="hljs-variable">%84</span><span class="hljs-variable">%E6</span><span class="hljs-variable">%B2</span><span class="hljs-variable">%B3</span><span class="hljs-variable">%E7</span><span class="hljs-variable">%9</span>A<span class="hljs-variable">%84</span><span class="hljs-variable">%E5</span><span class="hljs-variable">%85</span><span class="hljs-variable">%B3</span><span class="hljs-variable">%E9</span><span class="hljs-variable">%94</span><span class="hljs-variable">%AE</span><span class="hljs-variable">%E6</span><span class="hljs-variable">%80</span><span class="hljs-variable">%A7</span><span class="hljs-variable">%E5</span><span class="hljs-variable">%B7</span><span class="hljs-variable">%A5</span><span class="hljs-variable">%E7</span><span class="hljs-variable">%A8</span><span class="hljs-variable">%8</span>B<span class="hljs-variable">%E3</span><span class="hljs-variable">%80</span><span class="hljs-variable">%82</span><span class="hljs-variable">%E9</span><span class="hljs-variable">%98</span><span class="hljs-variable">%85</span><span class="hljs-variable">%E8</span><span class="hljs-variable">%AF</span><span class="hljs-variable">%BB</span><span class="hljs-variable">%E6</span><span class="hljs-variable">%9</span>D<span class="hljs-variable">%90</span><span class="hljs-variable">%E6</span><span class="hljs-variable">%96</span><span class="hljs-variable">%99</span><span class="hljs-variable">%E5</span><span class="hljs-variable">%9</span>B<span class="hljs-variable">%9</span>E<span class="hljs-variable">%E7</span><span class="hljs-variable">%AD</span><span class="hljs-variable">%94</span><span class="hljs-variable">%E9</span><span class="hljs-variable">%97</span><span class="hljs-variable">%AE</span><span class="hljs-variable">%E9</span><span class="hljs-variable">%A2</span><span class="hljs-variable">%98</span><span class="hljs-variable">%E3</span><span class="hljs-variable">%80</span><span class="hljs-variable">%82</span>(<span class="hljs-number">14</span><span class="hljs-variable">%E5</span><span class="hljs-variable">%88</span><span class="hljs-variable">%86</span>)+<span class="hljs-variable">%E6</span><span class="hljs-variable">%9</span>D<span class="hljs-variable">%90</span><span class="hljs-variable">%E6</span><span class="hljs-variable">%96</span><span class="hljs-variable">%99</span>&amp;<span class="hljs-keyword">type</span><span class="hljs-operator">=</span>&amp;page<span class="hljs-operator">=</span><span class="hljs-number">1</span>&amp;pageSize<span class="hljs-operator">=</span><span class="hljs-number">10</span>&amp;clientType<span class="hljs-operator">=</span>pc HTTP/<span class="hljs-number">1.1</span><br></code></pre></td></tr></table></figure>
+<p>它将<code>query</code>的值由客户端发送到了服务端。</p>
+<p>服务端返回的数据是一段<code>JSON</code>文本（实际内容较长，此处保留了一部分）：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs swift">&#123;<br>  <span class="hljs-string">&quot;errno&quot;</span>: <span class="hljs-number">0</span>,<br>  <span class="hljs-string">&quot;errmsg&quot;</span>: <span class="hljs-string">&quot;success&quot;</span>,<br>  <span class="hljs-string">&quot;data&quot;</span>: &#123;<br>    <span class="hljs-string">&quot;count&quot;</span>: <span class="hljs-number">50</span>,<br>    <span class="hljs-string">&quot;list&quot;</span>: [<br>      &#123;<br>        <span class="hljs-string">&quot;entityId&quot;</span>: <span class="hljs-string">&quot;1714572139188923485&quot;</span>,<br>        <span class="hljs-string">&quot;title&quot;</span>: <span class="hljs-string">&quot;&lt;div&gt;&lt;span class=<span class="hljs-subst">\&quot;</span>high-light<span class="hljs-subst">\&quot;</span>&gt;黄河小浪底水利枢纽是治理开发黄河&lt;/span&gt;的&lt;span class=<span class="hljs-subst">\&quot;</span>high-light<span class="hljs-subst">\&quot;</span>&gt;关键性工程&lt;/span&gt;。&lt;span class=<span class="hljs-subst">\&quot;</span>high-light<span class="hljs-subst">\&quot;</span>&gt;阅读材料回答问题&lt;/span&gt;。 &lt;span class=<span class="hljs-subst">\&quot;</span>high-light<span class="hljs-subst">\&quot;</span>&gt;材料&lt;/span&gt;一 图a为&lt;span class=<span class="hljs-subst">\&quot;</span>high-light<span class="hljs-subst">\&quot;</span>&gt;黄河&lt;/span&gt;水系图,图b为&lt;span class=<span class="hljs-subst">\&quot;</span>high-light<span class="hljs-subst">\&quot;</span>&gt;黄河&lt;/span&gt;流量与含沙量统计图...&lt;/div&gt;&quot;</span>,<br>        <span class="hljs-string">&quot;hotLevel&quot;</span>: <span class="hljs-number">100.3</span>,<br>        <span class="hljs-string">&quot;difficulty&quot;</span>: <span class="hljs-number">4</span>,<br>        <span class="hljs-string">&quot;sourceType&quot;</span>: <span class="hljs-string">&quot;question&quot;</span>,<br>        <span class="hljs-string">&quot;subject&quot;</span>: <span class="hljs-string">&quot;其他&quot;</span>,<br>        <span class="hljs-string">&quot;step&quot;</span>: <span class="hljs-string">&quot;其他&quot;</span>,<br>        <span class="hljs-string">&quot;knowPoint&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,<br>        <span class="hljs-string">&quot;hasVideo&quot;</span>: <span class="hljs-literal">false</span>,<br>        <span class="hljs-string">&quot;hasDocument&quot;</span>: <span class="hljs-literal">true</span>,<br>        <span class="hljs-string">&quot;viewNum&quot;</span>: <span class="hljs-string">&quot;9.1w&quot;</span>,<br>        <span class="hljs-string">&quot;docPriority&quot;</span>: <span class="hljs-number">4</span><br>      &#125;,<br>      &#123;<br>        <span class="hljs-string">&quot;entityId&quot;</span>: <span class="hljs-string">&quot;1735129348683347666&quot;</span>,<br>        <span class="hljs-string">&quot;title&quot;</span>: <span class="hljs-string">&quot;&lt;div&gt;&lt;span class=<span class="hljs-subst">\&quot;</span>high-light<span class="hljs-subst">\&quot;</span>&gt;黄河小浪底水利枢纽是治理开发黄河&lt;/span&gt;的&lt;span class=<span class="hljs-subst">\&quot;</span>high-light<span class="hljs-subst">\&quot;</span>&gt;关键性工程&lt;/span&gt;。&lt;span class=<span class="hljs-subst">\&quot;</span>high-light<span class="hljs-subst">\&quot;</span>&gt;阅读材料回答问题&lt;/span&gt;。  &lt;span class=<span class="hljs-subst">\&quot;</span>high-light<span class="hljs-subst">\&quot;</span>&gt;材料&lt;/span&gt;一 图a为&lt;span class=<span class="hljs-subst">\&quot;</span>high-light<span class="hljs-subst">\&quot;</span>&gt;黄河&lt;/span&gt;水系图，图b为&lt;span class=<span class="hljs-subst">\&quot;</span>high-light<span class="hljs-subst">\&quot;</span>&gt;黄河&lt;/span&gt;流量与含沙量统计...&lt;/div&gt;&quot;</span>,<br>        <span class="hljs-string">&quot;hotLevel&quot;</span>: <span class="hljs-number">102</span>,<br>        <span class="hljs-string">&quot;difficulty&quot;</span>: <span class="hljs-number">2</span>,<br>        <span class="hljs-string">&quot;sourceType&quot;</span>: <span class="hljs-string">&quot;question&quot;</span>,<br>        <span class="hljs-string">&quot;subject&quot;</span>: <span class="hljs-string">&quot;地理&quot;</span>,<br>        <span class="hljs-string">&quot;step&quot;</span>: <span class="hljs-string">&quot;高中&quot;</span>,<br>        <span class="hljs-string">&quot;knowPoint&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,<br>        <span class="hljs-string">&quot;hasVideo&quot;</span>: <span class="hljs-literal">false</span>,<br>        <span class="hljs-string">&quot;hasDocument&quot;</span>: <span class="hljs-literal">true</span>,<br>        <span class="hljs-string">&quot;viewNum&quot;</span>: <span class="hljs-string">&quot;4.9w&quot;</span>,<br>        <span class="hljs-string">&quot;docPriority&quot;</span>: <span class="hljs-number">4</span><br>      &#125;<br>    ]<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>不难发现，此处的<code>entityId</code>键值与之前在<code>URL</code>中看到的<code>id</code>的键值是一致的，因此，我们猜测它们有一定的关系。</p>
+<p>同样的，我们发现了类似的请求片段：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">GET https:<span class="hljs-regexp">//</span>easylearn.baidu.com<span class="hljs-regexp">/edu-web-go/</span>shiti<span class="hljs-regexp">/basicinfo?id=1714572139188923485&amp;eqid=&amp;clientType=pc HTTP/</span><span class="hljs-number">1.1</span><br></code></pre></td></tr></table></figure>
+<p>服务端返回的数据是一段<code>JSON</code>文本：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">&#123;<br>    &quot;errno&quot;:<span class="hljs-number">0</span>,<br>    &quot;errmsg&quot;:&quot;success&quot;,<br>    &quot;data&quot;:&#123;<br>        &quot;answer&quot;:[<br>            &#123;<br>                &quot;tag&quot;:&quot;解答&quot;,<br>                &quot;desc&quot;:&quot;&lt;div class=&quot;IILbHc&quot;&gt;&lt;div class=&quot;GSfhdv&quot; style=&quot;<span class="hljs-type">text</span>-indent:<span class="hljs-number">21.0</span>pt;&quot;&gt;成整正织该厂员人&lt;/div&gt;&lt;span&gt;&lt;div class=&quot;GSfhdv&quot; style=&quot;<span class="hljs-type">text</span>-indent:<span class="hljs-number">21.0</span>pt;&quot;&gt;成整正织该厂员人&lt;/div&gt;[答案]小浪底水利枢纽改变了海陆间水循环的地表径流环节和库区的水汽蒸发环节(2分);调节了下游河段河流流量的季节变化,减少了泥沙对下游河道的沉积,并对河口三角洲海陆变化产生的影响。(3分)&lt;/span&gt;&lt;div class=&quot;GSfhdv&quot; style=&quot;<span class="hljs-type">text</span>-indent:<span class="hljs-number">21.0</span>pt;&quot;&gt;成整正织该厂员人&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;GSfhdv&quot; style=&quot;<span class="hljs-type">text</span>-indent:<span class="hljs-number">21.0</span>pt;&quot;&gt;成整正织该厂员人&lt;/div&gt;&quot;<br>            &#125;<br>        ],<br>        &quot;choice&quot;:[<br><br>        ],<br>        &quot;collectNum&quot;:<span class="hljs-number">0</span>,<br>        &quot;difficulty&quot;:<span class="hljs-number">1</span>,<br>        &quot;first&quot;:<span class="hljs-keyword">false</span>,<br>        &quot;hotLevel&quot;:<span class="hljs-number">84.6</span>,<br>        &quot;id&quot;:&quot;1714572139188923485&quot;,<br>        &quot;isCollect&quot;:<span class="hljs-number">0</span>,<br>        &quot;isLike&quot;:<span class="hljs-number">0</span>,<br>        &quot;isShowAnswer&quot;:<span class="hljs-keyword">false</span>,<br>        &quot;isShowOcr&quot;:<span class="hljs-number">0</span>,<br>        &quot;knowList&quot;:[<br><br>        ],<br>        &quot;likeNum&quot;:<span class="hljs-number">0</span>,<br>        &quot;material&quot;:[<br><br>        ],<br>        &quot;ocrData&quot;:[<br><br>        ],<br>        &quot;query&quot;:&quot;&quot;,<br>        &quot;question&quot;:&quot;&lt;div class=&quot;DlYrCn&quot;&gt;&lt;div class=&quot;uhTjAb&quot; style=&quot;<span class="hljs-type">text</span>-indent:<span class="hljs-number">21.0</span>pt;&quot;&gt;身整作四值面准近圆&lt;/div&gt;&lt;span&gt;&lt;div class=&quot;uhTjAb&quot; style=&quot;<span class="hljs-type">text</span>-indent:<span class="hljs-number">21.0</span>pt;&quot;&gt;身整作四值面准近圆&lt;/div&gt;黄河小浪底水利枢纽是治理开发黄河的关键性工程。阅读材料回答问题。(14分)&lt;/span&gt;&lt;div class=&quot;uhTjAb&quot; style=&quot;<span class="hljs-type">text</span>-indent:<span class="hljs-number">21.0</span>pt;&quot;&gt;身整作四值面准近圆&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;uhTjAb&quot; style=&quot;<span class="hljs-type">text</span>-indent:<span class="hljs-number">21.0</span>pt;&quot;&gt;身整作四值面准近圆&lt;/div&gt;&lt;div class=&quot;DlYrCn&quot;&gt;&lt;div class=&quot;uhTjAb&quot; style=&quot;<span class="hljs-type">text</span>-indent:<span class="hljs-number">21.0</span>pt;&quot;&gt;身整作四值面准近圆&lt;/div&gt;&lt;span&gt;&lt;div class=&quot;uhTjAb&quot; style=&quot;<span class="hljs-type">text</span>-indent:<span class="hljs-number">21.0</span>pt;&quot;&gt;身整作四值面准近圆&lt;/div&gt;材料一  图A为黄河水系图,图B为黄河流量与含沙量统计图。&lt;/span&gt;&lt;div class=&quot;uhTjAb&quot; style=&quot;<span class="hljs-type">text</span>-indent:<span class="hljs-number">21.0</span>pt;&quot;&gt;身整作四值面准近圆&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;uhTjAb&quot; style=&quot;<span class="hljs-type">text</span>-indent:<span class="hljs-number">21.0</span>pt;&quot;&gt;身整作四值面准近圆&lt;/div&gt;&lt;div class=&quot;DlYrCn&quot;&gt;&lt;div class=&quot;uhTjAb&quot; style=&quot;<span class="hljs-type">text</span>-indent:<span class="hljs-number">21.0</span>pt;&quot;&gt;身整作四值面准近圆&lt;/div&gt;&lt;img class=&quot;img-max&quot; src=&quot;https://tiku-data.cdn.bcebos.com/originalpic/<span class="hljs-number">89</span>c12155f5ce077c1ba56d29ff103a25.jpg?auth_key=<span class="hljs-number">2320402241</span><span class="hljs-number">-0</span><span class="hljs-number">-0</span>-acd57f0481a5f474e595b0ed62498bc8&quot; style=&quot;width:<span class="hljs-number">588.00</span>px;height:<span class="hljs-number">209.00</span>px&quot;&gt;&lt;div class=&quot;uhTjAb&quot; style=&quot;<span class="hljs-type">text</span>-indent:<span class="hljs-number">21.0</span>pt;&quot;&gt;身整作四值面准近圆&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;uhTjAb&quot; style=&quot;<span class="hljs-type">text</span>-indent:<span class="hljs-number">21.0</span>pt;&quot;&gt;身整作四值面准近圆&lt;/div&gt;&lt;div class=&quot;DlYrCn&quot;&gt;&lt;div class=&quot;uhTjAb&quot; style=&quot;<span class="hljs-type">text</span>-indent:<span class="hljs-number">21.0</span>pt;&quot;&gt;身整作四值面准近圆&lt;/div&gt;&lt;span&gt;&lt;div class=&quot;uhTjAb&quot; style=&quot;<span class="hljs-type">text</span>-indent:<span class="hljs-number">21.0</span>pt;&quot;&gt;身整作四值面准近圆&lt;/div&gt;材料二  黄河小浪底水利枢纽位于黄河中游最后一段峡谷的出口处,以防洪、减淤为主,兼顾供水、灌溉和发电,工程主要由壤土斜心墙堆石坝、泄洪排沙系统和引水发电系统组成。图C为黄河小浪底景观照片。&lt;/span&gt;&lt;div class=&quot;uhTjAb&quot; style=&quot;<span class="hljs-type">text</span>-indent:<span class="hljs-number">21.0</span>pt;&quot;&gt;身整作四值面准近圆&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;uhTjAb&quot; style=&quot;<span class="hljs-type">text</span>-indent:<span class="hljs-number">21.0</span>pt;&quot;&gt;身整作四值面准近圆&lt;/div&gt;&lt;div class=&quot;DlYrCn&quot;&gt;&lt;div class=&quot;uhTjAb&quot; style=&quot;<span class="hljs-type">text</span>-indent:<span class="hljs-number">21.0</span>pt;&quot;&gt;身整作四值面准近圆&lt;/div&gt;&lt;img class=&quot;img-max&quot; src=&quot;https://tiku-data.cdn.bcebos.com/originalpic/<span class="hljs-number">66788145983</span>dcc8ef1438b71c9097c6d.jpg?auth_key=<span class="hljs-number">2320402241</span><span class="hljs-number">-0</span><span class="hljs-number">-0</span><span class="hljs-number">-19597</span>d773224ff445fb3c8e187c413de&quot; style=&quot;width:<span class="hljs-number">239.00</span>px;height:<span class="hljs-number">171.00</span>px&quot;&gt;&lt;div class=&quot;uhTjAb&quot; style=&quot;<span class="hljs-type">text</span>-indent:<span class="hljs-number">21.0</span>pt;&quot;&gt;身整作四值面准近圆&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;uhTjAb&quot; style=&quot;<span class="hljs-type">text</span>-indent:<span class="hljs-number">21.0</span>pt;&quot;&gt;身整作四值面准近圆&lt;/div&gt;&lt;div class=&quot;DlYrCn&quot;&gt;&lt;div class=&quot;uhTjAb&quot; style=&quot;<span class="hljs-type">text</span>-indent:<span class="hljs-number">21.0</span>pt;&quot;&gt;身整作四值面准近圆&lt;/div&gt;&lt;span&gt;&lt;div class=&quot;uhTjAb&quot; style=&quot;<span class="hljs-type">text</span>-indent:<span class="hljs-number">21.0</span>pt;&quot;&gt;身整作四值面准近圆&lt;/div&gt;试用水循环原理和地理环境整体性原理说明小浪底水利枢纽的建设对地理环境产生的影响。(5分)&lt;/span&gt;&lt;div class=&quot;uhTjAb&quot; style=&quot;<span class="hljs-type">text</span>-indent:<span class="hljs-number">21.0</span>pt;&quot;&gt;身整作四值面准近圆&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;uhTjAb&quot; style=&quot;<span class="hljs-type">text</span>-indent:<span class="hljs-number">21.0</span>pt;&quot;&gt;身整作四值面准近圆&lt;/div&gt;&quot;,<br>        &quot;similar&quot;:[<br>            &#123;<br>                &quot;id&quot;:&quot;1714572139188923485&quot;<br>            &#125;,<br>            &#123;<br>                &quot;id&quot;:&quot;1714263992328526866&quot;<br>            &#125;,<br>            &#123;<br>                &quot;id&quot;:&quot;1714161626125941121&quot;<br>            &#125;,<br>            &#123;<br>                &quot;id&quot;:&quot;1713953333589690253&quot;<br>            &#125;,<br>            &#123;<br>                &quot;id&quot;:&quot;1728494088442452058&quot;<br>            &#125;,<br>            &#123;<br>                &quot;id&quot;:&quot;1712388657586605084&quot;<br>            &#125;<br>        ],<br>        &quot;step&quot;:&quot;qt&quot;,<br>        &quot;stepName&quot;:&quot;&quot;,<br>        &quot;strquestion&quot;:&quot;黄河小浪底水利枢纽是治理开发黄河的关键性工程。阅读&quot;,<br>        &quot;subList&quot;:[<br><br>        ],<br>        &quot;subject&quot;:&quot;other&quot;,<br>        &quot;subjectName&quot;:&quot;&quot;,<br>        &quot;testGuideVer&quot;:<span class="hljs-number">1</span>,<br>        &quot;testMergeVer&quot;:<span class="hljs-number">2</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>由此，我们便获得了相关有效信息的源信息。</p>
+
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>fly6022<br>
+        <strong>本文链接：</strong><a href="https://blog.fly6022.fun/posts/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%20%E5%9F%BA%E4%BA%8E%20Fiddler%20%E5%B7%A5%E5%85%B7%E7%9A%84%20Web%20%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/" title="https:&#x2F;&#x2F;blog.fly6022.fun&#x2F;posts&#x2F;%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%20%E5%9F%BA%E4%BA%8E%20Fiddler%20%E5%B7%A5%E5%85%B7%E7%9A%84%20Web%20%E9%80%86%E5%90%91%E5%88%86%E6%9E%90&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;blog.fly6022.fun&#x2F;posts&#x2F;%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%20%E5%9F%BA%E4%BA%8E%20Fiddler%20%E5%B7%A5%E5%85%B7%E7%9A%84%20Web%20%E9%80%86%E5%90%91%E5%88%86%E6%9E%90&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>除特殊说明以外，本文采用 <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh" target="_blank"> 署名-非商业性使用 4.0 国际 (CC BY-NC 4.0) </a> 协议进行许可，转载请注明原出处。
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">编程开发</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/Fiddler/" rel="tag">Fiddler</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/Python/" rel="tag">Python</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/Web/" rel="tag">Web</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/" rel="tag">逆向工程</a>
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div id="gitalk"></div>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '7792e6798da4d5db5d2d',
+        clientSecret: 'dabb45aab64c13a9e848c95dcc0b380dbe01c593',
+        id: decodeURI(window.location.pathname),
+        repo: 'fly6022-blog.github.io',
+        owner: 'fly6022-blog',
+        admin: 'fly6022'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E9%A1%B5%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%93%8D%E4%BD%9C%E9%80%BB%E8%BE%91"><span class="toc-number">1.</span> <span class="toc-text"> 网页客户端操作逻辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E5%8F%8A%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text"> 实现原理及逆向工程</span></a></li></ol>
+                                  </div>
+                              </button>
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+     
+    <div id="nexmoe-search-space">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-container">
+                    <input class="search-input" type="text" placeholder="搜索" oninput="sinput();">
+                </div>
+                <a class="search-close" onclick="sclose();">×</a>
+            </div>
+            <div class="search-body"></div>
+        </div>
+    </div>
+
+    <script src="/lib/lazysizes/lazysizes@5.1.0.min.js"></script>
+<script src="/lib/mdui_043tiny/js/mdui.js"></script>
+<script src="/lib/jQuery/jQuery@3.5.1.min.js"></script>
+<script src="/lib/fancybox/jquery.fancybox.min.js"></script>
+<script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js?id=JEOD145Z95thC4GS&ck=JEOD145Z95thC4GS"></script>
+
+ 
+
+<script async src="/js/app.js?v=1690819065349"></script>
+
+
+	<script async src="/js/search.js?v=1690819065349"></script>
+
+
+<script src="/lib/justifiedGallery/jquery.justifiedGallery@3.8.1.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+
+
+    
+
+
+
+
+
+</body>
+
+</html>
