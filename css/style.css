@@ -155,6 +155,7 @@ article code {
   font-size: 85%;
   padding: 0.2em 0.4em;
   font-family: 'Fira code';
+  word-wrap: break-word;
 }
 article code::-webkit-scrollbar {
   width: 10px;
@@ -1146,6 +1147,7 @@ strong {
   padding: 25px;
   font-family: "PlusJakartaSans-Medium", Noto Sans SC;
   font-weight: 700;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.251);
 }
 #nexmoe-content .nexmoe-post .nexmoe-post-cover h1:after {
   background-image: -moz-linear-gradient(to top, rgba(16,16,16,0.35) 25%, rgba(16,16,16,0) 100%);
