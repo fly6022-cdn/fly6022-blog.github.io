@@ -6,7 +6,7 @@
   <link href="https://blog.fly6022.fun/atom.xml" rel="self"/>
   
   <link href="https://blog.fly6022.fun/"/>
-  <updated>2023-11-03T11:44:36.076Z</updated>
+  <updated>2024-07-16T12:53:50.966Z</updated>
   <id>https://blog.fly6022.fun/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>IPv6：电信光猫IPv6网络配置</title>
+    <link href="https://blog.fly6022.fun/posts/IPv6%EF%BC%9A%E7%94%B5%E4%BF%A1%E5%85%89%E7%8C%ABIPv6%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/"/>
+    <id>https://blog.fly6022.fun/posts/IPv6%EF%BC%9A%E7%94%B5%E4%BF%A1%E5%85%89%E7%8C%ABIPv6%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/</id>
+    <published>2024-07-16T12:19:00.000Z</published>
+    <updated>2024-07-16T12:53:50.966Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文章以 <code>天翼网关 4.0</code>（设备型号：<code>ZXHN F610GV9</code>）为例，实际演示电信光猫IPv6网络的配置。</p><span id="more"></span><h2 id="配置方法"><a class="markdownIt-Anchor" href="#配置方法"></a> 配置方法</h2><p>打开浏览器，在地址栏键入光猫的局域网IP地址（我的是 <code>192.168.1.1</code>），进入光猫后台。</p><p><img data-fancybox="gallery" data-sizes="auto" data-src="/images/posts/ipv6_dx/0.png" alt="img" class="lazyload"></p><p>输入管理员用户名及密码，用户名：<code>telecomadmin</code>，密码：<code>nE7jA%5m</code>。</p><p>点击导航栏中的“网络”→“网络设置”，选择连接名称及IP模式。</p><p><img data-fancybox="gallery" data-sizes="auto" data-src="/images/posts/ipv6_dx/1.png" alt="img" class="lazyload"></p><p><img data-fancybox="gallery" data-sizes="auto" data-src="/images/posts/ipv6_dx/6.png" alt="img" class="lazyload"></p><p><img data-fancybox="gallery" data-sizes="auto" data-src="/images/posts/ipv6_dx/7.png" alt="img" class="lazyload"></p><p><img data-fancybox="gallery" data-sizes="auto" data-src="/images/posts/ipv6_dx/8.png" alt="img" class="lazyload"></p><p>将“IPv6”信息修改为下图所示并<strong>保存</strong>：</p><p><img data-fancybox="gallery" data-sizes="auto" data-src="/images/posts/ipv6_dx/9.png" alt="img" class="lazyload"></p><blockquote><p>地址获取方式：AutoConfigured<br />获取前缀：是<br />前缀获取方式：PrefixDelegration<br />DNS获取方式：DHCPv6</p></blockquote><p>回退到“用户侧管理”，点击“IPv6设置”，将本页设置修改为下图所示并保存。</p><p><img data-fancybox="gallery" data-sizes="auto" data-src="/images/posts/ipv6_dx/2.png" alt="img" class="lazyload"></p><p><img data-fancybox="gallery" data-sizes="auto" data-src="/images/posts/ipv6_dx/4.png" alt="img" class="lazyload"></p><p><img data-fancybox="gallery" data-sizes="auto" data-src="/images/posts/ipv6_dx/5.png" alt="img" class="lazyload"></p><p>打开路由器后台，在IPv6相关设置下更改为“桥模式”。</p><p>重启光猫及路由器。</p><p>打开网页<a href="https://ipw.cn/">IPW.cn</a>，检查IPv6连接情况。</p><p>若为下图所示，证明配置成功</p><p><img data-fancybox="gallery" data-sizes="auto" data-src="/images/posts/ipv6_dx/10.png" alt="img" class="lazyload"></p><h2 id="ipv6有什么好处"><a class="markdownIt-Anchor" href="#ipv6有什么好处"></a> IPv6有什么好处</h2><h3 id="免去内网穿透的烦恼"><a class="markdownIt-Anchor" href="#免去内网穿透的烦恼"></a> 免去内网穿透的烦恼</h3><p>每一个IPv6地址都是一个公网IP地址。这使得游戏联机、远程连接等更加便捷。</p><h3 id="实现真正意义上的p2p"><a class="markdownIt-Anchor" href="#实现真正意义上的p2p"></a> 实现真正意义上的P2P</h3><p>每一个IPv6地址对应一个设备，为点对点传输创造了条件。</p><h3 id="取之不尽用之不竭"><a class="markdownIt-Anchor" href="#取之不尽用之不竭"></a> 取之不尽用之不竭</h3><p>IPv6的地址池足够巨大，甚至可以为地球上每一粒沙子都分配一个IPv6地址。</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;本文章以 &lt;code&gt;天翼网关 4.0&lt;/code&gt;（设备型号：&lt;code&gt;ZXHN F610GV9&lt;/code&gt;）为例，实际演示电信光猫IPv6网络的配置。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="随便写写" scheme="https://blog.fly6022.fun/categories/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/"/>
+    
+    
+    <category term="IPv6" scheme="https://blog.fly6022.fun/tags/IPv6/"/>
+    
+    <category term="中国电信" scheme="https://blog.fly6022.fun/tags/%E4%B8%AD%E5%9B%BD%E7%94%B5%E4%BF%A1/"/>
+    
+    <category term="网络" scheme="https://blog.fly6022.fun/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
   
   <entry>
     <title>Spyder：[WinError 126] 找不到指定的模块 错误的解决</title>
