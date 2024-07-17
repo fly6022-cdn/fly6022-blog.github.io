@@ -6,7 +6,7 @@
   <link href="https://blog.fly6022.fun/atom.xml" rel="self"/>
   
   <link href="https://blog.fly6022.fun/"/>
-  <updated>2024-07-16T13:46:28.155Z</updated>
+  <updated>2024-07-17T07:12:50.800Z</updated>
   <id>https://blog.fly6022.fun/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>树莓派：基于docker利用ddns-go配置DDNS实现公网域名访问</title>
+    <link href="https://blog.fly6022.fun/posts/%E6%A0%91%E8%8E%93%E6%B4%BE%EF%BC%9A%E5%9F%BA%E4%BA%8Edocker%E5%88%A9%E7%94%A8ddns-go%E9%85%8D%E7%BD%AEDDNS%E5%AE%9E%E7%8E%B0%E5%85%AC%E7%BD%91%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE/"/>
+    <id>https://blog.fly6022.fun/posts/%E6%A0%91%E8%8E%93%E6%B4%BE%EF%BC%9A%E5%9F%BA%E4%BA%8Edocker%E5%88%A9%E7%94%A8ddns-go%E9%85%8D%E7%BD%AEDDNS%E5%AE%9E%E7%8E%B0%E5%85%AC%E7%BD%91%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE/</id>
+    <published>2024-07-17T06:17:40.000Z</published>
+    <updated>2024-07-17T07:12:50.800Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文章以树莓派为例，基于Docker，利用ddns-go实现IPv6网络公网域名访问。</p><span id="more"></span><h2 id="环境"><a class="markdownIt-Anchor" href="#环境"></a> 环境</h2><p>设备：Raspberry Pi 4B（4GB RAM）</p><p>系统：Ubuntu 22.04 LTS（arm64）</p><h2 id="你还需要"><a class="markdownIt-Anchor" href="#你还需要"></a> 你还需要</h2><ul><li>个人域名</li></ul><h2 id="安装docker"><a class="markdownIt-Anchor" href="#安装docker"></a> 安装Docker</h2><p>打开命令行，键入:</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo su<br>sudo apt update<br>sudo apt upgrade<br>sudo apt install docker-ce<br></code></pre></td></tr></table></figure><p>设置docker开启自启动：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl enable docker.service<br></code></pre></td></tr></table></figure><h2 id="配置docker"><a class="markdownIt-Anchor" href="#配置docker"></a> 配置Docker</h2><p>为了使ddns-go安装过程顺利，故需要提前更换Docker的安装源：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo nano /etc/docker/daemon.json<br></code></pre></td></tr></table></figure><p>将Docker的安装源更换为下面内容：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs shell">&#123;<br>    &quot;registry-mirrors&quot;: [<br>        &quot;https://do.nark.eu.org&quot;,<br>        &quot;https://dc.j8.work&quot;,<br>        &quot;https://docker.m.daocloud.io&quot;,<br>        &quot;https://dockerproxy.com&quot;,<br>        &quot;https://docker.mirrors.ustc.edu.cn&quot;,<br>        &quot;https://docker.nju.edu.cn&quot;<br>    ]<br>&#125;<br></code></pre></td></tr></table></figure><p>输入下方命令重启服务：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl daemon-reload<br>systemctl restart docker<br></code></pre></td></tr></table></figure><p>键入下方命令检查是否更换成功：</p><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">docker</span> <span class="hljs-literal">info</span><br></code></pre></td></tr></table></figure><div class="admonition error"><p class="admonition-title">ERROR</p><p>若终端报错，可重启终端重试。</p></div><p>若返回内容中包括以下内容，则证明更换成功。</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs awk">Registry Mirrors:<br> https:<span class="hljs-regexp">//</span><span class="hljs-keyword">do</span>.nark.eu.org/<br> https:<span class="hljs-regexp">//</span>dc.j8.work/<br> https:<span class="hljs-regexp">//</span>docker.m.daocloud.io/<br> https:<span class="hljs-regexp">//</span>dockerproxy.com/<br> https:<span class="hljs-regexp">//</span>docker.mirrors.ustc.edu.cn/<br> https:<span class="hljs-regexp">//</span>docker.nju.edu.cn/<br></code></pre></td></tr></table></figure><h2 id="安装及配置ddns-go"><a class="markdownIt-Anchor" href="#安装及配置ddns-go"></a> 安装及配置ddns-go</h2><p>在任意路径下新建文件夹：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir ddns-go<br></code></pre></td></tr></table></figure><p>在文件夹内创建 <code>docker-compose.yml</code>文件。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">cd ddns-go<br>touch docker-compose.yml<br>nano docker-compose.yml<br></code></pre></td></tr></table></figure><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">services:</span><br>  <span class="hljs-attr">ddns-go:</span><br>    <span class="hljs-attr">image:</span> <span class="hljs-string">jeessy/ddns-go</span><br>    <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span><br>    <span class="hljs-attr">network_mode:</span> <span class="hljs-string">&quot;host&quot;</span><br>    <span class="hljs-attr">volumes:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">./ddns-go_data:/root</span><br></code></pre></td></tr></table></figure><p>运行以下命令，安装ddns-go：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo docker compose up -d<br></code></pre></td></tr></table></figure><p>安装成功后，在浏览器地址栏输入：<code>http://[树莓派ip地址]:9876</code>进入后台配置。</p><div class="admonition warning"><p class="admonition-title">WARNING</p><p>ddns-go初始配置需要在5分钟之内完成，否则配置不能保存。</p></div><p>配置时，需要DNS平台的token，这里以Cloudflare为例进行配置。</p><p>在浏览器地址栏键入 <code>https://dash.cloudflare.com/profile/api-tokens</code>.</p><p><img data-fancybox="gallery" data-sizes="auto" data-src="https://cdn.jsdelivr.net/gh/imageurl/fly6022@master/images/posts/ddns/2.png" alt="img" class="lazyload"></p><p>点击&quot;创建令牌&quot;→“编辑区域DNS（使用模板）”</p><p><img data-fancybox="gallery" data-sizes="auto" data-src="https://cdn.jsdelivr.net/gh/imageurl/fly6022@master/images/posts/ddns/3.png" alt="img" class="lazyload"></p><p>配置后点击&quot;继续以显示摘要&quot;→创建令牌。</p><p>将生成的令牌粘贴到ddns-go后台中。</p><p><img data-fancybox="gallery" data-sizes="auto" data-src="https://cdn.jsdelivr.net/gh/imageurl/fly6022@master/images/posts/ddns/4.png" alt="img" class="lazyload"></p><p>在IPv6的“Domains”一栏中添加好自己的域名，保存即可。</p><p>等待5分钟左右，即可通过域名从公网访问内容。</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;本文章以树莓派为例，基于Docker，利用ddns-go实现IPv6网络公网域名访问。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="随便写写" scheme="https://blog.fly6022.fun/categories/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/"/>
+    
+    
+    <category term="IPv6" scheme="https://blog.fly6022.fun/tags/IPv6/"/>
+    
+    <category term="树莓派" scheme="https://blog.fly6022.fun/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/"/>
+    
+    <category term="docker" scheme="https://blog.fly6022.fun/tags/docker/"/>
+    
+    <category term="DDNS" scheme="https://blog.fly6022.fun/tags/DDNS/"/>
+    
+    <category term="ddns-go" scheme="https://blog.fly6022.fun/tags/ddns-go/"/>
+    
+    <category term="内网穿透" scheme="https://blog.fly6022.fun/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"/>
+    
+    <category term="Cloudflare" scheme="https://blog.fly6022.fun/tags/Cloudflare/"/>
+    
+  </entry>
   
   <entry>
     <title>IPv6：电信光猫IPv6网络配置</title>
