@@ -1,0 +1,157 @@
+avatar: https://cdn.jsdelivr.net/gh/imageurl/fly6022@master/images/logo.png # 网站 Logo
+background: # 既是博客的背景，又是文章默认头图
+  path: https://api.ee123.net/img/bingimg/dayimg.jpg
+  width: 1920
+  height: 1080
+favicon:
+  href: https://cdn.jsdelivr.net/gh/imageurl/fly6022@master/images/favicon.png # 网站图标
+  type: image/png # 图标类型，可能的值有(image/png, image/vnd.microsoft.icon, image/x-icon, image/gif)
+
+function: # 功能开关，可选值（true,false）
+  globalToc: true # 开启该功能会自动开启文章 TOC（文章目录） 功能
+  darkmode: false # 是否启用暗色主题，可选值（true,false）
+
+imageCDN: # 图片 CDN 功能
+  enable: true # 开启该功能  
+  origin: /images # 图片原始目录
+  to: https://cdn.jsdelivr.net/gh/imageurl/fly6022@master/images # 图片 CDN 域名
+  
+# 附加图标库 使用说明：https://docs.nexmoe.com/config/icon
+iconlib: //at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css
+
+search: 
+  type: local # 可选engine（用搜索引擎搜索）、swiftype、或local（本地搜索）
+  url: https://cn.bing.com/search?q=site:fly6022.fun # 搜索引擎地址，在type为swiftype时无效 e.g:https://www.google.com/search?q={你的博客链接}
+  id: <swiftype-id> # swiftype的id，见启用教程。在type为engine时无效
+
+cdn: # 这里可以修改站点使用的库的CDN
+  gitalk:
+    css: https://unpkg.com/gitalk/dist/gitalk.css
+    js: https://unpkg.com/gitalk/dist/gitalk.min.js
+
+menu:
+  回到首页: 
+    - /
+    - icon-home
+  Me & Blog:
+    - /about.html
+    - icon-info-circle
+  友情链接: 
+    - /links.html # 使用说明：https://docs.nexmoe.com/article/py
+  请杯咖啡:
+    - /donate.html
+    - icon-coffee
+  # 友链接力:
+    # - https://travellings.link
+    # - fa fa-subway
+
+widgets:
+- search
+- social
+- category
+- tagcloud
+# - archive #settings: widgetAchive
+# - recent_posts
+# - link #settings: widgetLink
+
+maxTagcloud: 0  # 标签云组件显示的标签数量，0 表示不限制
+
+social:
+  哔哩哔哩:
+    - https://space.bilibili.com/191078710
+    - icon-bilibili
+    - rgb(231, 106, 141)
+    - rgba(231, 106, 141, .1)
+  GitHub:
+    - https://github.com/fly6022
+    - icon-github
+    - rgb(25, 23, 23)
+    - rgba(25, 23, 23, .1)
+  知乎:
+    - https://www.zhihu.com/people/fly_6022
+    - icon-zhihu
+    - rgb(30, 136, 229)
+    - rgba(30, 136, 229, .1)
+
+# 自定义样式，启用后可在站点的source文件夹下新建custom.css自定义站点样式
+customstyle: false  
+color: # 配色方案，从first到seventh为优先级为1-7的颜色，默认为彩虹配色
+  first: # 同时作为主题色
+    r: 255 
+    g: 78
+    b: 106
+  second:
+    r: 255
+    g: 118
+    b: 30
+  third:
+    r: 255
+    g: 185
+    b: 0
+  fourth:
+    r: 51
+    g: 213
+    b: 122
+  fifth:
+    r: 0
+    g: 219
+    b: 255
+  sixth:
+    r: 26
+    g: 152
+    b: 255
+  seventh:
+    r: 144
+    g: 144
+    b: 255
+
+# 向搜索引擎验证你对站点的所有权，用于向搜索引擎提交 sitemap 和管理站点被搜索引擎收录的情况。
+site_verification: 
+  google:
+  baidu:
+
+# 统计系统，目前支持 Google analytics.js 统计、Google Tag Manager 统计、CNZZ 统计、腾讯统计、51.La统计、百度统计
+analytics: 
+  google_site_id: #<ID>
+  gtags_site_id: #<ID>
+  cnzz_site_id: #<ID>
+  tencent_site_id: #<ID>
+  la_site_id: #<ID>
+  baidu_site_id: #<ID>
+  gtm_container_id: #<ID>
+
+# 评论框，目前支持 gitalk,gitment,valine,disqus,disqusjs,changyan,livere,DiscussBot 使用 false 可以关闭
+comment: gitalk
+gitalk:
+  admin: fly6022 # 拥有对该repo进行操作的 GitHub username
+  owner: fly6022-blog # 持有该 repo 的 GitHub username
+  repo: fly6022-blog.github.io # 存放评论的 issue 所在的 repo
+  clientID: 7792e6798da4d5db5d2d # GitHub Client ID
+  clientSecret: dabb45aab64c13a9e848c95dcc0b380dbe01c593 # GitHub Client Secret
+  
+copyright: '<strong>版权声明：</strong>除特殊说明以外，本文采用 <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh" target="_blank"> 署名-非商业性使用 4.0 国际 (CC BY-NC 4.0) </a> 协议进行许可，转载请注明原出处。'
+copyTip: "" # 自定义复制版权文案,使用 %url 代替当前页面URL, 修改为false禁用
+
+# achive widget behavior
+widgetAchive: #文章归档组件
+  archive_type: 'year' #按月展示还是按年展示
+  show_count: true  #是否展示数量
+
+widgetLink: #链接组件
+  - title: <title>
+    img : <img_path>
+    link : <url>
+  - title: <title>
+    img : <img_path>
+    link : <url>
+
+# 自定义侧边栏尾部内容
+sidebar: ''
+
+mathjax:
+    enable: true
+
+katex:
+  enable: false
+  allpost: false
+  copy_tex: true
