@@ -20,20 +20,20 @@
 <meta property="og:description" content="本文章以树莓派为例，通过配置 config.txt文件实现对树莓派CPU&#x2F;GPU的超频并启用HDMI功能。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-08-10T12:00:59.000Z">
-<meta property="article:modified_time" content="2024-08-10T14:58:00.095Z">
+<meta property="article:modified_time" content="2024-08-10T15:31:37.366Z">
 <meta property="article:author" content="fly6022">
 <meta property="article:tag" content="树莓派">
 <meta property="article:tag" content="配置文件">
 <meta property="article:tag" content="HDMI">
 <meta property="article:tag" content="超频">
 <meta name="twitter:card" content="summary">
-    <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css?v=1723301924065">
+    <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css?v=1723303921155">
     
         <link rel="stylesheet" href="//at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css">
     
-    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1723301924065">
-    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1723301924065">
-    <link rel="stylesheet" href="/css/style.css?v=1723301924065">
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1723303921155">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1723303921155">
+    <link rel="stylesheet" href="/css/style.css?v=1723303921155">
      
     
 
@@ -225,12 +225,18 @@
 </ul>
 <h2 id="超频"><a class="markdownIt-Anchor" href="#超频"></a> 超频</h2>
 <div class="admonition warning"><p class="admonition-title">注意
-</p></div>
-<ol>
-<li>在配置 <code>config.txt</code>之前，请对原文件进行备份，以免造成树莓派无法启动的后果。</li>
-<li>超频会造成树莓派运行稳定性下降，请根据实际情况合理超频。</li>
-<li>将 <code>force_turbo</code>选项赋值为 <code>1</code>会使CPU强制在最大频率工作，可能会造成严重发热问题，同时会失去保修。</li>
+</p><ol>
+<li>
+<p>在配置<code>config.txt</code>之前，请对原文件进行备份，以免造成树莓派无法启动的后果。</p>
+</li>
+<li>
+<p>超频会造成树莓派运行稳定性下降，请根据实际情况合理超频。</p>
+</li>
+<li>
+<p>将<code>force_turbo</code>选项赋值为 <code>1</code>会使CPU强制在最大频率工作，可能会造成严重发热问题，同时会失去保修。</p>
+</li>
 </ol>
+</div>
 <p>将存储卡连接到电脑上，打开 <code>system-boot</code>文件夹，找到 <code>config.txt</code>文件。</p>
 <p>在文件末尾新增一行，添加以下内容：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[pi4]<br>arm_boost=1<br>over_voltage=6<br>arm_freq=2000<br>gpu_freq=750<br>force_turbo=0<br></code></pre></td></tr></table></figure>
@@ -363,6 +369,8 @@
 <p>将下列内容注释掉：</p>
 <figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c"><span class="hljs-meta"># dtoverlay=vc4-kms-v3d,cma-128</span><br></code></pre></td></tr></table></figure>
 <p><code>hdmi_group</code>和 <code>hdmi_mode</code>的赋值详见 <a target="_blank" rel="noopener" href="https://shumeipai.nxez.com/2013/08/31/custom-display-resolution-raspberry-pie.html">自定义树莓派的显示分辨率 - 树莓派实验室</a></p>
+<h2 id="原版-configtxt"><a class="markdownIt-Anchor" href="#原版-configtxt"></a> 原版 <code>config.txt</code></h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[all]<br>kernel=vmlinuz<br>cmdline=cmdline.txt<br>initramfs initrd.img followkernel<br><br>[pi4]<br>max_framebuffers=2<br>arm_boost=1<br><br>[all]<br># Enable the audio output, I2C and SPI interfaces on the GPIO header. As these<br># parameters related to the base device-tree they must appear *before* any<br># other dtoverlay= specification<br>dtparam=audio=on<br>dtparam=i2c_arm=on<br>dtparam=spi=on<br><br># Comment out the following line if the edges of the desktop appear outside<br># the edges of your display<br>disable_overscan=1<br><br># If you have issues with audio, you may try uncommenting the following line<br># which forces the HDMI output into HDMI mode instead of DVI (which doesn&#x27;t<br># support audio output)<br>#hdmi_drive=2<br><br># Enable the serial pins<br>enable_uart=1<br><br># Autoload overlays for any recognized cameras or displays that are attached<br># to the CSI/DSI ports. Please note this is for libcamera support, *not* for<br># the legacy camera stack<br>camera_auto_detect=1<br>display_auto_detect=1<br><br># Config settings specific to arm64<br>arm_64bit=1<br>dtoverlay=dwc2<br><br># Enable the KMS (&quot;full&quot; KMS) graphics overlay, leaving GPU memory as the<br># default (the kernel is in control of graphics memory with full KMS)<br>dtoverlay=vc4-kms-v3d<br>disable_fw_kms_setup=1<br><br>[pi3+]<br># Use a smaller contiguous memory area, specifically on the 3A+ to avoid an<br># OOM oops on boot. The 3B+ is also affected by this section, but it shouldn&#x27;t<br># cause any issues on that board<br>dtoverlay=vc4-kms-v3d,cma-128<br><br>[pi02]<br># The Zero 2W is another 512MB board which is occasionally affected by the same<br># OOM oops on boot.<br>dtoverlay=vc4-kms-v3d,cma-128<br><br>[all]<br><br>[cm4]<br># Enable the USB2 outputs on the IO board (assuming your CM4 is plugged into<br># such a board)<br>dtoverlay=dwc2,dr_mode=host<br><br>[all]<br><br></code></pre></td></tr></table></figure>
 
   </article>
 
@@ -420,7 +428,7 @@
                               <button class="mdui-fab catalog" style="overflow:unset;">
                                   <i class="nexmoefont icon-i-catalog"></i>
                                   <div class="nexmoe-toc">
-                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83"><span class="toc-number">1.</span> <span class="toc-text"> 环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%A0%E8%BF%98%E9%9C%80%E8%A6%81"><span class="toc-number">2.</span> <span class="toc-text"> 你还需要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B6%85%E9%A2%91"><span class="toc-number">3.</span> <span class="toc-text"> 超频</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hdmi%E9%85%8D%E7%BD%AE"><span class="toc-number">4.</span> <span class="toc-text"> HDMI配置</span></a></li></ol>
+                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83"><span class="toc-number">1.</span> <span class="toc-text"> 环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%A0%E8%BF%98%E9%9C%80%E8%A6%81"><span class="toc-number">2.</span> <span class="toc-text"> 你还需要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B6%85%E9%A2%91"><span class="toc-number">3.</span> <span class="toc-text"> 超频</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hdmi%E9%85%8D%E7%BD%AE"><span class="toc-number">4.</span> <span class="toc-text"> HDMI配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%89%88-configtxt"><span class="toc-number">5.</span> <span class="toc-text"> 原版 config.txt</span></a></li></ol>
                                   </div>
                               </button>
                           
@@ -462,10 +470,10 @@
 
  
 
-<script async src="/js/app.js?v=1723301924077"></script>
+<script async src="/js/app.js?v=1723303921172"></script>
 
 
-	<script async src="/js/search.js?v=1723301924077"></script>
+	<script async src="/js/search.js?v=1723303921172"></script>
 
 
 <script src="/lib/justifiedGallery/jquery.justifiedGallery@3.8.1.min.js"></script>
