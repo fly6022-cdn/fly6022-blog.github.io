@@ -20,20 +20,20 @@
 <meta property="og:description" content="本文章以树莓派为例，通过配置 config.txt文件实现对树莓派CPU&#x2F;GPU的超频并启用HDMI功能。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-08-10T12:00:59.000Z">
-<meta property="article:modified_time" content="2024-08-10T12:26:57.731Z">
+<meta property="article:modified_time" content="2024-08-10T14:58:00.095Z">
 <meta property="article:author" content="fly6022">
 <meta property="article:tag" content="树莓派">
 <meta property="article:tag" content="配置文件">
 <meta property="article:tag" content="HDMI">
 <meta property="article:tag" content="超频">
 <meta name="twitter:card" content="summary">
-    <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css?v=1723292851624">
+    <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css?v=1723301924065">
     
         <link rel="stylesheet" href="//at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css">
     
-    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1723292851624">
-    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1723292851624">
-    <link rel="stylesheet" href="/css/style.css?v=1723292851624">
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1723301924065">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1723301924065">
+    <link rel="stylesheet" href="/css/style.css?v=1723301924065">
      
     
 
@@ -203,7 +203,7 @@
   <article>
       
           <div class="nexmoe-post-cover" style="padding-bottom: 56.25%;"> 
-              <img data-src="https://cdn.jsdelivr.net/gh/imageurl/fly6022@master/imageshttps://api.ee123.net/img/bingimg/dayimg.jpg" data-sizes="auto" alt="树莓派：配置config.txt实现超频及启用HDMI功能" class="lazyload">
+              <img data-src="https://cdn.jsdelivr.net/gh/imageurl/fly6022@master/images/background/52.jpg" data-sizes="auto" alt="树莓派：配置config.txt实现超频及启用HDMI功能" class="lazyload">
               <h1>树莓派：配置config.txt实现超频及启用HDMI功能</h1>
           </div>
       
@@ -358,167 +358,11 @@
 </tbody>
 </table>
 <h2 id="hdmi配置"><a class="markdownIt-Anchor" href="#hdmi配置"></a> HDMI配置</h2>
-<p>新增一行，添加下列内容（其中 <code>hdmi_group</code>和 <code>hdmi_mode</code>的值是具体情况而定）：</p>
+<p>新增一行，添加下列内容（其中 <code>hdmi_group</code>和 <code>hdmi_mode</code>的值视具体情况而定）：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">hdmi_group=1<br>hdmi_mode=16<br>hdmi_enable_4kp60=1<br>hdmi_force_hotplug=1<br>config_hdmi_boost=4<br></code></pre></td></tr></table></figure>
 <p>将下列内容注释掉：</p>
 <figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c"><span class="hljs-meta"># dtoverlay=vc4-kms-v3d,cma-128</span><br></code></pre></td></tr></table></figure>
-<p>以下内容摘自 <a target="_blank" rel="noopener" href="https://shumeipai.nxez.com/2013/08/31/custom-display-resolution-raspberry-pie.html">自定义树莓派的显示分辨率 - 树莓派实验室</a></p>
-<p><strong>CEA分辨率</strong></p>
-<p>以下是CEA规定的电视规格分辨率。这些分辨率的<code>hdmi_group=1</code>。</p>
-<blockquote>
-<p><code>hdmi_mode=1    VGA</code></p>
-<p><code>hdmi_mode=2    480p  60Hz</code></p>
-<p><code>hdmi_mode=3    480p  60Hz  H</code></p>
-<p><code>hdmi_mode=4    720p  60Hz</code></p>
-<p><code>hdmi_mode=5    1080i 60Hz</code></p>
-<p><code>hdmi_mode=6    480i  60Hz</code></p>
-<p><code>hdmi_mode=7    480i  60Hz  H</code></p>
-<p><code>hdmi_mode=8    240p  60Hz</code></p>
-<p><code>hdmi_mode=9    240p  60Hz  H</code></p>
-<p><code>hdmi_mode=10   480i  60Hz  4x</code></p>
-<p><code>hdmi_mode=11   480i  60Hz  4x H</code></p>
-<p><code>hdmi_mode=12   240p  60Hz  4x</code></p>
-<p><code>hdmi_mode=13   240p  60Hz  4x H</code></p>
-<p><code>hdmi_mode=14   480p  60Hz  2x</code></p>
-<p><code>hdmi_mode=15   480p  60Hz  2x H</code></p>
-<p><code>hdmi_mode=16   1080p 60Hz</code></p>
-<p><code>hdmi_mode=17   576p  50Hz</code></p>
-<p><code>hdmi_mode=18   576p  50Hz  H</code></p>
-<p><code>hdmi_mode=19   720p  50Hz</code></p>
-<p><code>hdmi_mode=20   1080i 50Hz</code></p>
-<p><code>hdmi_mode=21   576i  50Hz</code></p>
-<p><code>hdmi_mode=22   576i  50Hz  H</code></p>
-<p><code>hdmi_mode=23   288p  50Hz</code></p>
-<p><code>hdmi_mode=24   288p  50Hz  H</code></p>
-<p><code>hdmi_mode=25   576i  50Hz  4x</code></p>
-<p><code>hdmi_mode=26   576i  50Hz  4x H</code></p>
-<p><code>hdmi_mode=27   288p  50Hz  4x</code></p>
-<p><code>hdmi_mode=28   288p  50Hz  4x H</code></p>
-<p><code>hdmi_mode=29   576p  50Hz  2x</code></p>
-<p><code>hdmi_mode=30   576p  50Hz  2x H</code></p>
-<p><code>hdmi_mode=31   1080p 50Hz</code></p>
-<p><code>hdmi_mode=32   1080p 24Hz</code></p>
-<p><code>hdmi_mode=33   1080p 25Hz</code></p>
-<p><code>hdmi_mode=34   1080p 30Hz</code></p>
-<p><code>hdmi_mode=35   480p  60Hz  4x</code></p>
-<p><code>hdmi_mode=36   480p  60Hz  4xH</code></p>
-<p><code>hdmi_mode=37   576p  50Hz  4x</code></p>
-<p><code>hdmi_mode=38   576p  50Hz  4x H</code></p>
-<p><code>hdmi_mode=39   1080i 50Hz  reduced blanking</code></p>
-<p><code>hdmi_mode=40   1080i 100Hz</code></p>
-<p><code>hdmi_mode=41   720p  100Hz</code></p>
-<p><code>hdmi_mode=42   576p  100Hz</code></p>
-<p><code>hdmi_mode=43   576p  100Hz H</code></p>
-<p><code>hdmi_mode=44   576i  100Hz</code></p>
-<p><code>hdmi_mode=45   576i  100Hz H</code></p>
-<p><code>hdmi_mode=46   1080i 120Hz</code></p>
-<p><code>hdmi_mode=47   720p  120Hz</code></p>
-<p><code>hdmi_mode=48   480p  120Hz</code></p>
-<p><code>hdmi_mode=49   480p  120Hz H</code></p>
-<p><code>hdmi_mode=50   480i  120Hz</code></p>
-<p><code>hdmi_mode=51   480i  120Hz H</code></p>
-<p><code>hdmi_mode=52   576p  200Hz</code></p>
-<p><code>hdmi_mode=53   576p  200Hz H</code></p>
-<p><code>hdmi_mode=54   576i  200Hz</code></p>
-<p><code>hdmi_mode=55   576i  200Hz H</code></p>
-<p><code>hdmi_mode=56   480p  240Hz</code></p>
-<p><code>hdmi_mode=57   480p  240Hz H</code></p>
-<p><code>hdmi_mode=58   480i  240Hz</code></p>
-<p><code>hdmi_mode=59   480i  240Hz H</code></p>
-<p><code>H means 16:9 variant (of a normally 4:3 mode).</code></p>
-<p><code>2x means pixel doubled (i.e. higher clock rate, with each pixel repeated twice)</code></p>
-<p><code>4x means pixel quadrupled (i.e. higher clock rate, with each pixel repeated four times)</code></p>
-</blockquote>
-<p><strong>DMT分辨率</strong></p>
-<p>以下是计算机显示器使用的分辨率。这些分辨率的<code>hdmi_group=2</code>。</p>
-<blockquote>
-<p><code>hdmi_mode=1    640x350   85Hz</code></p>
-<p><code>hdmi_mode=2    640x400   85Hz</code></p>
-<p><code>hdmi_mode=3    720x400   85Hz</code></p>
-<p><code>hdmi_mode=4    640x480   60Hz</code></p>
-<p><code>hdmi_mode=5    640x480   72Hz</code></p>
-<p><code>hdmi_mode=6    640x480   75Hz</code></p>
-<p><code>hdmi_mode=7    640x480   85Hz</code></p>
-<p><code>hdmi_mode=8    800x600   56Hz</code></p>
-<p><code>hdmi_mode=9    800x600   60Hz</code></p>
-<p><code>hdmi_mode=10   800x600   72Hz</code></p>
-<p><code>hdmi_mode=11   800x600   75Hz</code></p>
-<p><code>hdmi_mode=12   800x600   85Hz</code></p>
-<p><code>hdmi_mode=13   800x600   120Hz</code></p>
-<p><code>hdmi_mode=14   848x480   60Hz</code></p>
-<p><code>hdmi_mode=15  &lt;a href=&quot;http://pan.baidu.com/s/1024x768#43Hz&quot; target=&quot;_blank&quot;&gt; 1024x768  43Hz&lt;/a&gt;  DO NOT USE</code></p>
-<p><code>hdmi_mode=16  &lt;a href=&quot;http://pan.baidu.com/s/1024x768#60Hz&quot; target=&quot;_blank&quot;&gt; 1024x768  60Hz&lt;/a&gt;</code></p>
-<p><code>hdmi_mode=17  &lt;a href=&quot;http://pan.baidu.com/s/1024x768#70Hz&quot; target=&quot;_blank&quot;&gt; 1024x768  70Hz&lt;/a&gt;</code></p>
-<p><code>hdmi_mode=18  &lt;a href=&quot;http://pan.baidu.com/s/1024x768#75Hz&quot; target=&quot;_blank&quot;&gt; 1024x768  75Hz&lt;/a&gt;</code></p>
-<p><code>hdmi_mode=19  &lt;a href=&quot;http://pan.baidu.com/s/1024x768#85Hz&quot; target=&quot;_blank&quot;&gt; 1024x768  85Hz&lt;/a&gt;</code></p>
-<p><code>hdmi_mode=20  &lt;a href=&quot;http://pan.baidu.com/s/1024x768#120H&quot; target=&quot;_blank&quot;&gt; 1024x768  120H&lt;/a&gt;z</code></p>
-<p><code>hdmi_mode=21  &lt;a href=&quot;http://pan.baidu.com/s/1152x864#75Hz&quot; target=&quot;_blank&quot;&gt; 1152x864  75Hz&lt;/a&gt;</code></p>
-<p><code>hdmi_mode=22  &lt;a href=&quot;http://pan.baidu.com/s/1280x768#redu&quot; target=&quot;_blank&quot;&gt; 1280x768        redu&lt;/a&gt;ced blanking</code></p>
-<p><code>hdmi_mode=23  &lt;a href=&quot;http://pan.baidu.com/s/1280x768#60Hz&quot; target=&quot;_blank&quot;&gt; 1280x768  60Hz&lt;/a&gt;</code></p>
-<p><code>hdmi_mode=24  &lt;a href=&quot;http://pan.baidu.com/s/1280x768#75Hz&quot; target=&quot;_blank&quot;&gt; 1280x768  75Hz&lt;/a&gt;</code></p>
-<p><code>hdmi_mode=25  &lt;a href=&quot;http://pan.baidu.com/s/1280x768#85Hz&quot; target=&quot;_blank&quot;&gt; 1280x768  85Hz&lt;/a&gt;</code></p>
-<p><code>hdmi_mode=26  &lt;a href=&quot;http://pan.baidu.com/s/1280x768#120H&quot; target=&quot;_blank&quot;&gt; 1280x768  120H&lt;/a&gt;z reduced blanking</code></p>
-<p><code>hdmi_mode=27  &lt;a href=&quot;http://pan.baidu.com/s/1280x800#redu&quot; target=&quot;_blank&quot;&gt; 1280x800        redu&lt;/a&gt;ced blanking</code></p>
-<p><code>hdmi_mode=28  &lt;a href=&quot;http://pan.baidu.com/s/1280x800#60Hz&quot; target=&quot;_blank&quot;&gt; 1280x800  60Hz&lt;/a&gt;</code></p>
-<p><code>hdmi_mode=29  &lt;a href=&quot;http://pan.baidu.com/s/1280x800#75Hz&quot; target=&quot;_blank&quot;&gt; 1280x800  75Hz&lt;/a&gt;</code></p>
-<p><code>hdmi_mode=30  &lt;a href=&quot;http://pan.baidu.com/s/1280x800#85Hz&quot; target=&quot;_blank&quot;&gt; 1280x800  85Hz&lt;/a&gt;</code></p>
-<p><code>hdmi_mode=31  &lt;a href=&quot;http://pan.baidu.com/s/1280x800#120H&quot; target=&quot;_blank&quot;&gt; 1280x800  120H&lt;/a&gt;z reduced blanking</code></p>
-<p><code>hdmi_mode=32  &lt;a href=&quot;http://pan.baidu.com/s/1280x960#60Hz&quot; target=&quot;_blank&quot;&gt; 1280x960  60Hz&lt;/a&gt;</code></p>
-<p><code>hdmi_mode=33  &lt;a href=&quot;http://pan.baidu.com/s/1280x960#85Hz&quot; target=&quot;_blank&quot;&gt; 1280x960  85Hz&lt;/a&gt;</code></p>
-<p><code>hdmi_mode=34  &lt;a href=&quot;http://pan.baidu.com/s/1280x960#120H&quot; target=&quot;_blank&quot;&gt; 1280x960  120H&lt;/a&gt;z reduced blanking</code></p>
-<p><code>hdmi_mode=35   1280x1024 60Hz</code></p>
-<p><code>hdmi_mode=36   1280x1024 75Hz</code></p>
-<p><code>hdmi_mode=37   1280x1024 85Hz</code></p>
-<p><code>hdmi_mode=38   1280x1024 120Hz reduced blanking</code></p>
-<p><code>hdmi_mode=39  &lt;a href=&quot;http://pan.baidu.com/s/1360x768#60Hz&quot; target=&quot;_blank&quot;&gt; 1360x768  60Hz&lt;/a&gt;</code></p>
-<p><code>hdmi_mode=40  &lt;a href=&quot;http://pan.baidu.com/s/1360x768#120H&quot; target=&quot;_blank&quot;&gt; 1360x768  120H&lt;/a&gt;z reduced blanking</code></p>
-<p><code>hdmi_mode=41   1400x1050       reduced blanking</code></p>
-<p><code>hdmi_mode=42   1400x1050 60Hz</code></p>
-<p><code>hdmi_mode=43   1400x1050 75Hz</code></p>
-<p><code>hdmi_mode=44   1400x1050 85Hz</code></p>
-<p><code>hdmi_mode=45   1400x1050 120Hz reduced blanking</code></p>
-<p><code>hdmi_mode=46  &lt;a href=&quot;http://pan.baidu.com/s/1440x900#redu&quot; target=&quot;_blank&quot;&gt; 1440x900        redu&lt;/a&gt;ced blanking</code></p>
-<p><code>hdmi_mode=47  &lt;a href=&quot;http://pan.baidu.com/s/1440x900#60Hz&quot; target=&quot;_blank&quot;&gt; 1440x900  60Hz&lt;/a&gt;</code></p>
-<p><code>hdmi_mode=48  &lt;a href=&quot;http://pan.baidu.com/s/1440x900#75Hz&quot; target=&quot;_blank&quot;&gt; 1440x900  75Hz&lt;/a&gt;</code></p>
-<p><code>hdmi_mode=49  &lt;a href=&quot;http://pan.baidu.com/s/1440x900#85Hz&quot; target=&quot;_blank&quot;&gt; 1440x900  85Hz&lt;/a&gt;</code></p>
-<p><code>hdmi_mode=50  &lt;a href=&quot;http://pan.baidu.com/s/1440x900#120H&quot; target=&quot;_blank&quot;&gt; 1440x900  120H&lt;/a&gt;z reduced blanking</code></p>
-<p><code>hdmi_mode=51   1600x1200 60Hz</code></p>
-<p><code>hdmi_mode=52   1600x1200 65Hz</code></p>
-<p><code>hdmi_mode=53   1600x1200 70Hz</code></p>
-<p><code>hdmi_mode=54   1600x1200 75Hz</code></p>
-<p><code>hdmi_mode=55   1600x1200 85Hz</code></p>
-<p><code>hdmi_mode=56   1600x1200 120Hz reduced blanking</code></p>
-<p><code>hdmi_mode=57   1680x1050       reduced blanking</code></p>
-<p><code>hdmi_mode=58   1680x1050 60Hz</code></p>
-<p><code>hdmi_mode=59   1680x1050 75Hz</code></p>
-<p><code>hdmi_mode=60   1680x1050 85Hz</code></p>
-<p><code>hdmi_mode=61   1680x1050 120Hz reduced blanking</code></p>
-<p><code>hdmi_mode=62   1792x1344 60Hz</code></p>
-<p><code>hdmi_mode=63   1792x1344 75Hz</code></p>
-<p><code>hdmi_mode=64   1792x1344 120Hz reduced blanking</code></p>
-<p><code>hdmi_mode=65   1856x1392 60Hz</code></p>
-<p><code>hdmi_mode=66   1856x1392 75Hz</code></p>
-<p><code>hdmi_mode=67   1856x1392 120Hz reduced blanking</code></p>
-<p><code>hdmi_mode=68   1920x1200       reduced blanking</code></p>
-<p><code>hdmi_mode=69   1920x1200 60Hz</code></p>
-<p><code>hdmi_mode=70   1920x1200 75Hz</code></p>
-<p><code>hdmi_mode=71   1920x1200 85Hz</code></p>
-<p><code>hdmi_mode=72   1920x1200 120Hz reduced blanking</code></p>
-<p><code>hdmi_mode=73   1920x1440 60Hz</code></p>
-<p><code>hdmi_mode=74   1920x1440 75Hz</code></p>
-<p><code>hdmi_mode=75   1920x1440 120Hz reduced blanking</code></p>
-<p><code>hdmi_mode=76   2560x1600       reduced blanking</code></p>
-<p><code>hdmi_mode=77   2560x1600 60Hz</code></p>
-<p><code>hdmi_mode=78   2560x1600 75Hz</code></p>
-<p><code>hdmi_mode=79   2560x1600 85Hz</code></p>
-<p><code>hdmi_mode=80   2560x1600 120Hz reduced blanking</code></p>
-<p><code>hdmi_mode=81  &lt;a href=&quot;http://pan.baidu.com/s/1366x768#60Hz&quot; target=&quot;_blank&quot;&gt; 1366x768  60Hz&lt;/a&gt;</code></p>
-<p><code>hdmi_mode=82   1080p     60Hz</code></p>
-<p><code>hdmi_mode=83  &lt;a href=&quot;http://pan.baidu.com/s/1600x900#redu&quot; target=&quot;_blank&quot;&gt; 1600x900        redu&lt;/a&gt;ced blanking</code></p>
-<p><code>hdmi_mode=84   2048x1152       reduced blanking</code></p>
-<p><code>hdmi_mode=85   720p      60Hz</code></p>
-<p><code>hdmi_mode=86  &lt;a href=&quot;http://pan.baidu.com/s/1366x768#redu&quot; target=&quot;_blank&quot;&gt; 1366x768        redu&lt;/a&gt;ced blanking</code></p>
-</blockquote>
+<p><code>hdmi_group</code>和 <code>hdmi_mode</code>的赋值详见 <a target="_blank" rel="noopener" href="https://shumeipai.nxez.com/2013/08/31/custom-display-resolution-raspberry-pie.html">自定义树莓派的显示分辨率 - 树莓派实验室</a></p>
 
   </article>
 
@@ -618,10 +462,10 @@
 
  
 
-<script async src="/js/app.js?v=1723292851647"></script>
+<script async src="/js/app.js?v=1723301924077"></script>
 
 
-	<script async src="/js/search.js?v=1723292851647"></script>
+	<script async src="/js/search.js?v=1723301924077"></script>
 
 
 <script src="/lib/justifiedGallery/jquery.justifiedGallery@3.8.1.min.js"></script>
