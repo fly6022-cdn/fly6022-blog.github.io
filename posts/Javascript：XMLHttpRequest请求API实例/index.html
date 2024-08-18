@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-
 <html lang="zh-CN">
-
 <head>
     
     <title>Javascript：XMLHttpRequest请求API实例 - fly6022&#39;s Blog</title>
     <meta charset="UTF-8">
     <meta name="keywords" content="fly6022, 技术宅, 编程, code">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
-    
-    
+        
+        
 
     <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/imageurl/fly6022@master/images/favicon.png" type="image/png" />
     <meta name="description" content="API（应用程序接口）在前端开发过程中起到了举足轻重的作用，利用Web API中的 XMLHttpRequest对象可以便于我们对API的调用。请求API的方式有很多，本文为大家提供一个比较简单的范例。 本文内容所用语言若无特别说明均为JavaScript，且本文所提供的方法作用域不包含IE浏览器这类比较老旧的浏览器。 首先，构造一个函数 XMLHttpRequest()得到实例对象。 1XHR">
@@ -25,16 +23,18 @@
 <meta property="article:tag" content="Ajax">
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
-    <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css?v=1723968029132">
+    <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css?v=1723987215793">
     
-        <link rel="stylesheet" href="//at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css">
     
-    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1723968029133">
-    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1723968029133">
-    <link rel="stylesheet" href="/css/style.css?v=1723968029133">
+    <link rel="stylesheet" href="/css/style.css" /> 
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css" />
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css" />
+    <!--<link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1723987215793">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1723987215793">-->
+    <!--<link rel="stylesheet" href="/css/style.css?v=1723987215793">
      
-    
-
+    -->
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
           tex2jax: {
@@ -57,7 +57,8 @@
     <meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="fly6022's Blog" type="application/atom+xml">
 </head>
 
-<body class="mdui-drawer-body-left">
+<body class="mdui-drawer-body-left" onload="document.body.style.visibility=`visible`;">
+    <!--<script>document.body.style.visibility=`hidden`;</script>-->
     
     <meting-js style="position: absolute; z-index:99999;" type="playlist" server="netease" id="6622801607" fixed="true"></meting-js>
     <div id="nexmoe-background">
@@ -118,13 +119,9 @@
     
     <div class="nexmoe-widget-wrap">
     <div class="nexmoe-widget nexmoe-search">
-        
-            <form id="search_form">
-                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="搜索" style="
-                    font-size: 15px !important;
-                    height: 56px !important;
-                    background-image: none;
-                "></label>
+         
+            <form id="search_form" action_e="https://cn.bing.com/search?q=site:fly6022.fun" onsubmit="return search();">
+                <label><input id="search_value" name="q" type="search" placeholder="搜索"></label>
             </form>
          
     </div>
@@ -138,6 +135,8 @@
             <i class="nexmoefont icon-github"></i>
         </a><a class="mdui-ripple" href="https://www.zhihu.com/people/fly_6022" target="_blank" mdui-tooltip="{content: '知乎'}" style="color: rgb(30, 136, 229);background-color: rgba(30, 136, 229, .1);">
             <i class="nexmoefont icon-zhihu"></i>
+        </a><a class="mdui-ripple" href="/atom.xml" target="_blank" mdui-tooltip="{content: 'RSS'}" style="color: rgb(247, 132, 34);background-color: rgba(247, 132, 34, .1);">
+            <i class="nexmoefont icon-rss"></i>
         </a>
     </div>
 </div>
@@ -324,10 +323,8 @@
 
  
 
-<script async src="/js/app.js?v=1723968029140"></script>
+<script async src="/js/app.js?v=1723987215800"></script>
 
-
-	<script async src="/js/search.js?v=1723968029140"></script>
 
 
 <script src="/lib/justifiedGallery/jquery.justifiedGallery@3.8.1.min.js"></script>
@@ -359,7 +356,5 @@
         d.getElementsByTagName('body').item(0).appendChild(s);
     })(document);
     </script>
-
 </body>
-
 </html>

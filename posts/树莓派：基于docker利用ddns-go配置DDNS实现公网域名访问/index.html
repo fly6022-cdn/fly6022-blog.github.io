@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-
 <html lang="zh-CN">
-
 <head>
     
     <title>树莓派：基于docker利用ddns-go配置DDNS实现公网域名访问 - fly6022&#39;s Blog</title>
     <meta charset="UTF-8">
     <meta name="keywords" content="fly6022, 技术宅, 编程, code">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
-    
-    
+        
+        
 
     <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/imageurl/fly6022@master/images/favicon.png" type="image/png" />
     <meta name="description" content="本文章以树莓派为例，基于Docker，利用ddns-go实现IPv6网络公网域名访问。">
@@ -34,16 +32,18 @@
 <meta property="article:tag" content="Cloudflare">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/imageurl/fly6022@master/images/posts/ddns/2.png">
-    <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css?v=1723968029026">
+    <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css?v=1723987215704">
     
-        <link rel="stylesheet" href="//at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css">
     
-    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1723968029027">
-    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1723968029027">
-    <link rel="stylesheet" href="/css/style.css?v=1723968029027">
+    <link rel="stylesheet" href="/css/style.css" /> 
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css" />
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css" />
+    <!--<link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1723987215704">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1723987215704">-->
+    <!--<link rel="stylesheet" href="/css/style.css?v=1723987215704">
      
-    
-
+    -->
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
           tex2jax: {
@@ -66,7 +66,8 @@
     <meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="fly6022's Blog" type="application/atom+xml">
 </head>
 
-<body class="mdui-drawer-body-left">
+<body class="mdui-drawer-body-left" onload="document.body.style.visibility=`visible`;">
+    <!--<script>document.body.style.visibility=`hidden`;</script>-->
     
     <meting-js style="position: absolute; z-index:99999;" type="playlist" server="netease" id="6622801607" fixed="true"></meting-js>
     <div id="nexmoe-background">
@@ -127,13 +128,9 @@
     
     <div class="nexmoe-widget-wrap">
     <div class="nexmoe-widget nexmoe-search">
-        
-            <form id="search_form">
-                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="搜索" style="
-                    font-size: 15px !important;
-                    height: 56px !important;
-                    background-image: none;
-                "></label>
+         
+            <form id="search_form" action_e="https://cn.bing.com/search?q=site:fly6022.fun" onsubmit="return search();">
+                <label><input id="search_value" name="q" type="search" placeholder="搜索"></label>
             </form>
          
     </div>
@@ -147,6 +144,8 @@
             <i class="nexmoefont icon-github"></i>
         </a><a class="mdui-ripple" href="https://www.zhihu.com/people/fly_6022" target="_blank" mdui-tooltip="{content: '知乎'}" style="color: rgb(30, 136, 229);background-color: rgba(30, 136, 229, .1);">
             <i class="nexmoefont icon-zhihu"></i>
+        </a><a class="mdui-ripple" href="/atom.xml" target="_blank" mdui-tooltip="{content: 'RSS'}" style="color: rgb(247, 132, 34);background-color: rgba(247, 132, 34, .1);">
+            <i class="nexmoefont icon-rss"></i>
         </a>
     </div>
 </div>
@@ -368,10 +367,8 @@
 
  
 
-<script async src="/js/app.js?v=1723968029040"></script>
+<script async src="/js/app.js?v=1723987215714"></script>
 
-
-	<script async src="/js/search.js?v=1723968029040"></script>
 
 
 <script src="/lib/justifiedGallery/jquery.justifiedGallery@3.8.1.min.js"></script>
@@ -403,7 +400,5 @@
         d.getElementsByTagName('body').item(0).appendChild(s);
     })(document);
     </script>
-
 </body>
-
 </html>
