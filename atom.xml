@@ -6,7 +6,7 @@
   <link href="https://blog.fly6022.fun/atom.xml" rel="self"/>
   
   <link href="https://blog.fly6022.fun/"/>
-  <updated>2024-08-29T10:24:35.031Z</updated>
+  <updated>2024-08-29T10:29:39.487Z</updated>
   <id>https://blog.fly6022.fun/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://blog.fly6022.fun/posts/%E4%B8%80%E5%8A%A07%EF%BC%9A%E8%AE%B0%E4%B8%80%E6%AC%A1%E6%95%91%E7%A0%96%E8%BF%87%E7%A8%8B/"/>
     <id>https://blog.fly6022.fun/posts/%E4%B8%80%E5%8A%A07%EF%BC%9A%E8%AE%B0%E4%B8%80%E6%AC%A1%E6%95%91%E7%A0%96%E8%BF%87%E7%A8%8B/</id>
     <published>2024-08-29T10:04:40.000Z</published>
-    <updated>2024-08-29T10:24:35.031Z</updated>
+    <updated>2024-08-29T10:29:39.487Z</updated>
     
-    <content type="html"><![CDATA[<p>记一次手机救砖过程。</p><span id="more"></span><p>一个平静的午后，当我给手机重启时，却迟迟等不到手机开机时的振动，屏幕也一直没有被点亮。</p><p>会不会是电池的问题？我将手机连接到充电器，接通电源后依然不开机。</p><p>会不会是主板的问题？考虑到重启时手机温度不高，芯片脱焊的概率不大。于是我考虑将手机连接到电脑……</p><p>连接到电脑，打开 AutumnBox。</p><p><img data-fancybox="gallery" data-sizes="auto" data-src="/posts/opjiuzhuanjingli/1.png" alt="1" class="lazyload"></p><p>提示“未连接设备”，同时也无法进入到Fastboot模式。</p><p>看到这个画面，我慌了，一时间不知所措。问题究竟出现在哪里？</p><p>我再一次尝试。</p><p>同时按住“音量+”和“音量-”键，将手机连接到电脑，打开“计算机管理”，找到“设备管理器”，展开“端口（COM和LPT）”。</p><p><img data-fancybox="gallery" data-sizes="auto" data-src="/posts/opjiuzhuanjingli/2.png" alt="2" class="lazyload"></p><p>注意到手机进入了 900E 模式（不是9008模式），原因也在此浮现出来：<strong>手机在执行重启的过程中未完全关机，从而造成“假死”的现象。</strong></p><p>按住“音量+”键和电源键，使手机强制重启，终于听到了开机的振动声，屏幕也被点亮，稍后手机完成启动，进入了系统。</p><p>真是“山重水复疑无路，柳暗花明又一村”！</p>]]></content>
+    <content type="html"><![CDATA[<p>记一次手机救砖过程。</p><span id="more"></span><p>一个平静的午后，当我给手机重启时，却迟迟等不到手机开机时的振动，屏幕也一直没有被点亮。</p><p>会不会是电池的问题？我将手机连接到充电器，接通电源后依然不开机。</p><p>会不会是主板的问题？考虑到重启时手机温度不高，芯片脱焊的概率不大。于是我考虑将手机连接到电脑……</p><p>连接到电脑，打开 AutumnBox。</p><p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.fly6022.fun/images/posts/opjiuzhuanjingli/1.png" alt="1" class="lazyload"></p><p>提示“未连接设备”，同时也无法进入到Fastboot模式。</p><p>看到这个画面，我慌了，一时间不知所措。问题究竟出现在哪里？</p><p>我再一次尝试。</p><p>同时按住“音量+”和“音量-”键，将手机连接到电脑，打开“计算机管理”，找到“设备管理器”，展开“端口（COM和LPT）”。</p><p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.fly6022.fun/images/posts/opjiuzhuanjingli/2.png" alt="2" class="lazyload"></p><p>注意到手机进入了 900E 模式（不是9008模式），原因也在此浮现出来：<strong>手机在执行重启的过程中未完全关机，从而造成“假死”的现象。</strong></p><p>按住“音量+”键和电源键，使手机强制重启，终于听到了开机的振动声，屏幕也被点亮，稍后手机完成启动，进入了系统。</p><p>真是“山重水复疑无路，柳暗花明又一村”！</p>]]></content>
     
     
     <summary type="html">&lt;p&gt;记一次手机救砖过程。&lt;/p&gt;</summary>
