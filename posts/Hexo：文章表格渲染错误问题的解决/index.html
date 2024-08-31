@@ -18,28 +18,28 @@
 <meta property="og:site_name" content="fly6022&#39;s Blog">
 <meta property="og:description" content="hexo-renderer-kramed渲染器渲染表格时错误问题的解决。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/imageurl/fly6022@masterhttps://imageurl.fly6022.fun/https://imageurl.fly6022.fun//posts/2022-02-19-01/04.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/imageurl/fly6022@masterhttps://imageurl.fly6022.fun/https://imageurl.fly6022.fun//posts/2022-02-19-01/05.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/imageurl/fly6022@masterhttps://imageurl.fly6022.fun/https://imageurl.fly6022.fun//posts/2022-02-19-01/06.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/imageurl/fly6022@masterhttps://imageurl.fly6022.fun/https://imageurl.fly6022.fun//posts/2022-02-19-01/01.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/imageurl/fly6022@masterhttps://imageurl.fly6022.fun/https://imageurl.fly6022.fun//posts/2022-02-19-01/02.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/imageurl/fly6022@masterhttps://imageurl.fly6022.fun/images/posts/2022-02-19-01/04.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/imageurl/fly6022@masterhttps://imageurl.fly6022.fun/images/posts/2022-02-19-01/05.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/imageurl/fly6022@masterhttps://imageurl.fly6022.fun/images/posts/2022-02-19-01/06.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/imageurl/fly6022@masterhttps://imageurl.fly6022.fun/images/posts/2022-02-19-01/01.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/imageurl/fly6022@masterhttps://imageurl.fly6022.fun/images/posts/2022-02-19-01/02.png">
 <meta property="article:published_time" content="2022-02-19T05:00:39.041Z">
 <meta property="article:modified_time" content="2024-08-19T11:59:51.071Z">
 <meta property="article:author" content="fly6022">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="hexo-renderer-kramed">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/imageurl/fly6022@masterhttps://imageurl.fly6022.fun/https://imageurl.fly6022.fun//posts/2022-02-19-01/04.png">
-    <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css?v=1725095866831">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/imageurl/fly6022@masterhttps://imageurl.fly6022.fun/images/posts/2022-02-19-01/04.png">
+    <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css?v=1725097867348">
     
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css">
     
     <link rel="stylesheet" href="/css/style.css" /> 
     <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css" />
     <link rel="stylesheet" href="/lib/iconfont/iconfont.css" />
-    <!--<link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1725095866831">
-    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1725095866831">-->
-    <!--<link rel="stylesheet" href="/css/style.css?v=1725095866831">
+    <!--<link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1725097867348">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1725097867348">-->
+    <!--<link rel="stylesheet" href="/css/style.css?v=1725097867348">
      
     -->
     <script type="text/x-mathjax-config">
@@ -223,15 +223,15 @@
       <p>hexo-renderer-kramed渲染器渲染表格时错误问题的解决。</p>
 <span id="more"></span>
 <p>最近在将Hexo博客升级的时候，发现博客网页中的表格渲染有问题：</p>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://cdn.jsdelivr.net/gh/imageurl/fly6022@masterhttps://imageurl.fly6022.fun/https://imageurl.fly6022.fun//posts/2022-02-19-01/04.png" alt="04" class="lazyload"></p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://cdn.jsdelivr.net/gh/imageurl/fly6022@masterhttps://imageurl.fly6022.fun/images/posts/2022-02-19-01/04.png" alt="04" class="lazyload"></p>
 <p>经过排查，发现与主题无关，我认为是渲染器出了问题。</p>
 <p>在浏览器F12界面进行调试发现：</p>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://cdn.jsdelivr.net/gh/imageurl/fly6022@masterhttps://imageurl.fly6022.fun/https://imageurl.fly6022.fun//posts/2022-02-19-01/05.png" alt="05" class="lazyload"></p>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://cdn.jsdelivr.net/gh/imageurl/fly6022@masterhttps://imageurl.fly6022.fun/https://imageurl.fly6022.fun//posts/2022-02-19-01/06.png" alt="06" class="lazyload"></p>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://cdn.jsdelivr.net/gh/imageurl/fly6022@masterhttps://imageurl.fly6022.fun/https://imageurl.fly6022.fun//posts/2022-02-19-01/01.png" alt="01" class="lazyload"></p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://cdn.jsdelivr.net/gh/imageurl/fly6022@masterhttps://imageurl.fly6022.fun/images/posts/2022-02-19-01/05.png" alt="05" class="lazyload"></p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://cdn.jsdelivr.net/gh/imageurl/fly6022@masterhttps://imageurl.fly6022.fun/images/posts/2022-02-19-01/06.png" alt="06" class="lazyload"></p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://cdn.jsdelivr.net/gh/imageurl/fly6022@masterhttps://imageurl.fly6022.fun/images/posts/2022-02-19-01/01.png" alt="01" class="lazyload"></p>
 <p>将 <code>&lt;table&gt;</code>标签外面的 <code>&lt;div class=&quot;table-container&gt;&quot;</code>删除，表格恢复正常。</p>
 <p>前往博客根目录，在地址栏键入：<code>&lt;根目录文件夹&gt;\node_modules\hexo-renderer-kramed\lib</code></p>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://cdn.jsdelivr.net/gh/imageurl/fly6022@masterhttps://imageurl.fly6022.fun/https://imageurl.fly6022.fun//posts/2022-02-19-01/02.png" alt="02" class="lazyload"></p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://cdn.jsdelivr.net/gh/imageurl/fly6022@masterhttps://imageurl.fly6022.fun/images/posts/2022-02-19-01/02.png" alt="02" class="lazyload"></p>
 <p>将 <code>renderer.js</code>用编辑器打开，并将其中的第 <code>35-47</code>行：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// Add table-container div to set overflow-x: auto</span><br><span class="hljs-title class_">Renderer</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">table</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params">header, body</span>) &#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&lt;div class=&quot;table-container&quot;&gt;\n&#x27;</span><br>    + <span class="hljs-string">&#x27;&lt;table&gt;\n&#x27;</span><br>    + <span class="hljs-string">&#x27;&lt;thead&gt;\n&#x27;</span><br>    + header<br>    + <span class="hljs-string">&#x27;&lt;/thead&gt;\n&#x27;</span><br>    + <span class="hljs-string">&#x27;&lt;tbody&gt;\n&#x27;</span><br>    + body<br>    + <span class="hljs-string">&#x27;&lt;/tbody&gt;\n&#x27;</span><br>    + <span class="hljs-string">&#x27;&lt;/table&gt;\n&#x27;</span><br>    + <span class="hljs-string">&#x27;&lt;/div&gt;\n&#x27;</span>;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>更改为：</p>
@@ -333,7 +333,7 @@
 
  
 
-<script async src="/js/app.js?v=1725095866833"></script>
+<script async src="/js/app.js?v=1725097867350"></script>
 
 
 
