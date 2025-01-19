@@ -5957,12 +5957,12 @@ select.mdui-select[multiple] option:last-child {
  */
 /* DOM 加载完后再添加 transition */
 body.mdui-loaded {
-  -webkit-transition: padding .3s cubic-bezier(0, 0, .2, 1);
-          transition: padding .3s cubic-bezier(0, 0, .2, 1);
+  -webkit-transition: padding 0s cubic-bezier(0, 0, .2, 1);
+          transition: padding 0s cubic-bezier(0, 0, .2, 1);
 }
 body.mdui-loaded .mdui-drawer {
-  -webkit-transition: all .3s cubic-bezier(0, 0, .2, 1);
-          transition: all .3s cubic-bezier(0, 0, .2, 1);
+  -webkit-transition: all 0s cubic-bezier(0, 0, .2, 1);
+          transition: all 0s cubic-bezier(0, 0, .2, 1);
 }
 /* 抽屉栏外层，默认出现在左侧且隐藏 */
 .mdui-drawer {

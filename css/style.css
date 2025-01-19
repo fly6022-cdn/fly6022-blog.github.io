@@ -147,7 +147,7 @@ article {
 }
 article p {
   line-height: 24px;
-  font-family: 'PlusJakartaSans-Medium', Noto Serif SC;
+  font-family: Times New Roman, 'PlusJakartaSans-Medium', Noto Serif SC;
 }
 article code {
   background-color: rgba(27,31,35,0.05);
@@ -320,7 +320,7 @@ article h5,
 article h6 {
   color: #111;
   margin: 25px 0;
-  font-family: Noto Serif SC;
+  font-family: Times New Roman, Noto Serif SC;
 }
 article h4,
 article h5,
