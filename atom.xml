@@ -6,7 +6,7 @@
   <link href="https://blog.fly6022.fun/atom.xml" rel="self"/>
   
   <link href="https://blog.fly6022.fun/"/>
-  <updated>2025-01-19T06:23:03.349Z</updated>
+  <updated>2025-02-05T02:24:18.495Z</updated>
   <id>https://blog.fly6022.fun/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>AI：AMD RX590显卡通过Ollama本地部署Deepseek R1大模型</title>
+    <link href="https://blog.fly6022.fun/posts/AI%EF%BC%9AAMD%20RX590%E6%98%BE%E5%8D%A1%E9%80%9A%E8%BF%87Ollama%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2Deepseek%20R1%E5%A4%A7%E6%A8%A1%E5%9E%8B/"/>
+    <id>https://blog.fly6022.fun/posts/AI%EF%BC%9AAMD%20RX590%E6%98%BE%E5%8D%A1%E9%80%9A%E8%BF%87Ollama%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2Deepseek%20R1%E5%A4%A7%E6%A8%A1%E5%9E%8B/</id>
+    <published>2025-02-05T02:24:00.000Z</published>
+    <updated>2025-02-05T02:24:18.495Z</updated>
+    
+    <content type="html"><![CDATA[<p>Ollama 并不原生支持部分系列的 AMD 显卡，因此，想要通过 RX590 显卡运行大模型（LLM），需要手动进行修改配置。</p><span id="more"></span><h2 id="下载安装Ollama-for-AMD">下载安装Ollama-for-AMD</h2><p>首先下载Ollama-for-AMD：<a href="https://github.com/likelovewant/ollama-for-amd/releases/tag/v0.5.4">https://github.com/likelovewant/ollama-for-amd/releases/tag/v0.5.4</a>。</p><p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.fly6022.fun/images/posts/rx590-ollama-deepseek/01.png" alt="01" class="lazyload"></p><p>正常安装，Ollama会自动在后台运行，在任务栏中右键Ollama图标，点击“View logs”。</p><p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.fly6022.fun/images/posts/rx590-ollama-deepseek/02.png" alt="02" class="lazyload"></p><p>此时会跳转到目录：<code>C:\Users\&lt;用户名&gt;\AppData\Local\Ollama</code></p><p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.fly6022.fun/images/posts/rx590-ollama-deepseek/03.png" alt="03" class="lazyload"></p><p>用文本编辑器打开“<code>server.log</code>”或“<code>server-1.log</code>”。</p><p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.fly6022.fun/images/posts/rx590-ollama-deepseek/04.png" alt="04" class="lazyload"></p><p>日志提示WARN：显卡<code>gpu type</code>为<code>gfx803</code>，且<code>ROCm</code>版本为<code>5.7</code>。</p><p>我们需要下载对应<code>gfx version</code>及<code>ROCm</code>的文件。</p><h2 id="配置ROCm（HIP-SDK）">配置ROCm（HIP SDK）</h2><p>首先下载ROCm的相关驱动，HIP SDK：<a href="https://www.amd.com/en/developer/resources/ROCm-hub/hip-sdk.html">https://www.amd.com/en/developer/resources/ROCm-hub/hip-sdk.html</a></p><p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.fly6022.fun/images/posts/rx590-ollama-deepseek/05.png" alt="05" class="lazyload"></p><p>找到对应操作系统版本<code>Windows 10 &amp; 11</code>，<code>ROCm</code>版本<code>5.7.x</code>的SDK，下载并安装。</p><h2 id="配置Rocmlibs">配置Rocmlibs</h2><p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.fly6022.fun/images/posts/rx590-ollama-deepseek/06.png" alt="06" class="lazyload"></p><p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.fly6022.fun/images/posts/rx590-ollama-deepseek/07.png" alt="07" class="lazyload"></p><p>显卡<code>gpu type</code>为<code>gfx803</code>，对应为<code>rocm.gfx803.optic.vega10.logic.hip.sdk.6.1.2.7z</code>。</p><p>下载完毕后解压。</p><p>打开目录：<code>C:\Users\&lt;用户名&gt;\AppData\Local\Programs\Ollama\rocm</code></p><p>将解压后文件中的<code>hipblas.dll</code>替换本目录中的文件。</p><p>打开目录：<code>C:\Users\&lt;用户名&gt;\AppData\Local\Programs\Ollama\rocm\rocblas</code></p><p>将解压后文件中的<code>library</code>文件夹替换本目录中的文件夹。</p><p><strong>重启电脑</strong>。</p><h2 id="安装Deepseek">安装Deepseek</h2><p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.fly6022.fun/images/posts/rx590-ollama-deepseek/09.png" alt="09" class="lazyload"></p><p>打开Ollama官网模型目录：<a href="https://ollama.com/library/deepseek-r1">https://ollama.com/library/deepseek-r1</a></p><p>根据自身电脑配置选择对应参数（<code>x b</code>代表<code>10x 亿参数</code>，例如<code>14b</code>代表<code>140亿参数</code>）</p><p>例如，我们要安装14b的大模型。</p><p>在CMD中键入<code>ollama run deepseek-r1:14b</code></p><p>等待安装完毕即可。</p><p>或者，你也可以采用图形化界面与AI交互，例如使用<a href="https://chatboxai.app/zh">Chatbox</a>。</p><h2 id="检查">检查</h2><p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.fly6022.fun/images/posts/rx590-ollama-deepseek/08.png" alt="08" class="lazyload"></p><p>尝试与AI进行对话，例如输入“你好。”</p><p>打开任务管理器，发现GPU在工作，证明配置成功。</p><p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.fly6022.fun/images/posts/rx590-ollama-deepseek/10.png" alt="10" class="lazyload"></p><p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.fly6022.fun/images/posts/rx590-ollama-deepseek/11.png" alt="11" class="lazyload"></p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;Ollama 并不原生支持部分系列的 AMD 显卡，因此，想要通过 RX590 显卡运行大模型（LLM），需要手动进行修改配置。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="随便写写" scheme="https://blog.fly6022.fun/categories/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/"/>
+    
+    
+    <category term="AI" scheme="https://blog.fly6022.fun/tags/AI/"/>
+    
+    <category term="Deepseek" scheme="https://blog.fly6022.fun/tags/Deepseek/"/>
+    
+    <category term="Ollama" scheme="https://blog.fly6022.fun/tags/Ollama/"/>
+    
+    <category term="AMD" scheme="https://blog.fly6022.fun/tags/AMD/"/>
+    
+    <category term="RX590" scheme="https://blog.fly6022.fun/tags/RX590/"/>
+    
+    <category term="ROCm" scheme="https://blog.fly6022.fun/tags/ROCm/"/>
+    
+  </entry>
   
   <entry>
     <title>HAM：业余无线电入门从考试到设台指南(一)</title>
@@ -40,37 +71,6 @@
     <category term="业余无线电" scheme="https://blog.fly6022.fun/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
     
     <category term="UV-K6" scheme="https://blog.fly6022.fun/tags/UV-K6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>AI：AMD RX590显卡通过Ollama本地部署Deepseek R1大模型</title>
-    <link href="https://blog.fly6022.fun/posts/AI%EF%BC%9AAMD%20RX590%E6%98%BE%E5%8D%A1%E9%80%9A%E8%BF%87Ollama%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2Deepseek%20R1%E5%A4%A7%E6%A8%A1%E5%9E%8B/"/>
-    <id>https://blog.fly6022.fun/posts/AI%EF%BC%9AAMD%20RX590%E6%98%BE%E5%8D%A1%E9%80%9A%E8%BF%87Ollama%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2Deepseek%20R1%E5%A4%A7%E6%A8%A1%E5%9E%8B/</id>
-    <published>2025-01-04T08:25:25.000Z</published>
-    <updated>2025-02-05T02:21:12.441Z</updated>
-    
-    <content type="html"><![CDATA[<p>Ollama 并不原生支持部分系列的 AMD 显卡，因此，想要通过 RX590 显卡运行大模型（LLM），需要手动进行修改配置。</p><span id="more"></span><h2 id="下载安装Ollama-for-AMD">下载安装Ollama-for-AMD</h2><p>首先下载Ollama-for-AMD：<a href="https://github.com/likelovewant/ollama-for-amd/releases/tag/v0.5.4">https://github.com/likelovewant/ollama-for-amd/releases/tag/v0.5.4</a>。</p><p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.fly6022.fun/images/posts/rx590-ollama-deepseek/01.png" alt="01" class="lazyload"></p><p>正常安装，Ollama会自动在后台运行，在任务栏中右键Ollama图标，点击“View logs”。</p><p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.fly6022.fun/images/posts/rx590-ollama-deepseek/02.png" alt="02" class="lazyload"></p><p>此时会跳转到目录：<code>C:\Users\&lt;用户名&gt;\AppData\Local\Ollama</code></p><p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.fly6022.fun/images/posts/rx590-ollama-deepseek/03.png" alt="03" class="lazyload"></p><p>用文本编辑器打开“<code>server.log</code>”或“<code>server-1.log</code>”。</p><p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.fly6022.fun/images/posts/rx590-ollama-deepseek/04.png" alt="04" class="lazyload"></p><p>日志提示WARN：显卡<code>gpu type</code>为<code>gfx803</code>，且<code>ROCm</code>版本为<code>5.7</code>。</p><p>我们需要下载对应<code>gfx version</code>及<code>ROCm</code>的文件。</p><h2 id="配置ROCm（HIP-SDK）">配置ROCm（HIP SDK）</h2><p>首先下载ROCm的相关驱动，HIP SDK：<a href="https://www.amd.com/en/developer/resources/ROCm-hub/hip-sdk.html">https://www.amd.com/en/developer/resources/ROCm-hub/hip-sdk.html</a></p><p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.fly6022.fun/images/posts/rx590-ollama-deepseek/05.png" alt="05" class="lazyload"></p><p>找到对应操作系统版本<code>Windows 10 &amp; 11</code>，<code>ROCm</code>版本<code>5.7.x</code>的SDK，下载并安装。</p><h2 id="配置Rocmlibs">配置Rocmlibs</h2><p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.fly6022.fun/images/posts/rx590-ollama-deepseek/06.png" alt="06" class="lazyload"></p><p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.fly6022.fun/images/posts/rx590-ollama-deepseek/07.png" alt="07" class="lazyload"></p><p>显卡<code>gpu type</code>为<code>gfx803</code>，对应为<code>rocm.gfx803.optic.vega10.logic.hip.sdk.6.1.2.7z</code>。</p><p>下载完毕后解压。</p><p>打开目录：<code>C:\Users\&lt;用户名&gt;\AppData\Local\Programs\Ollama\rocm</code></p><p>将解压后文件中的<code>hipblas.dll</code>替换本目录中的文件。</p><p>打开目录：<code>C:\Users\&lt;用户名&gt;\AppData\Local\Programs\Ollama\rocm\rocblas</code></p><p>将解压后文件中的<code>library</code>文件夹替换本目录中的文件夹。</p><p><strong>重启电脑</strong>。</p><h2 id="安装Deepseek">安装Deepseek</h2><p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.fly6022.fun/images/posts/rx590-ollama-deepseek/09.png" alt="09" class="lazyload"></p><p>打开Ollama官网模型目录：<a href="https://ollama.com/library/deepseek-r1">https://ollama.com/library/deepseek-r1</a></p><p>根据自身电脑配置选择对应参数（<code>x b</code>代表<code>10x 亿参数</code>，例如<code>14b</code>代表<code>140亿参数</code>）</p><p>例如，我们要安装14b的大模型。</p><p>在CMD中键入<code>ollama run deepseek-r1:14b</code></p><p>等待安装完毕即可。</p><p>或者，你也可以采用图形化界面与AI交互，例如使用<a href="https://chatboxai.app/zh">Chatbox</a>。</p><h2 id="检查">检查</h2><p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.fly6022.fun/images/posts/rx590-ollama-deepseek/08.png" alt="08" class="lazyload"></p><p>尝试与AI进行对话，例如输入“你好。”</p><p>打开任务管理器，发现GPU在工作，证明配置成功。</p><p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.fly6022.fun/images/posts/rx590-ollama-deepseek/10.png" alt="10" class="lazyload"></p><p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.fly6022.fun/images/posts/rx590-ollama-deepseek/11.png" alt="11" class="lazyload"></p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;Ollama 并不原生支持部分系列的 AMD 显卡，因此，想要通过 RX590 显卡运行大模型（LLM），需要手动进行修改配置。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="随便写写" scheme="https://blog.fly6022.fun/categories/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/"/>
-    
-    
-    <category term="AI" scheme="https://blog.fly6022.fun/tags/AI/"/>
-    
-    <category term="Deepseek" scheme="https://blog.fly6022.fun/tags/Deepseek/"/>
-    
-    <category term="Ollama" scheme="https://blog.fly6022.fun/tags/Ollama/"/>
-    
-    <category term="AMD" scheme="https://blog.fly6022.fun/tags/AMD/"/>
-    
-    <category term="RX590" scheme="https://blog.fly6022.fun/tags/RX590/"/>
-    
-    <category term="ROCm" scheme="https://blog.fly6022.fun/tags/ROCm/"/>
     
   </entry>
   
