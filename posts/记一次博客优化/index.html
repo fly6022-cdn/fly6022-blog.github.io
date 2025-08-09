@@ -27,16 +27,16 @@
 <meta property="article:tag" content="博客">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://imageurl.kuri.ink/images/posts/2020-12-26-01/01.png">
-    <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css?v=1754726852921">
+    <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css?v=1754727036667">
     
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css">
     
     <link rel="stylesheet" href="/css/style.css" /> 
     <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css" />
     <link rel="stylesheet" href="/lib/iconfont/iconfont.css" />
-    <!--<link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1754726852921">
-    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1754726852921">-->
-    <!--<link rel="stylesheet" href="/css/style.css?v=1754726852921">
+    <!--<link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1754727036667">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1754727036667">-->
+    <!--<link rel="stylesheet" href="/css/style.css?v=1754727036667">
      
     -->
     <script type="text/x-mathjax-config">
@@ -221,46 +221,62 @@
 
       <p>233，本次博客优化主要对网站的层叠样式表（CSS）以及字体方面做了微调。</p>
 <span id="more"></span>
-<h2 id="🎨-层叠样式表">🎨 层叠样式表</h2>
-<p>为了使页面更快响应，我对网站的层叠样式表做了微调及压缩：目前CSS文件的大小由原来的 <code>243 KB</code> 变为了 <code>221 KB</code> 。</p>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.kuri.ink/images/posts/2020-12-26-01/01.png" alt="PNG1" class="lazyload"></p>
+<h2 id="层叠样式表">🎨 层叠样式表</h2>
+<p>为了使页面更快响应，我对网站的层叠样式表做了微调及压缩：目前CSS文件的大小由原来的
+<code>243 KB</code> 变为了 <code>221 KB</code> 。</p>
+<figure>
+<img src="https://imageurl.kuri.ink/images/posts/2020-12-26-01/01.png"
+alt="PNG1" />
+<figcaption aria-hidden="true">PNG1</figcaption>
+</figure>
 <p>经过本地测试，网站首页CSS的响应速度为 <code>33.96 ms</code> 。</p>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.kuri.ink/images/posts/2020-12-26-01/02.png" alt="PNG2" class="lazyload"></p>
+<figure>
+<img src="https://imageurl.kuri.ink/images/posts/2020-12-26-01/02.png"
+alt="PNG2" />
+<figcaption aria-hidden="true">PNG2</figcaption>
+</figure>
 <p>在分页测试中，CSS的响应速度为 <code>11.92 ms</code>。</p>
-<p>实际表现虽然不是很理想，但还是比以往要快的。不过受制于CloudFlare CDN的速度，上云的实际速度会比本地测试慢。</p>
-<h2 id="✏-字体">✏ 字体</h2>
-<p>字体方面，由以往单一的 <code>&lt;i&gt;</code>思源黑体 <code>&lt;/i&gt;</code> 拓展到 <code>&lt;b&gt;</code>思源黑体+思源宋体+Roboto字体 <code>&lt;/b&gt;</code> 一并使用。</p>
-<p>网站主体部分以及博客文章方面，标题使用思源宋体（<code>font-weight</code>值为 <code>800</code>），正文使用思源黑体 + Roboto字体（<code>font-weight</code>值为 <code>300</code>）。</p>
+<p>实际表现虽然不是很理想，但还是比以往要快的。不过受制于CloudFlare
+CDN的速度，上云的实际速度会比本地测试慢。</p>
+<h2 id="字体">✏ 字体</h2>
+<p>字体方面，由以往单一的 <code>&lt;i&gt;</code>思源黑体
+<code>&lt;/i&gt;</code> 拓展到
+<code>&lt;b&gt;</code>思源黑体+思源宋体+Roboto字体
+<code>&lt;/b&gt;</code> 一并使用。</p>
+<p>网站主体部分以及博客文章方面，标题使用思源宋体（<code>font-weight</code>值为
+<code>800</code>），正文使用思源黑体 +
+Roboto字体（<code>font-weight</code>值为 <code>300</code>）。</p>
 <h3 id="字体对比">字体对比</h3>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.kuri.ink/images/posts/2020-12-26-01/03.PNG" alt="PNG3" class="lazyload"></p>
-<h3 id="Google-Fonts">Google Fonts</h3>
+<figure>
+<img src="https://imageurl.kuri.ink/images/posts/2020-12-26-01/03.PNG"
+alt="PNG3" />
+<figcaption aria-hidden="true">PNG3</figcaption>
+</figure>
+<h3 id="google-fonts">Google Fonts</h3>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs routeros">&lt;link <span class="hljs-attribute">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attribute">href</span>=<span class="hljs-string">&quot;https://fonts.googleapis.com/css?family=Noto+Sans+SC:100,200,300,400,500,700,800,900&quot;</span>&gt;<br><br>&lt;link <span class="hljs-attribute">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attribute">href</span>=<span class="hljs-string">&quot;https://fonts.googleapis.com/css?family=Noto+Serif+SC:100,200,300,400,500,700,800,900&quot;</span>&gt;<br><br>&lt;link <span class="hljs-attribute">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attribute">href</span>=<span class="hljs-string">&quot;https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,700,800,900&quot;</span>&gt;<br></code></pre></td></tr></table></figure>
 <h2 id="功能测试区">功能测试区</h2>
-<h3 id="Mermaid-Flowchart">Mermaid Flowchart</h3>
-<p>flowchart TD<br>
-A[Christmas] --&gt;|Get money| B(Go shopping)<br>
-B --&gt; C{Let me think}<br>
-C --&gt;|One| D[Laptop]<br>
-C --&gt;|Two| E[iPhone]<br>
-C --&gt;|Three| F[fa:fa-car Car]</p>
-<h3 id="Emojis">Emojis</h3>
-<p>😃</p>
-<h3 id="Mathjax">Mathjax</h3>
-<p>$$<br>
-A = \begin{bmatrix}<br>
-a_{11}    &amp; a_{12}    &amp; …    &amp; a_{1n}\<br>
-a_{21}    &amp; a_{22}    &amp; …    &amp; a_{2n}\<br>
-a_{31}    &amp; a_{22}    &amp; …    &amp; a_{3n}\<br>
-\vdots    &amp; \vdots    &amp; \ddots &amp; \vdots\<br>
-a_{n1}    &amp; a_{n2}    &amp; … &amp; a_{nn}\<br>
-\end{bmatrix} , b = \begin{bmatrix}<br>
-b_{1}  \<br>
-b_{2}  \<br>
-b_{3}  \<br>
-\vdots \<br>
-b_{n}  \<br>
-\end{bmatrix}<br>
-$$</p>
+<h3 id="mermaid-flowchart">Mermaid Flowchart</h3>
+<p>flowchart TD A[Christmas] –&gt;|Get money| B(Go shopping) B –&gt;
+C{Let me think} C –&gt;|One| D[Laptop] C –&gt;|Two| E[iPhone] C
+–&gt;|Three| F[fa:fa-car Car]</p>
+<h3 id="emojis">Emojis</h3>
+<p>:)</p>
+<h3 id="mathjax">Mathjax</h3>
+<p><span class="math display">$$
+A = \begin{bmatrix}
+        a_{11}    &amp; a_{12}    &amp; ...    &amp; a_{1n}\\
+        a_{21}    &amp; a_{22}    &amp; ...    &amp; a_{2n}\\
+        a_{31}    &amp; a_{22}    &amp; ...    &amp; a_{3n}\\
+        \vdots    &amp; \vdots    &amp; \ddots &amp; \vdots\\
+        a_{n1}    &amp; a_{n2}    &amp; ... &amp; a_{nn}\\
+    \end{bmatrix} , b = \begin{bmatrix}
+        b_{1}  \\
+        b_{2}  \\
+        b_{3}  \\
+        \vdots \\
+        b_{n}  \\
+    \end{bmatrix}
+$$</span></p>
 
   </article>
 
@@ -318,7 +334,7 @@ $$</p>
                               <button class="mdui-fab catalog" style="overflow:unset;">
                                   <i class="nexmoefont icon-i-catalog"></i>
                                   <div class="nexmoe-toc">
-                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8E%A8-%E5%B1%82%E5%8F%A0%E6%A0%B7%E5%BC%8F%E8%A1%A8"><span class="toc-number">1.</span> <span class="toc-text">🎨 层叠样式表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9C%8F-%E5%AD%97%E4%BD%93"><span class="toc-number">2.</span> <span class="toc-text">✏ 字体</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E4%BD%93%E5%AF%B9%E6%AF%94"><span class="toc-number">2.1.</span> <span class="toc-text">字体对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Google-Fonts"><span class="toc-number">2.2.</span> <span class="toc-text">Google Fonts</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95%E5%8C%BA"><span class="toc-number">3.</span> <span class="toc-text">功能测试区</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mermaid-Flowchart"><span class="toc-number">3.1.</span> <span class="toc-text">Mermaid Flowchart</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Emojis"><span class="toc-number">3.2.</span> <span class="toc-text">Emojis</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mathjax"><span class="toc-number">3.3.</span> <span class="toc-text">Mathjax</span></a></li></ol></li></ol>
+                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%82%E5%8F%A0%E6%A0%B7%E5%BC%8F%E8%A1%A8"><span class="toc-number">1.</span> <span class="toc-text">🎨 层叠样式表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E4%BD%93"><span class="toc-number">2.</span> <span class="toc-text">✏ 字体</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E4%BD%93%E5%AF%B9%E6%AF%94"><span class="toc-number">2.1.</span> <span class="toc-text">字体对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#google-fonts"><span class="toc-number">2.2.</span> <span class="toc-text">Google Fonts</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95%E5%8C%BA"><span class="toc-number">3.</span> <span class="toc-text">功能测试区</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mermaid-flowchart"><span class="toc-number">3.1.</span> <span class="toc-text">Mermaid Flowchart</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#emojis"><span class="toc-number">3.2.</span> <span class="toc-text">Emojis</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mathjax"><span class="toc-number">3.3.</span> <span class="toc-text">Mathjax</span></a></li></ol></li></ol>
                                   </div>
                               </button>
                           
@@ -364,7 +380,7 @@ $$</p>
 
  
 
-<script async src="/js/app.js?v=1754726852922"></script>
+<script async src="/js/app.js?v=1754727036668"></script>
 
 
 

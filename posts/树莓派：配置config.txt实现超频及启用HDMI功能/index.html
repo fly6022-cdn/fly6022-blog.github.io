@@ -11,12 +11,12 @@
         
 
     <link rel="shortcut icon" href="https://imageurl.kuri.ink/images/favicon.png" type="image/png" />
-    <meta name="description" content="本文章以树莓派为例，通过配置 config.txt文件实现对树莓派CPU&#x2F;GPU的超频并启用HDMI功能。">
+    <meta name="description" content="本文章以树莓派为例，通过配置 config.txt文件实现对树莓派CPU&#x2F;GPU的超频并启用HDMI功能。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="树莓派：配置config.txt实现超频及启用HDMI功能">
 <meta property="og:url" content="https://blog.kuri.ink/posts/%E6%A0%91%E8%8E%93%E6%B4%BE%EF%BC%9A%E9%85%8D%E7%BD%AEconfig.txt%E5%AE%9E%E7%8E%B0%E8%B6%85%E9%A2%91%E5%8F%8A%E5%90%AF%E7%94%A8HDMI%E5%8A%9F%E8%83%BD/index.html">
 <meta property="og:site_name" content="fly6022&#39;s Blog">
-<meta property="og:description" content="本文章以树莓派为例，通过配置 config.txt文件实现对树莓派CPU&#x2F;GPU的超频并启用HDMI功能。">
+<meta property="og:description" content="本文章以树莓派为例，通过配置 config.txt文件实现对树莓派CPU&#x2F;GPU的超频并启用HDMI功能。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-08-10T12:00:59.000Z">
 <meta property="article:modified_time" content="2025-07-15T13:31:35.744Z">
@@ -26,16 +26,16 @@
 <meta property="article:tag" content="HDMI">
 <meta property="article:tag" content="超频">
 <meta name="twitter:card" content="summary">
-    <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css?v=1754726852870">
+    <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css?v=1754727036622">
     
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css">
     
     <link rel="stylesheet" href="/css/style.css" /> 
     <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css" />
     <link rel="stylesheet" href="/lib/iconfont/iconfont.css" />
-    <!--<link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1754726852870">
-    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1754726852870">-->
-    <!--<link rel="stylesheet" href="/css/style.css?v=1754726852870">
+    <!--<link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1754727036622">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1754727036622">-->
+    <!--<link rel="stylesheet" href="/css/style.css?v=1754727036622">
      
     -->
     <script type="text/x-mathjax-config">
@@ -218,36 +218,52 @@
     <a><i class="nexmoefont icon-calendar-fill"></i>2024年08月10日</a>
 </div>
 
-      <p>本文章以树莓派为例，通过配置 <code>config.txt</code>文件实现对树莓派CPU/GPU的超频并启用HDMI功能。</p>
+      <p>本文章以树莓派为例，通过配置
+<code>config.txt</code>文件实现对树莓派CPU/GPU的超频并启用HDMI功能。</p>
 <span id="more"></span>
 <h2 id="环境">环境</h2>
 <p>设备：Raspberry Pi 4B（4GB RAM）</p>
 <p>系统：Ubuntu 22.04 LTS（arm64）</p>
 <h2 id="你还需要">你还需要</h2>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>Micro SD Card 读卡器</p>
-</li>
+<ul>
+<li>Micro SD Card 读卡器</li>
 </ul>
 <h2 id="超频">超频</h2>
-<div class="admonition warning"><p class="admonition-title">注意
-</p><ol>
+<div class="admonition warning">
+<p class="admonition-title">
+注意
+</p>
+<ol>
 <li>
-<p>在配置<code>config.txt</code>之前，请对原文件进行备份，以免造成树莓派无法启动的后果。</p>
+<p>
+在配置<code>config.txt</code>之前，请对原文件进行备份，以免造成树莓派无法启动的后果。
+</p>
 </li>
 <li>
-<p>超频会造成树莓派运行稳定性下降，请根据实际情况合理超频。</p>
+<p>
+超频会造成树莓派运行稳定性下降，请根据实际情况合理超频。
+</p>
 </li>
 <li>
-<p>将<code>force_turbo</code>选项赋值为 <code>1</code>会使CPU强制在最大频率工作，可能会造成严重发热问题，同时会失去保修。</p>
+<p>
+将<code>force_turbo</code>选项赋值为
+<code>1</code>会使CPU强制在最大频率工作，可能会造成严重发热问题，同时会失去保修。
+</p>
 </li>
 </ol>
 </div>
-<p>将存储卡连接到电脑上，打开 <code>system-boot</code>文件夹，找到 <code>config.txt</code>文件。</p>
+<p>将存储卡连接到电脑上，打开 <code>system-boot</code>文件夹，找到
+<code>config.txt</code>文件。</p>
 <p>在文件末尾新增一行，添加以下内容：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[pi4]<br>arm_boost=1<br>over_voltage=6<br>arm_freq=2000<br>gpu_freq=750<br>force_turbo=0<br></code></pre></td></tr></table></figure>
-<p>以下内容摘自 <a target="_blank" rel="noopener" href="https://pidoc.cn/docs/computers/config-txt#%E8%B6%85%E9%A2%91%E9%80%89%E9%A1%B9">树莓派文档</a> ：</p>
+<p>以下内容摘自 <a
+target="_blank" rel="noopener" href="https://pidoc.cn/docs/computers/config-txt#%E8%B6%85%E9%A2%91%E9%80%89%E9%A1%B9">树莓派文档</a>
+：</p>
 <table>
+<colgroup>
+<col style="width: 5%" />
+<col style="width: 94%" />
+</colgroup>
 <thead>
 <tr>
 <th>选项</th>
@@ -261,31 +277,43 @@
 </tr>
 <tr>
 <td>arm_boost</td>
-<td>将 <code>arm_freq</code>提升至板卡类型和固件支持的最高频率。设置为 <code>1</code>时启用。</td>
+<td>将 <code>arm_freq</code>提升至板卡类型和固件支持的最高频率。设置为
+<code>1</code>时启用。</td>
 </tr>
 <tr>
 <td>gpu_freq</td>
-<td>同时设置 <code>core_freq</code>、<code>h264_freq</code>、<code>isp_freq</code>、<code>v3d_freq</code>和 <code>hevc_freq</code>。</td>
+<td>同时设置
+<code>core_freq</code>、<code>h264_freq</code>、<code>isp_freq</code>、<code>v3d_freq</code>和
+<code>hevc_freq</code>。</td>
 </tr>
 <tr>
 <td>core_freq</td>
-<td>GPU 处理器内核的频率（MHz）。影响 CPU 性能，因为它驱动二级缓存和内存总线；二级缓存仅对树莓派 Zero/树莓派 Zero W/树莓派 1 有利；SDRAM 对树莓派2和树莓派3有微小的好处。有关在树莓派4上的使用，请参阅下面的章节。</td>
+<td>GPU 处理器内核的频率（MHz）。影响 CPU
+性能，因为它驱动二级缓存和内存总线；二级缓存仅对树莓派 Zero/树莓派 Zero
+W/树莓派 1 有利；SDRAM
+对树莓派2和树莓派3有微小的好处。有关在树莓派4上的使用，请参阅下面的章节。</td>
 </tr>
 <tr>
 <td>h264_freq</td>
-<td>硬件视频模块的频率（MHz）；可单独覆盖 <code>gpu_freq</code>设置。</td>
+<td>硬件视频模块的频率（MHz）；可单独覆盖
+<code>gpu_freq</code>设置。</td>
 </tr>
 <tr>
 <td>isp_freq</td>
-<td>图像传感器流水线模块的频率（MHz）；可单独覆盖 <code>gpu_freq</code>设置。</td>
+<td>图像传感器流水线模块的频率（MHz）；可单独覆盖
+<code>gpu_freq</code>设置。</td>
 </tr>
 <tr>
 <td>v3d_freq</td>
-<td>3D 模块的频率（MHz）；可单独覆盖 <code>gpu_freq</code>设置。在树莓派5上，V3D 独立于 <code>core_freq</code>、<code>isp_freq</code>和 <code>hevc_freq</code>。</td>
+<td>3D 模块的频率（MHz）；可单独覆盖
+<code>gpu_freq</code>设置。在树莓派5上，V3D 独立于
+<code>core_freq</code>、<code>isp_freq</code>和
+<code>hevc_freq</code>。</td>
 </tr>
 <tr>
 <td>hevc_freq</td>
-<td>高效视频编解码器块的频率（MHz）；可单独覆盖 gpu_freq 设置。仅适用于树莓派4。</td>
+<td>高效视频编解码器块的频率（MHz）；可单独覆盖 gpu_freq
+设置。仅适用于树莓派4。</td>
 </tr>
 <tr>
 <td>sdram_freq</td>
@@ -293,35 +321,50 @@
 </tr>
 <tr>
 <td>over_voltage</td>
-<td>CPU/GPU内核电压上限。该值范围应为 [-16,8]，相当于 [0.95V,1.55V]（树莓派1 上为 [0.8,1.4V]），步长为 0.025V。换句话说，指定 -16 时，CPU/GPU 内核电压最大值为 0.95V（树莓派 1 为 0.8V）；指定 8 时，CPU/GPU 内核电压最大值为 1.55V（树莓派 1 为 1.4V）。有关默认值，请参见下表。只有指定 <code>force_turbo=1</code>时，才允许电压值超过 6：如果同时设置 <code>over_voltage_*</code>&gt;<code>0</code>，则会设置保修位。</td>
+<td>CPU/GPU内核电压上限。该值范围应为 [-16,8]，相当于
+[0.95V,1.55V]（树莓派1 上为 [0.8,1.4V]），步长为 0.025V。换句话说，指定
+-16 时，CPU/GPU 内核电压最大值为 0.95V（树莓派 1 为 0.8V）；指定 8
+时，CPU/GPU 内核电压最大值为 1.55V（树莓派 1 为
+1.4V）。有关默认值，请参见下表。只有指定
+<code>force_turbo=1</code>时，才允许电压值超过 6：如果同时设置
+<code>over_voltage_*</code>&gt;<code>0</code>，则会设置保修位。</td>
 </tr>
 <tr>
 <td>over_voltage_sdram</td>
-<td>同时设置 <code>over_voltage_sdram_c</code>、<code>over_voltage_sdram_i</code>和 <code>over_voltage_sdram_p</code>。</td>
+<td>同时设置
+<code>over_voltage_sdram_c</code>、<code>over_voltage_sdram_i</code>和
+<code>over_voltage_sdram_p</code>。</td>
 </tr>
 <tr>
 <td>over_voltage_sdram_c</td>
-<td>SDRAM 控制器电压调整。[-16,8]相当于 [0.8V,1.4V]，步长为 0.025V。不支持树莓派4或更高版本设备。</td>
+<td>SDRAM 控制器电压调整。[-16,8]相当于 [0.8V,1.4V]，步长为
+0.025V。不支持树莓派4或更高版本设备。</td>
 </tr>
 <tr>
 <td>over_voltage_sdram_i</td>
-<td>SDRAM I/O 电压调整。[-16,8] 相当于 [0.8V,1.4V]，步长为 0.025V。不支持树莓派4或更高版本设备。</td>
+<td>SDRAM I/O 电压调整。[-16,8] 相当于 [0.8V,1.4V]，步长为
+0.025V。不支持树莓派4或更高版本设备。</td>
 </tr>
 <tr>
 <td>over_voltage_sdram_p</td>
-<td>SDRAM phy 电压调整。[-16,8] 相当于 [0.8V,1.4V]，步长为 0.025V。不支持树莓派4或更高版本设备。</td>
+<td>SDRAM phy 电压调整。[-16,8] 相当于 [0.8V,1.4V]，步长为
+0.025V。不支持树莓派4或更高版本设备。</td>
 </tr>
 <tr>
 <td>force_turbo</td>
-<td>即使 ARM 内核不忙时也强制执行超频模式频率。如果同时设置了 <code>over_voltage_*</code>，则启用此功能可能会设置保修位。</td>
+<td>即使 ARM 内核不忙时也强制执行超频模式频率。如果同时设置了
+<code>over_voltage_*</code>，则启用此功能可能会设置保修位。</td>
 </tr>
 <tr>
 <td>initial_turbo</td>
-<td>在给定值（秒）或 cpufreq 设置频率之前，从启动开始启用<a target="_blank" rel="noopener" href="https://forums.raspberrypi.com/viewtopic.php?f=29&amp;t=6201&amp;start=425">超频模式</a>。最大值为 <code>60</code>。</td>
+<td>在给定值（秒）或 cpufreq 设置频率之前，从启动开始启用<a
+target="_blank" rel="noopener" href="https://forums.raspberrypi.com/viewtopic.php?f=29&amp;t=6201&amp;start=425">超频模式</a>。最大值为
+<code>60</code>。</td>
 </tr>
 <tr>
 <td>arm_freq_min</td>
-<td>用于动态频率时钟的 <code>arm_freq</code>最小值。请注意，将该值降至默认值以下并不会显著降低功耗，目前也不支持该功能。</td>
+<td>用于动态频率时钟的
+<code>arm_freq</code>最小值。请注意，将该值降至默认值以下并不会显著降低功耗，目前也不支持该功能。</td>
 </tr>
 <tr>
 <td>core_freq_min</td>
@@ -353,29 +396,42 @@
 </tr>
 <tr>
 <td>over_voltage_min</td>
-<td>用于动态频率时钟的 <code>over_voltage</code>。该值范围应为 [-16,8]，相当于 [0.8V,1.4V]，步长为 0.025V。换句话说，指定 -16 时，CPU/GPU 内核空闲电压为 0.8V，指定 8 时，最低电压为 1.4V。此设置在树莓派4和树莓派5上已被弃用。</td>
+<td>用于动态频率时钟的 <code>over_voltage</code>。该值范围应为
+[-16,8]，相当于 [0.8V,1.4V]，步长为 0.025V。换句话说，指定 -16
+时，CPU/GPU 内核空闲电压为 0.8V，指定 8 时，最低电压为
+1.4V。此设置在树莓派4和树莓派5上已被弃用。</td>
 </tr>
 <tr>
 <td>over_voltage_delta</td>
-<td>在 树莓派4和树莓派5上，over_voltage_delta 参数会在 DVFS 算法计算出的数值上添加以微伏为单位的偏移量。</td>
+<td>在 树莓派4和树莓派5上，over_voltage_delta 参数会在 DVFS
+算法计算出的数值上添加以微伏为单位的偏移量。</td>
 </tr>
 <tr>
 <td>temp_limit</td>
-<td>过热保护。当 SoC 达到该值（摄氏度）时，该参数会将时钟和电压设置为默认值。超过 85 的值将被箝位在 85。</td>
+<td>过热保护。当 SoC
+达到该值（摄氏度）时，该参数会将时钟和电压设置为默认值。超过 85
+的值将被箝位在 85。</td>
 </tr>
 <tr>
 <td>temp_soft_limit</td>
-<td><strong>仅限 3A+/3B+</strong> 。CPU 速度节流控制。该值用于设置 CPU 时钟速度节流系统启动时的温度。在此温度下，时钟速度将从<a target="_blank" rel="noopener" href="http://pan.baidu.com/s/1400MHz#undefined">1400MHz</a>降至<a target="_blank" rel="noopener" href="http://pan.baidu.com/s/1200MHz#undefined">1200MHz</a>。默认值为 <code>60</code>，最大可升至 <code>70</code>，但可能导致不稳定。</td>
+<td><strong>仅限 3A+/3B+</strong> 。CPU 速度节流控制。该值用于设置 CPU
+时钟速度节流系统启动时的温度。在此温度下，时钟速度将从<a
+target="_blank" rel="noopener" href="http://pan.baidu.com/s/1400MHz#undefined">1400MHz</a>降至<a
+target="_blank" rel="noopener" href="http://pan.baidu.com/s/1200MHz#undefined">1200MHz</a>。默认值为
+<code>60</code>，最大可升至 <code>70</code>，但可能导致不稳定。</td>
 </tr>
 </tbody>
 </table>
-<h2 id="HDMI配置">HDMI配置</h2>
-<p>新增一行，添加下列内容（其中 <code>hdmi_group</code>和 <code>hdmi_mode</code>的值视具体情况而定）：</p>
+<h2 id="hdmi配置">HDMI配置</h2>
+<p>新增一行，添加下列内容（其中 <code>hdmi_group</code>和
+<code>hdmi_mode</code>的值视具体情况而定）：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">hdmi_group=1<br>hdmi_mode=16<br>hdmi_enable_4kp60=1<br>hdmi_force_hotplug=1<br>config_hdmi_boost=4<br></code></pre></td></tr></table></figure>
 <p>将下列内容注释掉：</p>
 <figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c"><span class="hljs-meta"># dtoverlay=vc4-kms-v3d,cma-128</span><br></code></pre></td></tr></table></figure>
-<p><code>hdmi_group</code>和 <code>hdmi_mode</code>的赋值详见 <a target="_blank" rel="noopener" href="https://shumeipai.nxez.com/2013/08/31/custom-display-resolution-raspberry-pie.html">自定义树莓派的显示分辨率 - 树莓派实验室</a></p>
-<h2 id="原版-config-txt">原版 <code>config.txt</code></h2>
+<p><code>hdmi_group</code>和 <code>hdmi_mode</code>的赋值详见 <a
+target="_blank" rel="noopener" href="https://shumeipai.nxez.com/2013/08/31/custom-display-resolution-raspberry-pie.html">自定义树莓派的显示分辨率
+- 树莓派实验室</a></p>
+<h2 id="原版-config.txt">原版 <code>config.txt</code></h2>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[all]<br>kernel=vmlinuz<br>cmdline=cmdline.txt<br>initramfs initrd.img followkernel<br><br>[pi4]<br>max_framebuffers=2<br>arm_boost=1<br><br>[all]<br># Enable the audio output, I2C and SPI interfaces on the GPIO header. As these<br># parameters related to the base device-tree they must appear *before* any<br># other dtoverlay= specification<br>dtparam=audio=on<br>dtparam=i2c_arm=on<br>dtparam=spi=on<br><br># Comment out the following line if the edges of the desktop appear outside<br># the edges of your display<br>disable_overscan=1<br><br># If you have issues with audio, you may try uncommenting the following line<br># which forces the HDMI output into HDMI mode instead of DVI (which doesn&#x27;t<br># support audio output)<br>#hdmi_drive=2<br><br># Enable the serial pins<br>enable_uart=1<br><br># Autoload overlays for any recognized cameras or displays that are attached<br># to the CSI/DSI ports. Please note this is for libcamera support, *not* for<br># the legacy camera stack<br>camera_auto_detect=1<br>display_auto_detect=1<br><br># Config settings specific to arm64<br>arm_64bit=1<br>dtoverlay=dwc2<br><br># Enable the KMS (&quot;full&quot; KMS) graphics overlay, leaving GPU memory as the<br># default (the kernel is in control of graphics memory with full KMS)<br>dtoverlay=vc4-kms-v3d<br>disable_fw_kms_setup=1<br><br>[pi3+]<br># Use a smaller contiguous memory area, specifically on the 3A+ to avoid an<br># OOM oops on boot. The 3B+ is also affected by this section, but it shouldn&#x27;t<br># cause any issues on that board<br>dtoverlay=vc4-kms-v3d,cma-128<br><br>[pi02]<br># The Zero 2W is another 512MB board which is occasionally affected by the same<br># OOM oops on boot.<br>dtoverlay=vc4-kms-v3d,cma-128<br><br>[all]<br><br>[cm4]<br># Enable the USB2 outputs on the IO board (assuming your CM4 is plugged into<br># such a board)<br>dtoverlay=dwc2,dr_mode=host<br><br>[all]<br><br></code></pre></td></tr></table></figure>
 
   </article>
@@ -434,7 +490,7 @@
                               <button class="mdui-fab catalog" style="overflow:unset;">
                                   <i class="nexmoefont icon-i-catalog"></i>
                                   <div class="nexmoe-toc">
-                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83"><span class="toc-number">1.</span> <span class="toc-text">环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%A0%E8%BF%98%E9%9C%80%E8%A6%81"><span class="toc-number">2.</span> <span class="toc-text">你还需要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B6%85%E9%A2%91"><span class="toc-number">3.</span> <span class="toc-text">超频</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HDMI%E9%85%8D%E7%BD%AE"><span class="toc-number">4.</span> <span class="toc-text">HDMI配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%89%88-config-txt"><span class="toc-number">5.</span> <span class="toc-text">原版 config.txt</span></a></li></ol>
+                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83"><span class="toc-number">1.</span> <span class="toc-text">环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%A0%E8%BF%98%E9%9C%80%E8%A6%81"><span class="toc-number">2.</span> <span class="toc-text">你还需要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B6%85%E9%A2%91"><span class="toc-number">3.</span> <span class="toc-text">超频</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hdmi%E9%85%8D%E7%BD%AE"><span class="toc-number">4.</span> <span class="toc-text">HDMI配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%89%88-config.txt"><span class="toc-number">5.</span> <span class="toc-text">原版 config.txt</span></a></li></ol>
                                   </div>
                               </button>
                           
@@ -480,7 +536,7 @@
 
  
 
-<script async src="/js/app.js?v=1754726852874"></script>
+<script async src="/js/app.js?v=1754727036627"></script>
 
 
 

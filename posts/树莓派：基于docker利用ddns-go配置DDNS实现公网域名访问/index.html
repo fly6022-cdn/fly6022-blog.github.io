@@ -33,16 +33,16 @@
 <meta property="article:tag" content="Cloudflare">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://imageurl.kuri.ink/images/posts/ddns/2.png">
-    <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css?v=1754726852880">
+    <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css?v=1754727036630">
     
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css">
     
     <link rel="stylesheet" href="/css/style.css" /> 
     <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css" />
     <link rel="stylesheet" href="/lib/iconfont/iconfont.css" />
-    <!--<link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1754726852880">
-    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1754726852880">-->
-    <!--<link rel="stylesheet" href="/css/style.css?v=1754726852880">
+    <!--<link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1754727036630">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1754727036630">-->
+    <!--<link rel="stylesheet" href="/css/style.css?v=1754727036630">
      
     -->
     <script type="text/x-mathjax-config">
@@ -231,17 +231,15 @@
 <p>设备：Raspberry Pi 4B（4GB RAM）</p>
 <p>系统：Ubuntu 22.04 LTS（arm64）</p>
 <h2 id="你还需要">你还需要</h2>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>个人域名</p>
-</li>
+<ul>
+<li>个人域名</li>
 </ul>
-<h2 id="安装Docker">安装Docker</h2>
+<h2 id="安装docker">安装Docker</h2>
 <p>打开命令行，键入:</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo su<br>sudo apt update<br>sudo apt upgrade<br>sudo apt install docker-ce<br></code></pre></td></tr></table></figure>
 <p>设置docker开启自启动：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl enable docker.service<br></code></pre></td></tr></table></figure>
-<h2 id="配置Docker">配置Docker</h2>
+<h2 id="配置docker">配置Docker</h2>
 <p>为了使ddns-go安装过程顺利，故需要提前更换Docker的安装源：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo nano /etc/docker/daemon.json<br></code></pre></td></tr></table></figure>
 <p>将Docker的安装源更换为下面内容：</p>
@@ -250,7 +248,13 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl daemon-reload<br>systemctl restart docker<br></code></pre></td></tr></table></figure>
 <p>键入下方命令检查是否更换成功：</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">docker</span> <span class="hljs-literal">info</span><br></code></pre></td></tr></table></figure>
-<div class="admonition error"><p class="admonition-title">ERROR</p><p>若终端报错，可重启终端重试。</p>
+<div class="admonition error">
+<p class="admonition-title">
+ERROR
+</p>
+<p>
+若终端报错，可重启终端重试。
+</p>
 </div>
 <p>若返回内容中包括以下内容，则证明更换成功。</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs awk">Registry Mirrors:<br> https:<span class="hljs-regexp">//</span><span class="hljs-keyword">do</span>.nark.eu.org/<br> https:<span class="hljs-regexp">//</span>dc.j8.work/<br> https:<span class="hljs-regexp">//</span>docker.m.daocloud.io/<br> https:<span class="hljs-regexp">//</span>dockerproxy.com/<br> https:<span class="hljs-regexp">//</span>docker.mirrors.ustc.edu.cn/<br> https:<span class="hljs-regexp">//</span>docker.nju.edu.cn/<br></code></pre></td></tr></table></figure>
@@ -263,16 +267,35 @@
 <p>运行以下命令，安装ddns-go：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo docker compose up -d<br></code></pre></td></tr></table></figure>
 <p>安装成功后，在浏览器地址栏输入：<code>http://[树莓派ip地址]:9876</code>进入后台配置。</p>
-<div class="admonition warning"><p class="admonition-title">WARNING</p><p>ddns-go初始配置需要在5分钟之内完成，否则配置不能保存。</p>
+<div class="admonition warning">
+<p class="admonition-title">
+WARNING
+</p>
+<p>
+ddns-go初始配置需要在5分钟之内完成，否则配置不能保存。
+</p>
 </div>
 <p>配置时，需要DNS平台的token，这里以Cloudflare为例进行配置。</p>
-<p>在浏览器地址栏键入 <code>https://dash.cloudflare.com/profile/api-tokens</code>.</p>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.kuri.ink/images/posts/ddns/2.png" alt="img" class="lazyload"></p>
-<p>点击&quot;创建令牌&quot;→“编辑区域DNS（使用模板）”</p>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.kuri.ink/images/posts/ddns/3.png" alt="img" class="lazyload"></p>
-<p>配置后点击&quot;继续以显示摘要&quot;→创建令牌。</p>
+<p>在浏览器地址栏键入
+<code>https://dash.cloudflare.com/profile/api-tokens</code>.</p>
+<figure>
+<img src="https://imageurl.kuri.ink/images/posts/ddns/2.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>点击”创建令牌”→“编辑区域DNS（使用模板）”</p>
+<figure>
+<img src="https://imageurl.kuri.ink/images/posts/ddns/3.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>配置后点击”继续以显示摘要”→创建令牌。</p>
 <p>将生成的令牌粘贴到ddns-go后台中。</p>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.kuri.ink/images/posts/ddns/4.png" alt="img" class="lazyload"></p>
+<figure>
+<img src="https://imageurl.kuri.ink/images/posts/ddns/4.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
 <p>在IPv6的“Domains”一栏中添加好自己的域名，保存即可。</p>
 <p>等待5分钟左右，即可通过域名从公网访问内容。</p>
 
@@ -332,7 +355,7 @@
                               <button class="mdui-fab catalog" style="overflow:unset;">
                                   <i class="nexmoefont icon-i-catalog"></i>
                                   <div class="nexmoe-toc">
-                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83"><span class="toc-number">1.</span> <span class="toc-text">环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%A0%E8%BF%98%E9%9C%80%E8%A6%81"><span class="toc-number">2.</span> <span class="toc-text">你还需要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Docker"><span class="toc-number">3.</span> <span class="toc-text">安装Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEDocker"><span class="toc-number">4.</span> <span class="toc-text">配置Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AEddns-go"><span class="toc-number">5.</span> <span class="toc-text">安装及配置ddns-go</span></a></li></ol>
+                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83"><span class="toc-number">1.</span> <span class="toc-text">环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%A0%E8%BF%98%E9%9C%80%E8%A6%81"><span class="toc-number">2.</span> <span class="toc-text">你还需要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85docker"><span class="toc-number">3.</span> <span class="toc-text">安装Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEdocker"><span class="toc-number">4.</span> <span class="toc-text">配置Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AEddns-go"><span class="toc-number">5.</span> <span class="toc-text">安装及配置ddns-go</span></a></li></ol>
                                   </div>
                               </button>
                           
@@ -378,7 +401,7 @@
 
  
 
-<script async src="/js/app.js?v=1754726852883"></script>
+<script async src="/js/app.js?v=1754727036633"></script>
 
 
 

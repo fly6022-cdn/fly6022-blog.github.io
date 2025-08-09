@@ -11,24 +11,13 @@
         
 
     <link rel="shortcut icon" href="https://imageurl.kuri.ink/images/favicon.png" type="image/png" />
-    <meta name="description" content="Ollama 并不原生支持部分系列的 AMD 显卡，因此，想要通过 RX590 显卡运行大模型（LLM），需要手动进行修改配置。">
+    <meta name="description" content="Ollama 并不原生支持部分系列的 AMD 显卡，因此，想要通过 RX590 显卡运行大模型（LLM），需要手动进行修改配置。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AI：RX590通过Ollama本地部署Deepseek-R1大模型">
 <meta property="og:url" content="https://blog.kuri.ink/posts/AI%EF%BC%9AAMD%20RX590%E6%98%BE%E5%8D%A1%E9%80%9A%E8%BF%87Ollama%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2Deepseek%20R1%E5%A4%A7%E6%A8%A1%E5%9E%8B/index.html">
 <meta property="og:site_name" content="fly6022&#39;s Blog">
-<meta property="og:description" content="Ollama 并不原生支持部分系列的 AMD 显卡，因此，想要通过 RX590 显卡运行大模型（LLM），需要手动进行修改配置。">
+<meta property="og:description" content="Ollama 并不原生支持部分系列的 AMD 显卡，因此，想要通过 RX590 显卡运行大模型（LLM），需要手动进行修改配置。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/01.png">
-<meta property="og:image" content="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/02.png">
-<meta property="og:image" content="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/03.png">
-<meta property="og:image" content="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/04.png">
-<meta property="og:image" content="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/05.png">
-<meta property="og:image" content="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/06.png">
-<meta property="og:image" content="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/07.png">
-<meta property="og:image" content="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/09.png">
-<meta property="og:image" content="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/08.png">
-<meta property="og:image" content="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/10.png">
-<meta property="og:image" content="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/11.png">
 <meta property="article:published_time" content="2025-02-05T02:24:00.000Z">
 <meta property="article:modified_time" content="2025-07-15T13:31:35.759Z">
 <meta property="article:author" content="fly6022">
@@ -39,17 +28,16 @@
 <meta property="article:tag" content="RX590">
 <meta property="article:tag" content="ROCm">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/01.png">
-    <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css?v=1754726852864">
+    <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css?v=1754727036612">
     
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css">
     
     <link rel="stylesheet" href="/css/style.css" /> 
     <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css" />
     <link rel="stylesheet" href="/lib/iconfont/iconfont.css" />
-    <!--<link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1754726852864">
-    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1754726852864">-->
-    <!--<link rel="stylesheet" href="/css/style.css?v=1754726852864">
+    <!--<link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1754727036612">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1754727036612">-->
+    <!--<link rel="stylesheet" href="/css/style.css?v=1754727036612">
      
     -->
     <script type="text/x-mathjax-config">
@@ -232,26 +220,65 @@
     <a><i class="nexmoefont icon-calendar-fill"></i>2025年02月05日</a>
 </div>
 
-      <p>Ollama 并不原生支持部分系列的 AMD 显卡，因此，想要通过 RX590 显卡运行大模型（LLM），需要手动进行修改配置。</p>
+      <p>Ollama 并不原生支持部分系列的 AMD 显卡，因此，想要通过 RX590
+显卡运行大模型（LLM），需要手动进行修改配置。</p>
 <span id="more"></span>
-<h2 id="下载安装Ollama-for-AMD">下载安装Ollama-for-AMD</h2>
-<p>首先下载Ollama-for-AMD：<a target="_blank" rel="noopener" href="https://github.com/likelovewant/ollama-for-amd/releases/tag/v0.5.4">https://github.com/likelovewant/ollama-for-amd/releases/tag/v0.5.4</a>。</p>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/01.png" alt="01" class="lazyload"></p>
-<p>正常安装，Ollama会自动在后台运行，在任务栏中右键Ollama图标，点击“View logs”。</p>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/02.png" alt="02" class="lazyload"></p>
+<h2 id="下载安装ollama-for-amd">下载安装Ollama-for-AMD</h2>
+<p>首先下载Ollama-for-AMD：<a
+target="_blank" rel="noopener" href="https://github.com/likelovewant/ollama-for-amd/releases/tag/v0.5.4">https://github.com/likelovewant/ollama-for-amd/releases/tag/v0.5.4</a>。</p>
+<figure>
+<img
+src="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/01.png"
+alt="01" />
+<figcaption aria-hidden="true">01</figcaption>
+</figure>
+<p>正常安装，Ollama会自动在后台运行，在任务栏中右键Ollama图标，点击“View
+logs”。</p>
+<figure>
+<img
+src="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/02.png"
+alt="02" />
+<figcaption aria-hidden="true">02</figcaption>
+</figure>
 <p>此时会跳转到目录：<code>C:\Users\&lt;用户名&gt;\AppData\Local\Ollama</code></p>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/03.png" alt="03" class="lazyload"></p>
+<figure>
+<img
+src="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/03.png"
+alt="03" />
+<figcaption aria-hidden="true">03</figcaption>
+</figure>
 <p>用文本编辑器打开“<code>server.log</code>”或“<code>server-1.log</code>”。</p>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/04.png" alt="04" class="lazyload"></p>
+<figure>
+<img
+src="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/04.png"
+alt="04" />
+<figcaption aria-hidden="true">04</figcaption>
+</figure>
 <p>日志提示WARN：显卡<code>gpu type</code>为<code>gfx803</code>，且<code>ROCm</code>版本为<code>5.7</code>。</p>
 <p>我们需要下载对应<code>gfx version</code>及<code>ROCm</code>的文件。</p>
-<h2 id="配置ROCm（HIP-SDK）">配置ROCm（HIP SDK）</h2>
-<p>首先下载ROCm的相关驱动，HIP SDK：<a target="_blank" rel="noopener" href="https://www.amd.com/en/developer/resources/ROCm-hub/hip-sdk.html">https://www.amd.com/en/developer/resources/ROCm-hub/hip-sdk.html</a></p>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/05.png" alt="05" class="lazyload"></p>
+<h2 id="配置rocmhip-sdk">配置ROCm（HIP SDK）</h2>
+<p>首先下载ROCm的相关驱动，HIP SDK：<a
+target="_blank" rel="noopener" href="https://www.amd.com/en/developer/resources/ROCm-hub/hip-sdk.html">https://www.amd.com/en/developer/resources/ROCm-hub/hip-sdk.html</a></p>
+<figure>
+<img
+src="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/05.png"
+alt="05" />
+<figcaption aria-hidden="true">05</figcaption>
+</figure>
 <p>找到对应操作系统版本<code>Windows 10 &amp; 11</code>，<code>ROCm</code>版本<code>5.7.x</code>的SDK，下载并安装。</p>
-<h2 id="配置Rocmlibs">配置Rocmlibs</h2>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/06.png" alt="06" class="lazyload"></p>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/07.png" alt="07" class="lazyload"></p>
+<h2 id="配置rocmlibs">配置Rocmlibs</h2>
+<figure>
+<img
+src="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/06.png"
+alt="06" />
+<figcaption aria-hidden="true">06</figcaption>
+</figure>
+<figure>
+<img
+src="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/07.png"
+alt="07" />
+<figcaption aria-hidden="true">07</figcaption>
+</figure>
 <p>显卡<code>gpu type</code>为<code>gfx803</code>，对应为<code>rocm.gfx803.optic.vega10.logic.hip.sdk.6.1.2.7z</code>。</p>
 <p>下载完毕后解压。</p>
 <p>打开目录：<code>C:\Users\&lt;用户名&gt;\AppData\Local\Programs\Ollama\rocm</code></p>
@@ -259,20 +286,42 @@
 <p>打开目录：<code>C:\Users\&lt;用户名&gt;\AppData\Local\Programs\Ollama\rocm\rocblas</code></p>
 <p>将解压后文件中的<code>library</code>文件夹替换本目录中的文件夹。</p>
 <p><strong>重启电脑</strong>。</p>
-<h2 id="安装Deepseek">安装Deepseek</h2>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/09.png" alt="09" class="lazyload"></p>
-<p>打开Ollama官网模型目录：<a target="_blank" rel="noopener" href="https://ollama.com/library/deepseek-r1">https://ollama.com/library/deepseek-r1</a></p>
+<h2 id="安装deepseek">安装Deepseek</h2>
+<figure>
+<img
+src="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/09.png"
+alt="09" />
+<figcaption aria-hidden="true">09</figcaption>
+</figure>
+<p>打开Ollama官网模型目录：<a
+target="_blank" rel="noopener" href="https://ollama.com/library/deepseek-r1">https://ollama.com/library/deepseek-r1</a></p>
 <p>根据自身电脑配置选择对应参数（<code>x b</code>代表<code>10x 亿参数</code>，例如<code>14b</code>代表<code>140亿参数</code>）</p>
 <p>例如，我们要安装14b的大模型。</p>
 <p>在CMD中键入<code>ollama run deepseek-r1:14b</code></p>
 <p>等待安装完毕即可。</p>
-<p>或者，你也可以采用图形化界面与AI交互，例如使用<a target="_blank" rel="noopener" href="https://chatboxai.app/zh">Chatbox</a>。</p>
+<p>或者，你也可以采用图形化界面与AI交互，例如使用<a
+target="_blank" rel="noopener" href="https://chatboxai.app/zh">Chatbox</a>。</p>
 <h2 id="检查">检查</h2>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/08.png" alt="08" class="lazyload"></p>
+<figure>
+<img
+src="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/08.png"
+alt="08" />
+<figcaption aria-hidden="true">08</figcaption>
+</figure>
 <p>尝试与AI进行对话，例如输入“你好。”</p>
 <p>打开任务管理器，发现GPU在工作，证明配置成功。</p>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/10.png" alt="10" class="lazyload"></p>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/11.png" alt="11" class="lazyload"></p>
+<figure>
+<img
+src="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/10.png"
+alt="10" />
+<figcaption aria-hidden="true">10</figcaption>
+</figure>
+<figure>
+<img
+src="https://imageurl.kuri.ink/images/posts/rx590-ollama-deepseek/11.png"
+alt="11" />
+<figcaption aria-hidden="true">11</figcaption>
+</figure>
 
   </article>
 
@@ -330,7 +379,7 @@
                               <button class="mdui-fab catalog" style="overflow:unset;">
                                   <i class="nexmoefont icon-i-catalog"></i>
                                   <div class="nexmoe-toc">
-                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85Ollama-for-AMD"><span class="toc-number">1.</span> <span class="toc-text">下载安装Ollama-for-AMD</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEROCm%EF%BC%88HIP-SDK%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">配置ROCm（HIP SDK）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AERocmlibs"><span class="toc-number">3.</span> <span class="toc-text">配置Rocmlibs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Deepseek"><span class="toc-number">4.</span> <span class="toc-text">安装Deepseek</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5"><span class="toc-number">5.</span> <span class="toc-text">检查</span></a></li></ol>
+                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85ollama-for-amd"><span class="toc-number">1.</span> <span class="toc-text">下载安装Ollama-for-AMD</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AErocmhip-sdk"><span class="toc-number">2.</span> <span class="toc-text">配置ROCm（HIP SDK）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AErocmlibs"><span class="toc-number">3.</span> <span class="toc-text">配置Rocmlibs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85deepseek"><span class="toc-number">4.</span> <span class="toc-text">安装Deepseek</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5"><span class="toc-number">5.</span> <span class="toc-text">检查</span></a></li></ol>
                                   </div>
                               </button>
                           
@@ -376,7 +425,7 @@
 
  
 
-<script async src="/js/app.js?v=1754726852868"></script>
+<script async src="/js/app.js?v=1754727036615"></script>
 
 
 
