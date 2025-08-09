@@ -1,7 +1,7 @@
 ---
 title: 支持作者
 date: 2019-09-21 23:21:36
-layout: post
+layout: about
 permalink: donate.html
 cover: /background/116.jpg
 coverWidth: 6560
@@ -9,10 +9,8 @@ coverHeight: 3032
 ---
 ## ☕ 支持作者
 
-**Afdian（爱发电）:** [fly6022](https://afdian.net/@fly6022)
-
-| ![Wechat](/images/donate/wechat.png) | ![Afdian](/images/donate/afdian.png) | ![Alipay](/images/donate/alipay.png) |
-| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| ![Wechat](https://imageurl.kuri.ink/images/donate/wechat.png) | ![Afdian](https://imageurl.kuri.ink/images/donate/afdian.png) | ![Alipay](https://imageurl.kuri.ink/images/donate/alipay.png) |
+| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
 
 ## 📑 鸣谢名单
 
@@ -20,4 +18,4 @@ coverHeight: 3032
 | ---------- | ------ | ------ | ---------- | ---- |
 | YYYY-MM-DD | 阿卡西 | ￥2.33 | Wechat Pay |      |
 
-![](/images/donate/alipay-hb.jpg)
+<img src="https://imageurl.kuri.ink/images/donate/alipay-hb.jpg" style="width:20%;margin:0 auto;">

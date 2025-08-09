@@ -1,7 +1,7 @@
 ---
 title: JavaScript：Class 学习笔记
 layout: post
-cover: /background/85.jpg
+cover: https://imageurl.kuri.ink/images/background/85.jpg
 coverWidth: 2550
 coverHeight: 1440
 categories:

@@ -27,6 +27,7 @@
 		"eslint": "8.1.0"
 	},
 	"dependencies": {
-		"hexo-generator-json-content": "^4.2.3"
+		"hexo-generator-json-content": "^4.2.3",
+		"mermaid": "^11.6.0"
 	}
 }

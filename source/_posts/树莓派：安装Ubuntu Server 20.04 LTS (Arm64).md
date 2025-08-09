@@ -1,7 +1,7 @@
 ---
 title: 树莓派：安装Ubuntu Server 20.04 LTS (Arm64)
 layout: post
-cover: /background/98.jpeg
+cover: https://imageurl.kuri.ink/images/background/98.jpeg
 coverWidth: 1920
 coverHeight: 1080
 categories:
@@ -43,7 +43,7 @@ date: 2021/5/29 19:03:17
 
 加载SD卡和镜像之后烧录。
 
-![01](/images/posts/2021-05-29-01/02.jpg)
+![01](https://imageurl.kuri.ink/images/posts/2021-05-29-01/02.jpg)
 
 ## 连接Wifi
 
@@ -75,13 +75,13 @@ network={
 
 打开【PUTTY】软件。
 
-![03](/images/posts/2021-05-29-01/03.jpg)
+![03](https://imageurl.kuri.ink/images/posts/2021-05-29-01/03.jpg)
 
 键入初始化账户密码（账户：Ubuntu；密码：Ubuntu）
 
 之后修改密码。
 
-![04](/images/posts/2021-05-29-01/04.jpg)
+![04](https://imageurl.kuri.ink/images/posts/2021-05-29-01/04.jpg)
 
 ## 更换软件源
 
@@ -158,4 +158,4 @@ sudo raspi-config
 
 ## Ubuntu安装完成
 
-![06](/images/posts/2021-05-29-01/06.jpg)
+![06](https://imageurl.kuri.ink/images/posts/2021-05-29-01/06.jpg)

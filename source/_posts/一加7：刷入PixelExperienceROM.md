@@ -1,7 +1,7 @@
 ---
 title: 一加7：刷入 PixelExperience ROM
 layout: post
-cover: /posts/op7pe/banner.png
+cover: https://imageurl.kuri.ink/images/posts/op7pe/banner.png
 coverWidth: 1920
 coverHeight: 1080
 categories:
@@ -22,16 +22,16 @@ OnePlus 7 刷入类原生ROM ``PixelExperience``.
 ## 前言
 
 !!! error 注意
-    刷机有风险，成功率不保证是100%，请务必备份好手机数据，并且做好有可能失败的心理准备！
+    刷机有风险，成功率不保证是100%，请务必备份好手机数据，并且做好有可能失败的心理准备！本教程不对您刷机产生的一切不良后果负责！
 
 ### 选择阅读的部分
 
 以下部分为选择性阅读部分，如果您的手机之前已经刷入过其它类型的ROM或未遇到相关问题，可以略过。
 
-- 安装Autumn Box（秋之盒）
+- 安装 Autumn Box（秋之盒）或 Android SDK Platform-Tools
 - 安装 OnePlus USB 驱动并开启手机调试功能
-- 解除 BootLoader[^1] 锁【适用问题：第一次刷机，或以前刷机后又回锁的情况）
-- 高通 EDL 刷机（9008模式）【适用问题：通过官方 OTA 更新到 Color OS 后无法刷入 TWRP 的情况】
+- 解除 BootLoader[^1] 锁【**适用问题：**第一次刷机，或以前刷机后又回锁的情况）
+- 高通 EDL 刷机（9008模式）【**适用问题：**通过官方 OTA 更新到 Color OS 后无法刷入 TWRP 的情况；刷机失败成砖后的补救措施】
 - 注脚内容
 
 ### 必须阅读的部分
@@ -40,7 +40,7 @@ OnePlus 7 刷入类原生ROM ``PixelExperience``.
 
 ### 特别注意的部分
 
-用红色字体注明的部分，该部分内容您应当特别注意。
+用红色字体框注明的部分，该部分内容您应当特别注意。
 
 ### 下载链接
 
@@ -57,9 +57,19 @@ OnePlus 7 刷入类原生ROM ``PixelExperience``.
 | **Oxygen OS 12.1 H32底包**  | https://yun.daxiaamu.com/OnePlus_Roms_2/%E4%B8%80%E5%8A%A07/%E6%B0%A7OS%2012.1%20H.32/6393320e5fee4d859dc8e6dcea69e7a9.zip/                                              |
 | **PixelExperience（官方）** | https://download.pixelexperience.org/changelog/guacamoleb/PixelExperience_Plus_guacamoleb-13.0-20230106-1142-OFFICIAL.zip/                                               |
 
-## 安装Autumn Box（秋之盒）
+## 安装Autumn Box（秋之盒）或Android SDK Platform-Tools
+
+### Autumn Box
 
 点击上方链接，下载安装即可。具体使用参见官网：https://atmb.top/
+
+### Android SDK Platform-Tools
+
+点击链接：[https://developer.android.google.cn/tools/releases/platform-tools?hl=zh-cn#downloads](https://developer.android.google.cn/tools/releases/platform-tools?hl=zh-cn#downloads)，前往到下载页面。
+
+点击“下载适用于 Windows 的 SDK Platform-Tools”，勾选“我已阅读并同意上述条款及条件”，点击下载。
+
+解压缩到某个目录，之后添加系统环境变量。
 
 ## 安装 OnePlus USB 驱动并开启手机调试功能
 
@@ -73,16 +83,24 @@ OnePlus 7 刷入类原生ROM ``PixelExperience``.
 
 ## 解除 BootLoader 锁
 
-以下是解锁需要的命令：
-
-```bash
-adb devices // 判断手机是否连接成功；若输出一串字符，则证明手机连接成功
-adb reboot bootloader // 重启手机至 fastboot 模式
-fastboot oem unlock // 解除 Bootloader 锁
-```
-
 !!! error 注意
     此步骤会清空手机 data 分区，请事先备份好个人数据！
+
+以下是解锁需要的命令，依次在Powershell（管理员）命令行界面中输入：
+
+```bash
+adb devices 
+adb reboot bootloader 
+fastboot oem unlock 
+```
+
+各命令含义：
+
+| 命令 | 含义 |
+| --- | --- |
+| `adb devices` | 判断手机是否连接成功；若输出一串字符，则证明手机连接成功 |
+| `adb reboot bootloader` | 重启手机至 fastboot 模式 |
+| `fastboot oem unlock` | 解除 Bootloader 锁（**该操作会清空手机data分区**） |
 
 之后手机会弹出一个确认界面，使用音量键勾选确认。
 
@@ -92,16 +110,16 @@ fastboot oem unlock // 解除 Bootloader 锁
 
 ```
 adb reboot bootloader // 重启至 fastboot 模式
-fastboot boot twrp-3.7.0_12-0-guacamolev2.img // 临时刷入TWRP
+fastboot boot twrp-3.7.0_12-0-guacamolev2.img // 刷入临时TWRP
 ```
 
-稍等5-10秒钟，手机会自动进入REC.
+稍等5-10秒钟，手机会自动进入Recovery模式.
 
 !!! info FAQ
 
     ### 无法刷入TWRP或刷入后手机迟迟无反应
 
-    一般情况下，升级到 Color OS 之后会出现这种问题，建议备份手机数据，之后采用9008刷机回到 氢 OS，再刷入 TWRP。
+    一般情况下，升级到 Color OS 之后会出现这种问题，建议尝试较新的TWRP版本重新刷入REC，或是备份手机数据，之后采用9008刷机回到氢OS，再刷入TWRP。
 
     9008刷机教程详见文章底部。
 
@@ -136,13 +154,20 @@ fastboot boot twrp-3.7.0_12-0-guacamolev2.img // 临时刷入TWRP
 
     考虑切换A/B分区。（如果目前是A分区，就切换到B，反之，切换到A）
 
-    ``      adb reboot bootloader // 进入 Fastboot 模式               fastboot set_active b // 切换到 B 分区（视具体情况而定）      ``
+    ```
+    adb reboot bootloader          
+    fastboot set_active b     
+    ```
 
-    完成这一步，手机应该会自动重启到系统。
+    完成这一步，手机会自动重启到系统。
 
 **刷机到此结束！**
 
+完成初始化设置，即可在一加7上使用PixelExperience系统啦。
+
 ## （补充）9008刷机操作教程
+
+如果你不幸将手机刷成砖，请看以下教程（亦可参考互联网上其它9008教程，步骤大致相似）。
 
 在电脑安装好 [高通9008驱动](https://yun.daxiaamu.com/files/tool/%E9%AB%98%E9%80%9A%E7%BA%BF%E5%88%B7%E9%A9%B1%E5%8A%A8/%E9%AB%98%E9%80%9A9008%E9%A9%B1%E5%8A%A8(%E6%8E%A8%E8%8D%90).exe)。
 
@@ -164,8 +189,8 @@ fastboot boot twrp-3.7.0_12-0-guacamolev2.img // 临时刷入TWRP
    - TWRP：https://eu.dl.twrp.me/guacamolev2/
    - PixelExperience：https://forum.xda-developers.com/t/rom-official-guacamoleb-13-pixelexperience-6th-january-2023.4465935/
    - 大侠阿木：https://yun.daxiaamu.com/
-2. 本文章的官方发布渠道为酷安网(https://coolapk.com/)及本站(https://blog.fly6022.fun/)，采用 署名-非商业性使用-禁止演绎 4.0 国际 (CC BY-NC-ND 4.0) 协议进行许可，转载请注明原出处。
+2. 本文章的官方发布渠道为酷安网(https://coolapk.com/)及本站(https://blog.kuri.ink/)，采用 署名-非商业性使用-禁止演绎 4.0 国际 (CC BY-NC-ND 4.0) 协议进行许可，转载请注明原出处。
 
-[^1]: Bootloader 锁，即一种对引导加载程序的锁定系统，是手机厂商为了防止用户滥用  Fastboot 或篡改手机官方 Recovery 而设置的一种安全措施。想要刷入第三方ROM，必须解除 BootLoader 锁。
+[^1]: Bootloader 锁，即一种对引导加载程序的锁定系统，是手机厂商为了防止用户滥用 Fastboot 或篡改手机官方 Recovery 而设置的一种安全措施。想要刷入第三方ROM，必须解除 BootLoader 锁，晚期的三星、华为、vivo以及OPPO品牌设备解锁较困难，小米、一加等品牌设备解锁相对容易。
     
 [^2]: 鸣谢：感谢热心读者 [@lsqAI](https://github.com/lsqAl) 指出文章中的过时内容，现已更正。

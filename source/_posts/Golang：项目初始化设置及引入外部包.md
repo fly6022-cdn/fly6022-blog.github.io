@@ -1,7 +1,7 @@
 ---
 title: Golang：项目初始化设置及引入外部包
 layout: post
-cover: /background/113.jpg
+cover: https://imageurl.kuri.ink/images/background/113.jpg
 coverWidth: 2211
 coverHeight: 1050
 categories:

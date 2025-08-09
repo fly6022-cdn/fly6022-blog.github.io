@@ -1,7 +1,7 @@
 ---
 title: Javascript：Ajax 同源策略限制问题的解决
 layout: post
-cover: /background/7.jpg
+cover: https://imageurl.kuri.ink/images/background/7.jpg
 coverWidth: 2500
 coverHeight: 1352
 categories:
@@ -16,7 +16,7 @@ Ajax 同源策略限制问题的解决。
 
 <!--more-->
 
-![01](/images/posts/2021-03-07-01/01.jpg)
+![01](https://imageurl.kuri.ink/images/posts/2021-03-07-01/01.jpg)
 
 ## 写在前面
 
@@ -114,5 +114,5 @@ Content-Type: text/html; charset=utf-8
 
 <hr>
 
-`<small>`1. MDN官方文档（ https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy ）- Author(s): Jesse Ruderman `</small>`
-`<small>`2. 阮一峰.跨域资源共享CORS详解[EB/OL]. (2016-4-12)[2021-03-07].http://www.ruanyifeng.com/blog/2016/04/cors.html - 许可证:自由转载-非商用-非衍生-保持署名(创意共享3.0许可证).`</small>`
+<small>1. MDN官方文档(https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy): Jesse Ruderman </small>
+<small>2. 阮一峰.跨域资源共享CORS详解[EB/OL]. (2016-4-12)[2021-03-07].http://www.ruanyifeng.com/blog/2016/04/cors.html - 许可证:自由转载-非商用-非衍生-保持署名(创意共享3.0许可证).</small>

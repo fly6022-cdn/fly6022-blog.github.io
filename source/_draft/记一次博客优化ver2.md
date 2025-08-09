@@ -16,4 +16,4 @@ date: 2023/7/20 21:21:43
 
 ## CSS
 
-[^1]: 记一次博客优化：https://blog.fly6022.fun/posts/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/
+[^1]: 记一次博客优化：https://blog.kuri.ink/posts/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/

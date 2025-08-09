@@ -1,7 +1,7 @@
 ---
 title: 树莓派：搭建Minecraft服务器
 layout: post
-cover: /background/97.jpg
+cover: https://imageurl.kuri.ink/images/background/97.jpg
 coverWidth: 1920
 coverHeight: 1014
 categories:
@@ -52,11 +52,11 @@ sudo apt-get install openjdk-16-jdk
 
 访问[Getbukkit](https://getbukkit.org/download/spigot)，下载你需要版本的核心。
 
-![01](/images/posts/2021-01-26-01/01.png)
+![01](https://imageurl.kuri.ink/images/posts/2021-01-26-01/01.png)
 
 核心是一个 ``.jar``文件,此处我使用的核心适用于Minecraft Java版 1.15.2。
 
-![02](/images/posts/2021-01-26-01/02.png)
+![02](https://imageurl.kuri.ink/images/posts/2021-01-26-01/02.png)
 
 ### 配置服务器环境
 
@@ -75,7 +75,7 @@ sudo java -Xms768M -Xmx2048M -jar /root/Desktop/Minecraft_server/Server_3/[核�
 > -Xmx2048M：程序运行时最大内存为2048M
 > nogui：即No GUI，无图形界面，可节省内存
 
-![03](/images/posts/2021-01-26-01/03.png)
+![03](https://imageurl.kuri.ink/images/posts/2021-01-26-01/03.png)
 
 之后保存文件。
 
@@ -91,17 +91,17 @@ sh run.sh
 
 命令执行结束，会发现在文件夹中多了几个文件。
 
-![04](/images/posts/2021-01-26-01/04.png)
+![04](https://imageurl.kuri.ink/images/posts/2021-01-26-01/04.png)
 
 打开文件夹中的 ``eula.txt``，将 ``eula``的参数由 ``false``改为 ``true``。
 
 保存。
 
-![05](/images/posts/2021-01-26-01/05.png)
+![05](https://imageurl.kuri.ink/images/posts/2021-01-26-01/05.png)
 
 接着，打开文件夹中的 ``server.properties``文件（该文件是服务器的配置文件）。
 
-![06](/images/posts/2021-01-26-01/06.png)
+![06](https://imageurl.kuri.ink/images/posts/2021-01-26-01/06.png)
 
 参考[Minecraft Wiki](https://minecraft-zh.gamepedia.com/Server.properties).以下是各参数的实际含义：
 
@@ -163,7 +163,7 @@ sh run.sh
 
 稍等片刻。
 
-![07](/images/posts/2021-01-26-01/07.png)
+![07](https://imageurl.kuri.ink/images/posts/2021-01-26-01/07.png)
 
 待命令行出现 ``Done``时，即表示我们的服务器已经在本地成功运行了。
 

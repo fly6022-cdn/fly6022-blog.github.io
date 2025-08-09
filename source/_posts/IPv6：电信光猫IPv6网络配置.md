@@ -1,7 +1,7 @@
 ---
 title: IPv6：电信光猫IPv6网络配置
 layout: post
-cover: /posts/ipv6_dx/0.png
+cover: https://imageurl.kuri.ink/images/posts/ipv6_dx/0.png
 coverWidth: 1920
 coverHeight: 1017
 categories:
@@ -21,23 +21,23 @@ date: 2024/7/16 20:19:00
 
 打开浏览器，在地址栏键入光猫的局域网IP地址（我的是 `192.168.1.1`），进入光猫后台。
 
-![img](/images/posts/ipv6_dx/0.png)
+![img](https://imageurl.kuri.ink/images/posts/ipv6_dx/0.png)
 
 输入管理员用户名及密码，用户名：`telecomadmin`，密码：`nE7jA%5m`。
 
 点击导航栏中的“网络”→“网络设置”，选择连接名称及IP模式。
 
-![img](/images/posts/ipv6_dx/1.png)
+![img](https://imageurl.kuri.ink/images/posts/ipv6_dx/1.png)
 
-![img](/images/posts/ipv6_dx/6.png)
+![img](https://imageurl.kuri.ink/images/posts/ipv6_dx/6.png)
 
-![img](/images/posts/ipv6_dx/7.png)
+![img](https://imageurl.kuri.ink/images/posts/ipv6_dx/7.png)
 
-![img](/images/posts/ipv6_dx/8.png)
+![img](https://imageurl.kuri.ink/images/posts/ipv6_dx/8.png)
 
 将“IPv6”信息修改为下图所示并**保存**：
 
-![img](/images/posts/ipv6_dx/9.png)
+![img](https://imageurl.kuri.ink/images/posts/ipv6_dx/9.png)
 
 > 地址获取方式：AutoConfigured
 > 获取前缀：是
@@ -46,11 +46,11 @@ date: 2024/7/16 20:19:00
 
 回退到“用户侧管理”，点击“IPv6设置”，将本页设置修改为下图所示并保存。
 
-![img](/images/posts/ipv6_dx/2.png)
+![img](https://imageurl.kuri.ink/images/posts/ipv6_dx/2.png)
 
-![img](/images/posts/ipv6_dx/4.png)
+![img](https://imageurl.kuri.ink/images/posts/ipv6_dx/4.png)
 
-![img](/images/posts/ipv6_dx/5.png)
+![img](https://imageurl.kuri.ink/images/posts/ipv6_dx/5.png)
 
 打开路由器后台，在IPv6相关设置下更改为“桥模式”。
 
@@ -60,7 +60,7 @@ date: 2024/7/16 20:19:00
 
 若为下图所示，证明配置成功
 
-![img](/images/posts/ipv6_dx/10.png)
+![img](https://imageurl.kuri.ink/images/posts/ipv6_dx/10.png)
 
 ## IPv6有什么好处
 

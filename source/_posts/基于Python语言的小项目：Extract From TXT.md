@@ -1,7 +1,7 @@
 ---
 title: 基于Python语言的小项目：Extract From TXT
 layout: post
-cover: /background/111.jpg
+cover: https://imageurl.kuri.ink/images/background/111.jpg
 coverWidth: 2000
 coverHeight: 1000
 categories:
@@ -66,7 +66,7 @@ demo.txt 1 5 5
 # @name   : Extract_From_TXT/main.py
 # @author : fly6022
 # @date   : 2022/5/29
-# @Email  : i@fly6022.fun
+# @Email  : cl@kuri.ink
 # @license: MIT
 ```
 
@@ -84,7 +84,7 @@ demo.txt 1 5 5
     # @name   : Extract_From_TXT/main.py
     # @author : fly6022
     # @date   : 2022/5/29
-    # @Email  : i@fly6022.fun
+    # @Email  : cl@kuri.ink
     # @license: MIT
 
     import linecache

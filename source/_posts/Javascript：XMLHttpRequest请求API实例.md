@@ -1,7 +1,7 @@
 ---
 title: Javascript：XMLHttpRequest请求API实例
 layout: post
-cover: /background/94.jpg
+cover: https://imageurl.kuri.ink/images/background/94.jpg
 coverWidth: 3500
 coverHeight: 1969
 categories:
@@ -12,7 +12,6 @@ tags:
 
 date: 2022/6/3 22:24:50
 ---
-
 API（应用程序接口）在前端开发过程中起到了举足轻重的作用，利用Web API中的 ``XMLHttpRequest``对象可以便于我们对API的调用。请求API的方式有很多，本文为大家提供一个比较简单的范例。
 
 本文内容所用语言若无特别说明均为JavaScript，且本文所提供的方法作用域不包含IE浏览器这类比较老旧的浏览器。
@@ -23,7 +22,7 @@ API（应用程序接口）在前端开发过程中起到了举足轻重的作�
 XHR = new XMLHttpRequest();
 ```
 
-其次，调用 ``open()``方法，该方法提供了三个参数：请求类型（``GET``和 ``POST``等）、请求的目标链接（也就是我们需要请求的API地址）以及是否发送异步请求的布尔值（由于 ``XMLHttpRequest``默认为异步请求，所以该布尔值默认为`true`）。
+其次，调用 ``open()``方法，该方法提供了三个参数：请求类型（``GET``和 ``POST``等）、请求的目标链接（也就是我们需要请求的API地址）以及是否发送异步请求的布尔值（由于 ``XMLHttpRequest``默认为异步请求，所以该布尔值默认为 `true`）。
 
 这里以“[API服务,天气API - 帮!](http://api.help.bj.cn/api/?id=45)”网站提供的天气API接口作为例子，它支持使用GET方法调用，并且不需要Token。
 
@@ -41,19 +40,19 @@ citycode = '101060101'; // 假设citycode是通过表单提交的
 	XHR.open('GET', '//api.help.bj.cn/apis/weather/?id=' + String(citycode), true);
 ```
 
-之后发送一个 ``null``参数。
+之后发送一个 `null `参数。
 
 ```js
 XHR.send(null);
 ```
 
-使用Javascript的 ``JSON.parse()``方法处理传入的JSON数据。
+使用Javascript的 `JSON.parse()`方法处理传入的JSON数据。
 
 ```js
 	XHR.onload = function() {
 
         json = JSON.parse(XHR.response)
-      
+    
         console.log(json);
 
     }
@@ -89,7 +88,7 @@ XHR.send(null);
 }
 ```
 
-处理过后的 ``json``（将其转换为了对象）：
+处理过后的 `json`（将其转换为了对象）：
 
 ```
 Object { status: "0", cityen: "changchun", city: "长春", citycode: "101060101", temp: "19", tempf: "66", wd: "东南风", wden: "SE", wdenimg: "//www.help.bj.cn/weather/images/wind/se.png", wdforce: "2级", … }

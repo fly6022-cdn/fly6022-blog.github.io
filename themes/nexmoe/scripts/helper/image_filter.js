@@ -8,9 +8,9 @@ hexo.extend.filter.register('after_post_render', function(data){
 		'<img data-fancybox="gallery" data-sizes="auto" data-src="$1" alt="$2" class="lazyload">'
 	)
 	
-	if(themeCfg.imageCDN.enable){
+	if(themeCfg.imageCDN.enable == true){
 		data.content = data.content.replace(
-			new RegExp(themeCfg.imageCDN.origin,"gm"),
+			new RegExp(themeCfg.imageCDN.origin, "gm"),
 			themeCfg.imageCDN.to
 		);
 	}

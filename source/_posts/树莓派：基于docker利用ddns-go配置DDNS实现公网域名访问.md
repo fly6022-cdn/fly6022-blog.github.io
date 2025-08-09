@@ -1,7 +1,7 @@
 ---
 title: 树莓派：基于docker利用ddns-go配置DDNS实现公网域名访问
 layout: post
-cover: /posts/ddns/1.png
+cover: https://imageurl.kuri.ink/images/posts/ddns/1.png
 coverWidth: 1920
 coverHeight: 866
 categories:
@@ -141,17 +141,17 @@ sudo docker compose up -d
 
 在浏览器地址栏键入 ``https://dash.cloudflare.com/profile/api-tokens``.
 
-![img](/images/posts/ddns/2.png)
+![img](https://imageurl.kuri.ink/images/posts/ddns/2.png)
 
 点击"创建令牌"→“编辑区域DNS（使用模板）”
 
-![img](/images/posts/ddns/3.png)
+![img](https://imageurl.kuri.ink/images/posts/ddns/3.png)
 
 配置后点击"继续以显示摘要"→创建令牌。
 
 将生成的令牌粘贴到ddns-go后台中。
 
-![img](/images/posts/ddns/4.png)
+![img](https://imageurl.kuri.ink/images/posts/ddns/4.png)
 
 在IPv6的“Domains”一栏中添加好自己的域名，保存即可。
 

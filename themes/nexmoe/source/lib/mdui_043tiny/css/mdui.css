@@ -33,7 +33,7 @@ main {
 }
 /**
  * Correct the font size and margin on `h1` elements within `section` and
- * `article` contexts in Chrome, Firefox, and Safari.
+ * `article` contexts in Che, Firefox, and Safari.
  */
 h1 {
   margin: .67em 0;
@@ -59,7 +59,7 @@ hr {
  * 2. Correct the odd `em` font sizing in all browsers.
  */
 pre {
-  font-family: Roboto;
+  font-family: PlusJakartaSans-Medium;
   /* 1 */
   font-size: 1em;
   /* 2 */
@@ -101,7 +101,7 @@ strong {
 code,
 kbd,
 samp {
-  font-family:Roboto;
+  font-family:PlusJakartaSans-Medium;
   /* 1 */
   font-size: 1em;
   /* 2 */
@@ -150,7 +150,7 @@ select,
 textarea {
   /* 1 */
   margin: 0;
-  font-family:Roboto;
+  font-family:PlusJakartaSans-Medium;
   /* 1 */
   font-size: 100%;
   /* 1 */
@@ -321,7 +321,7 @@ template {
  * =============================================================================
  */
 body {
-  font-family:Roboto;
+  font-family:PlusJakartaSans-Medium;
   font-size: 14px;
   color: rgba(0, 0, 0, .87);
   background-color: #fff;
@@ -3719,7 +3719,7 @@ input.mdui-btn[type="submit"] {
   -webkit-appearance: none;
   padding-right: 24px;
   padding-left: 0;
-  font-family:Roboto;
+  font-family:PlusJakartaSans-Medium;
   font-size: 16px;
   vertical-align: middle;
   cursor: pointer;
@@ -5957,12 +5957,12 @@ select.mdui-select[multiple] option:last-child {
  */
 /* DOM 加载完后再添加 transition */
 body.mdui-loaded {
-  -webkit-transition: padding .3s cubic-bezier(0, 0, .2, 1);
-          transition: padding .3s cubic-bezier(0, 0, .2, 1);
+  -webkit-transition: padding 0s cubic-bezier(0, 0, .2, 1);
+          transition: padding 0s cubic-bezier(0, 0, .2, 1);
 }
 body.mdui-loaded .mdui-drawer {
-  -webkit-transition: all .3s cubic-bezier(0, 0, .2, 1);
-          transition: all .3s cubic-bezier(0, 0, .2, 1);
+  -webkit-transition: all 0s cubic-bezier(0, 0, .2, 1);
+          transition: all 0s cubic-bezier(0, 0, .2, 1);
 }
 /* 抽屉栏外层，默认出现在左侧且隐藏 */
 .mdui-drawer {

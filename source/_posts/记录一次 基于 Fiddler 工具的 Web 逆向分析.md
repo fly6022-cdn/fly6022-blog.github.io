@@ -1,7 +1,7 @@
 ---
 title: 记录一次 基于 Fiddler 工具的 Web 逆向分析
 layout: post
-cover: /posts/fw1/01.jpg
+cover: https://imageurl.kuri.ink/images/posts/fw1/01.jpg
 coverWidth: 1396
 coverHeight: 796
 categories:
@@ -25,11 +25,11 @@ date: 2023/7/31 23:06:59
 
 该网站是学习类网站，主要功能是提供作业习题内容及相关解析，客户端的操作逻辑是：用户将题目输入到搜索框，之后点击“搜索试题”按钮，网页便重定向到对应的页面。与搜索引擎的操作逻辑类似。
 
-![02](/images/posts/fw1/02.png)
+![02](https://imageurl.kuri.ink/images/posts/fw1/02.png)
 
 注意到，当按下“搜索试题”按钮后，URL后面多了键名为 ``query``，键值为 ``黄河小浪底水利枢纽是治理开发黄河的关键性工程。阅读材料回答问题。(14分) 材料``(编码后为：``%E9%BB%84%E6%B2%B3%E5%B0%8F%E6%B5%AA%E5%BA%95%E6%B0%B4%E5%88%A9%E6%9E%A2%E7%BA%BD%E6%98%AF%E6%B2%BB%E7%90%86%E5%BC%80%E5%8F%91%E9%BB%84%E6%B2%B3%E7%9A%84%E5%85%B3%E9%94%AE%E6%80%A7%E5%B7%A5%E7%A8%8B%E3%80%82%E9%98%85%E8%AF%BB%E6%9D%90%E6%96%99%E5%9B%9E%E7%AD%94%E9%97%AE%E9%A2%98%E3%80%82%2814%E5%88%86%29%20%E6%9D%90%E6%96%99``)的内容。
 
-![04](/images/posts/fw1/04.png)
+![04](https://imageurl.kuri.ink/images/posts/fw1/04.png)
 
 点击任意一条信息，我们跳转到了一个新页面，这个页面有一些像 作业帮 的搜题界面。
 
@@ -43,7 +43,7 @@ date: 2023/7/31 23:06:59
 
 为了弄清以上操作的实际原理，我们使用 Fiddler 工具，对刚才的全部过程进行记录，并且抓取部分请求片段进行分析。
 
-![03](/images/posts/fw1/03.png)
+![03](https://imageurl.kuri.ink/images/posts/fw1/03.png)
 
 在刚才的请求操作中，以下请求片段引起了我们的注意：
 
@@ -97,7 +97,7 @@ GET https://easylearn.baidu.com/edu-web/content/search?query=%E9%BB%84%E6%B2%B3%
 
 不难发现，此处的 ``entityId``键值与之前在 ``URL``中看到的 ``id``的键值是一致的，因此，我们猜测它们有一定的关系。
 
-![05](/images/posts/fw1/05.png)
+![05](https://imageurl.kuri.ink/images/posts/fw1/05.png)
 
 同样的，我们发现了类似的请求片段：
 

@@ -1,7 +1,7 @@
 ---
 title: Spyder：[WinError 126] 找不到指定的模块 错误的解决
 layout: post
-cover: /posts/spyder126/banner.png
+cover: https://imageurl.kuri.ink/images/posts/spyder126/banner.png
 coverWidth: 1919
 coverHeight: 1021
 categories:
@@ -36,7 +36,7 @@ where python
 
 Spyder中依次找到：工具 --> 偏好 --> Python 解释器 --> 使用下列 Python 解释器
 
-![01](https://cdn.jsdelivr.net/gh/imageurl/fly6022@master/images/posts/spyder126/01.png)
+![01](https://cdn.jsdelivr.net/gh/imageurl/fly6022@masterhttps://imageurl.kuri.ink/images/posts/spyder126/01.png)
 
 将 Python 解释器路径 粘贴过来。
 
