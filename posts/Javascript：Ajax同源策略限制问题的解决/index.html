@@ -26,16 +26,16 @@
 <meta property="article:tag" content="Ajax">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://imageurl.kuri.ink/images/posts/2021-03-07-01/01.jpg">
-    <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css?v=1754727380928">
+    <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css?v=1754730114883">
     
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css">
     
     <link rel="stylesheet" href="/css/style.css" /> 
     <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css" />
     <link rel="stylesheet" href="/lib/iconfont/iconfont.css" />
-    <!--<link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1754727380928">
-    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1754727380928">-->
-    <!--<link rel="stylesheet" href="/css/style.css?v=1754727380928">
+    <!--<link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1754730114883">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1754730114883">-->
+    <!--<link rel="stylesheet" href="/css/style.css?v=1754730114883">
      
     -->
     <script type="text/x-mathjax-config">
@@ -220,24 +220,13 @@
 
       <p>Ajax 同源策略限制问题的解决。</p>
 <span id="more"></span>
-<figure>
-<img src="https://imageurl.kuri.ink/images/posts/2021-03-07-01/01.jpg"
-alt="01" />
-<figcaption aria-hidden="true">01</figcaption>
-</figure>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.kuri.ink/images/posts/2021-03-07-01/01.jpg" alt="01" class="lazyload"></p>
 <h2 id="写在前面">写在前面</h2>
 <p>首先，我们要了解，何为『同源策略』。</p>
 <blockquote>
 <p><strong>同源策略</strong>是一个重要的<strong>安全策略</strong>，它用于限制一个origin的文档或者它加载的脚本如何能与另一个源的资源进行交互。它能帮助阻隔恶意文档，减少可能被攻击的媒介。</p>
-<p>如果两个 URL 的 protocol、port (如果有指定的话)和 host
-都相同的话，则这两个 URL
-是<em>同源</em>。这个方案也被称为“协议/主机/端口元组”，或者直接是
-“元组”。（“元组”
-是指一组项目构成的整体，双重/三重/四重/五重/等的通用形式）。</p>
-<p align="right">
-——
-<a href="https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy" target="_blank">MDN官方文档</a>
-</p>
+<p>如果两个 URL 的 protocol、port (如果有指定的话)和 host 都相同的话，则这两个 URL 是<em>同源</em>。这个方案也被称为“协议/主机/端口元组”，或者直接是 “元组”。（“元组” 是指一组项目构成的整体，双重/三重/四重/五重/等的通用形式）。</p>
+<p align="right">—— <a href="https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy" target="_blank">MDN官方文档</a></p>
 </blockquote>
 <p>例如：</p>
 <table>
@@ -250,94 +239,97 @@ alt="01" />
 </thead>
 <tbody>
 <tr>
-<td>http://a.com/1.html</td>
+<td><a target="_blank" rel="noopener" href="http://a.com/1.html">http://a.com/1.html</a></td>
 <td>同源</td>
 <td>只有路径不同</td>
 </tr>
 <tr>
-<td>http://a.com/src/2.html</td>
+<td><a target="_blank" rel="noopener" href="http://a.com/src/2.html">http://a.com/src/2.html</a></td>
 <td>同源</td>
 <td>只有路径不同</td>
 </tr>
 <tr>
-<td>https://a.com/3.html</td>
+<td><a target="_blank" rel="noopener" href="https://a.com/3.html">https://a.com/3.html</a></td>
 <td>失败</td>
 <td>协议不同</td>
 </tr>
 <tr>
-<td>http://a.com:81/4.html</td>
+<td><a target="_blank" rel="noopener" href="http://a.com:81/4.html">http://a.com:81/4.html</a></td>
 <td>失败</td>
 <td>端口不同(http默认端口是80)</td>
 </tr>
 <tr>
-<td>http://b.com/1.html</td>
+<td><a target="_blank" rel="noopener" href="http://b.com/1.html">http://b.com/1.html</a></td>
 <td>失败</td>
 <td>主机不同</td>
 </tr>
 </tbody>
 </table>
-<p>总结一下，满足 <code>&lt;u&gt;</code>同源
-<code>&lt;/u&gt;</code>的条件：</p>
-<ul>
-<li>主机相同</li>
-<li>端口相同</li>
-<li>协议相同</li>
+<p>总结一下，满足 <code>&lt;u&gt;</code>同源 <code>&lt;/u&gt;</code>的条件：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>主机相同</p>
+</li>
+<li class="lvl-2">
+<p>端口相同</p>
+</li>
+<li class="lvl-2">
+<p>协议相同</p>
+</li>
 </ul>
 <p>三者缺一不可。</p>
 <h2 id="解决方法">解决方法</h2>
 <p>我们已经了解了『同源策略』的基本概念，虽然说，它是一种浏览器主动的安全策略，但是，却时常给我们的前端开发造成了困难。</p>
 <p>那么，我们如何解决『同源策略』给我们带来的不便呢？</p>
 <p>比较推荐的方法有两种。</p>
-<h3 id="jsonp">JSONP</h3>
-<p>JSONP
-是利用html标签不受『同源策略』限制的影响，从而达到解决『同源策略』限制的目的。通俗来讲，叫“曲线救国”。</p>
+<h3 id="JSONP">JSONP</h3>
+<p>JSONP 是利用html标签不受『同源策略』限制的影响，从而达到解决『同源策略』限制的目的。通俗来讲，叫“曲线救国”。</p>
 <p>这种方法的好处是：</p>
-<ul>
-<li>比较简单</li>
-<li>兼容性较好（较老版本的浏览器也支持）</li>
-<li>不必对服务器端进行配置（或配置相对较少）</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>比较简单</p>
+</li>
+<li class="lvl-2">
+<p>兼容性较好（较老版本的浏览器也支持）</p>
+</li>
+<li class="lvl-2">
+<p>不必对服务器端进行配置（或配置相对较少）</p>
+</li>
 </ul>
 <p>但是，这种方法有一定的局限性：它仅支持GET方式请求数据。</p>
 <h4 id="基本原理">基本原理</h4>
-<p>在网页添加一个
-<code>&lt;script&gt;</code>元素，再向服务器请求JSON数据。服务器收到请求后，将数据存放在一个指定的回调函数
-<code>callback()</code>里。</p>
-<h3 id="cors跨域资源共享">CORS（跨域资源共享）</h3>
-<p>这种方法允许浏览器向跨源服务器发出
-<code>XMLHttpRequest</code>请求，从而克服了同源策略的限制。</p>
+<p>在网页添加一个 <code>&lt;script&gt;</code>元素，再向服务器请求JSON数据。服务器收到请求后，将数据存放在一个指定的回调函数 <code>callback()</code>里。</p>
+<h3 id="CORS（跨域资源共享）">CORS（跨域资源共享）</h3>
+<p>这种方法允许浏览器向跨源服务器发出 <code>XMLHttpRequest</code>请求，从而克服了同源策略的限制。</p>
 <p>好处是：</p>
-<ul>
-<li>较方便配置</li>
-<li>兼容所有请求方式</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>较方便配置</p>
+</li>
+<li class="lvl-2">
+<p>兼容所有请求方式</p>
+</li>
 </ul>
 <p>局限性是：</p>
-<ul>
-<li>较老版本的浏览器可能不支持</li>
-<li>需要在服务器端配置</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>较老版本的浏览器可能不支持</p>
+</li>
+<li class="lvl-2">
+<p>需要在服务器端配置</p>
+</li>
 </ul>
-<h4
-id="基本原理仅针对简单请求headgetpost">基本原理（仅针对简单请求：HEAD、GET、POST）</h4>
-<p>对于简单请求，浏览器直接发出CORS请求。具体来说，就是在头信息之中，增加一个
-<code>Origin</code>字段。</p>
-<p>下面是一个例子，浏览器发现这次跨源AJAX请求是简单请求，就自动在头信息之中，添加一个
-<code>Origin</code>字段。</p>
+<h4 id="基本原理（仅针对简单请求：HEAD、GET、POST）">基本原理（仅针对简单请求：HEAD、GET、POST）</h4>
+<p>对于简单请求，浏览器直接发出CORS请求。具体来说，就是在头信息之中，增加一个 <code>Origin</code>字段。</p>
+<p>下面是一个例子，浏览器发现这次跨源AJAX请求是简单请求，就自动在头信息之中，添加一个 <code>Origin</code>字段。</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">GET</span> <span class="hljs-string">/cors</span> <span class="hljs-string">HTTP/1.1</span><br><span class="hljs-attr">Origin:</span> <span class="hljs-string">http://api.bob.com</span><br><span class="hljs-attr">Host:</span> <span class="hljs-string">api.alice.com</span><br><span class="hljs-attr">Accept-Language:</span> <span class="hljs-string">en-US</span><br><span class="hljs-attr">Connection:</span> <span class="hljs-string">keep-alive</span><br><span class="hljs-attr">User-Agent:</span> <span class="hljs-string">Mozilla/5.0...</span><br></code></pre></td></tr></table></figure>
-<p>上面的头信息中，<code>Origin</code>字段用来说明，本次请求来自哪个源（协议
-+ 域名 + 端口）。服务器根据这个值，决定是否同意这次请求。</p>
-<p>如果
-<code>Origin</code>指定的源，不在许可范围内，服务器会返回一个正常的HTTP回应。浏览器发现，这个回应的头信息没有包含
-<code>Access-Control-Allow-Origin</code>字段（详见下文），就知道出错了，从而抛出一个错误，被
-<code>XMLHttpRequest</code>的
-<code>onerror</code>回调函数捕获。注意，这种错误无法通过状态码识别，因为HTTP回应的状态码有可能是200。</p>
-<p>如果
-<code>Origin</code>指定的域名在许可范围内，服务器返回的响应，会多出几个头信息字段。</p>
+<p>上面的头信息中，<code>Origin</code>字段用来说明，本次请求来自哪个源（协议 + 域名 + 端口）。服务器根据这个值，决定是否同意这次请求。</p>
+<p>如果 <code>Origin</code>指定的源，不在许可范围内，服务器会返回一个正常的HTTP回应。浏览器发现，这个回应的头信息没有包含 <code>Access-Control-Allow-Origin</code>字段（详见下文），就知道出错了，从而抛出一个错误，被 <code>XMLHttpRequest</code>的 <code>onerror</code>回调函数捕获。注意，这种错误无法通过状态码识别，因为HTTP回应的状态码有可能是200。</p>
+<p>如果 <code>Origin</code>指定的域名在许可范围内，服务器返回的响应，会多出几个头信息字段。</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">Access-Control-Allow-Origin:</span> <span class="hljs-string">http://api.bob.com</span><br><span class="hljs-attr">Access-Control-Allow-Credentials:</span> <span class="hljs-literal">true</span><br><span class="hljs-attr">Access-Control-Expose-Headers:</span> <span class="hljs-string">FooBar</span><br><span class="hljs-attr">Content-Type:</span> <span class="hljs-string">text/html;</span> <span class="hljs-string">charset=utf-8</span><br></code></pre></td></tr></table></figure>
 <hr>
-<p><small>1.
-MDN官方文档(https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy):
-Jesse Ruderman </small> <small>2. 阮一峰.跨域资源共享CORS详解[EB/OL].
-(2016-4-12)[2021-03-07].http://www.ruanyifeng.com/blog/2016/04/cors.html
-- 许可证:自由转载-非商用-非衍生-保持署名(创意共享3.0许可证).</small></p>
+<p><small>1. MDN官方文档(<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy">https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy</a>): Jesse Ruderman </small><br>
+<small>2. 阮一峰.跨域资源共享CORS详解[EB/OL]. (2016-4-12)[2021-03-07].<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/04/cors.html">http://www.ruanyifeng.com/blog/2016/04/cors.html</a> - 许可证:自由转载-非商用-非衍生-保持署名(创意共享3.0许可证).</small></p>
 
   </article>
 
@@ -395,7 +387,7 @@ Jesse Ruderman </small> <small>2. 阮一峰.跨域资源共享CORS详解[EB/OL].
                               <button class="mdui-fab catalog" style="overflow:unset;">
                                   <i class="nexmoefont icon-i-catalog"></i>
                                   <div class="nexmoe-toc">
-                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="toc-number">1.</span> <span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">解决方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#jsonp"><span class="toc-number">2.1.</span> <span class="toc-text">JSONP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="toc-number">2.1.1.</span> <span class="toc-text">基本原理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cors%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB"><span class="toc-number">2.2.</span> <span class="toc-text">CORS（跨域资源共享）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86%E4%BB%85%E9%92%88%E5%AF%B9%E7%AE%80%E5%8D%95%E8%AF%B7%E6%B1%82headgetpost"><span class="toc-number">2.2.1.</span> <span class="toc-text">基本原理（仅针对简单请求：HEAD、GET、POST）</span></a></li></ol></li></ol></li></ol>
+                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="toc-number">1.</span> <span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">解决方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JSONP"><span class="toc-number">2.1.</span> <span class="toc-text">JSONP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="toc-number">2.1.1.</span> <span class="toc-text">基本原理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CORS%EF%BC%88%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">CORS（跨域资源共享）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86%EF%BC%88%E4%BB%85%E9%92%88%E5%AF%B9%E7%AE%80%E5%8D%95%E8%AF%B7%E6%B1%82%EF%BC%9AHEAD%E3%80%81GET%E3%80%81POST%EF%BC%89"><span class="toc-number">2.2.1.</span> <span class="toc-text">基本原理（仅针对简单请求：HEAD、GET、POST）</span></a></li></ol></li></ol></li></ol>
                                   </div>
                               </button>
                           
@@ -441,7 +433,7 @@ Jesse Ruderman </small> <small>2. 阮一峰.跨域资源共享CORS详解[EB/OL].
 
  
 
-<script async src="/js/app.js?v=1754727380930"></script>
+<script async src="/js/app.js?v=1754730114885"></script>
 
 
 
