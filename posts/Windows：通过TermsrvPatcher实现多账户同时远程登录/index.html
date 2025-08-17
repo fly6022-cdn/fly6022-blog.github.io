@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    
+    <title>Windows：通过TermsrvPatcher实现多账户同时远程登录 - fly6022&#39;s Blog</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="fly6022, kuriCL">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <meta name="google-adsense-account" content="ca-pub-6839568581522290"><!-- Google AdSense-->
+        
+        
+
+    <link rel="shortcut icon" href="https://imageurl.kuri.ink/images/favicon.png" type="image/png" />
+    <meta name="description" content="TermsrvPatcher 是一个在 Github 上开源的项目，通过该项目可以实现非服务器版 Windows 系统多账户同时远程登录。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows：通过TermsrvPatcher实现多账户同时远程登录">
+<meta property="og:url" content="https://blog.kuri.ink/posts/Windows%EF%BC%9A%E9%80%9A%E8%BF%87TermsrvPatcher%E5%AE%9E%E7%8E%B0%E5%A4%9A%E8%B4%A6%E6%88%B7%E5%90%8C%E6%97%B6%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95/index.html">
+<meta property="og:site_name" content="fly6022&#39;s Blog">
+<meta property="og:description" content="TermsrvPatcher 是一个在 Github 上开源的项目，通过该项目可以实现非服务器版 Windows 系统多账户同时远程登录。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-08-17T08:36:00.000Z">
+<meta property="article:modified_time" content="2025-08-17T08:42:26.829Z">
+<meta property="article:author" content="fly6022">
+<meta property="article:tag" content="Windows">
+<meta name="twitter:card" content="summary">
+    <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css?v=1755420172817">
+    
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css">
+    
+    <link rel="stylesheet" href="/css/style.css" /> 
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css" />
+    <link rel="stylesheet" href="//at.alicdn.com/t/c/font_1994852_i5g7by5jje.css" />
+    <!--<link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1755420172817">
+    <link rel="stylesheet" href="https://kuri.ink/assets/css/iconfont.css?v=1755420172817">-->
+    <!--<link rel="stylesheet" href="/css/style.css?v=1755420172817">
+     
+    -->
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            showProcessingMessages: false,
+            messageStyle: "none"
+          }
+        });
+      </script>
+
+      <style>
+        .katex-html {
+            display: none;
+        }
+      </style>
+          
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="/lib/aplayer@1.10.0/aplayer.min.css"/>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6839568581522290"
+    crossorigin="anonymous"></script>
+    <!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="fly6022's Blog" type="application/atom+xml">
+</head>
+
+<body class="mdui-drawer-body-left" onload="document.body.style.visibility=`visible`;">
+    <!--<script>document.body.style.visibility=`hidden`;</script>-->
+    
+    <meting-js style="position: absolute; z-index:99999;" type="playlist" server="netease" id="6622801607" fixed="true"></meting-js>
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(https://api.ee123.net/img/bingimg/dayimg.jpg)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="fly6022" class="mdui-btn mdui-btn-icon"><img src="https://imageurl.kuri.ink/images/logo.png" alt="fly6022"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="fly6022">
+            <img src="https://imageurl.kuri.ink/images/logo.png" alt="fly6022" alt="fly6022">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>19</div>
+        <div><span>标签</span>45</div>
+        <div><span>分类</span>2</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont iconfont iconMinecraft"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/about.html" title="Me &amp; Blog">
+            <i class="mdui-list-item-icon nexmoefont iconfont iconaboutme"></i>
+            <div class="mdui-list-item-content">
+                Me &amp; Blog
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/gallery.html" title="摄影">
+            <i class="mdui-list-item-icon nexmoefont iconfont iconcarema"></i>
+            <div class="mdui-list-item-content">
+                摄影
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/links.html" title="友情链接">
+            <i class="mdui-list-item-icon nexmoefont iconfont iconlink"></i>
+            <div class="mdui-list-item-content">
+                友情链接
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/donate.html" title="请杯咖啡">
+            <i class="mdui-list-item-icon nexmoefont iconfont icondonate"></i>
+            <div class="mdui-list-item-content">
+                请杯咖啡
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+         
+            <form id="search_form" action_e="https://cn.bing.com/search?q=site:blog.kuri.ink" onsubmit="return search();">
+                <label><input id="search_value" name="q" type="search" placeholder="搜索"></label>
+            </form>
+         
+    </div>
+</div>
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://space.bilibili.com/191078710" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .1);">
+            <i class="nexmoefont iconfont iconbili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/fly6022" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .1);">
+            <i class="nexmoefont iconfont icongithub"></i>
+        </a><a class="mdui-ripple" href="https://www.zhihu.com/people/fly_6022" target="_blank" mdui-tooltip="{content: '知乎'}" style="color: rgb(30, 136, 229);background-color: rgba(30, 136, 229, .1);">
+            <i class="nexmoefont iconfont iconzhihu"></i>
+        </a><a class="mdui-ripple" href="/atom.xml" target="_blank" mdui-tooltip="{content: 'RSS'}" style="color: rgb(247, 132, 34);background-color: rgba(247, 132, 34, .1);">
+            <i class="nexmoefont iconfont iconrss"></i>
+        </a>
+    </div>
+</div>
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/编程开发/">编程开发</a>
+          <span class="category-list-count">8</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/随便写写/">随便写写</a>
+          <span class="category-list-count">11</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Ajax/" style="font-size: 15px;">Ajax</a> <a href="/tags/Cloudflare/" style="font-size: 10px;">Cloudflare</a> <a href="/tags/DDNS/" style="font-size: 10px;">DDNS</a> <a href="/tags/Deepseek/" style="font-size: 10px;">Deepseek</a> <a href="/tags/Fiddler/" style="font-size: 10px;">Fiddler</a> <a href="/tags/Golang/" style="font-size: 10px;">Golang</a> <a href="/tags/HAM/" style="font-size: 10px;">HAM</a> <a href="/tags/HDMI/" style="font-size: 10px;">HDMI</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/IPv6/" style="font-size: 15px;">IPv6</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Minecraft/" style="font-size: 10px;">Minecraft</a> <a href="/tags/Ollama/" style="font-size: 10px;">Ollama</a> <a href="/tags/PixelExperience/" style="font-size: 10px;">PixelExperience</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/ROCm/" style="font-size: 10px;">ROCm</a> <a href="/tags/ROM/" style="font-size: 10px;">ROM</a> <a href="/tags/RX590/" style="font-size: 10px;">RX590</a> <a href="/tags/Raspberry/" style="font-size: 10px;">Raspberry</a> <a href="/tags/Spyder/" style="font-size: 10px;">Spyder</a> <a href="/tags/UV-K6/" style="font-size: 10px;">UV-K6</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/ddns-go/" style="font-size: 10px;">ddns-go</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/hexo-renderer-kramed/" style="font-size: 10px;">hexo-renderer-kramed</a> <a href="/tags/%E4%B8%80%E5%8A%A07/" style="font-size: 15px;">一加7</a> <a href="/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/" style="font-size: 10px;">业余无线电</a> <a href="/tags/%E4%B8%AD%E5%9B%BD%E7%94%B5%E4%BF%A1/" style="font-size: 10px;">中国电信</a> <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 10px;">内网穿透</a> <a href="/tags/%E5%88%B7%E6%9C%BA/" style="font-size: 15px;">刷机</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">博客</a> <a href="/tags/%E6%95%91%E7%A0%96/" style="font-size: 10px;">救砖</a> <a href="/tags/%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91/" style="font-size: 10px;">文本编辑</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">服务器</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" style="font-size: 20px;">树莓派</a> <a href="/tags/%E7%B1%BB%E5%8E%9F%E7%94%9F/" style="font-size: 10px;">类原生</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E8%B6%85%E9%A2%91/" style="font-size: 10px;">超频</a> <a href="/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/" style="font-size: 10px;">逆向工程</a> <a href="/tags/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" style="font-size: 10px;">配置文件</a>
+    </div>
+    
+  </div>
+
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2019-2025 fly6022
+        <br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            <div class="nexmoe-post">
+
+  <article>
+      
+          <div class="nexmoe-post-cover" style="padding-bottom: 56.25%;"> 
+              <img data-src="https://api.ee123.net/img/bingimg/dayimg.jpg" data-sizes="auto" alt="Windows：通过TermsrvPatcher实现多账户同时远程登录" class="lazyload">
+              <h1>Windows：通过TermsrvPatcher实现多账户同时远程登录</h1>
+          </div>
+      
+      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2025年08月17日</a>
+</div>
+
+      <p>TermsrvPatcher 是一个在 Github 上开源的项目，通过该项目可以实现非服务器版 Windows 系统多账户同时远程登录。</p>
+<span id="more"></span>
+<div class="admonition info"><p class="admonition-title">Github
+</p></div>
+<blockquote>
+<p>项目名称：TermsrvPatcher<br>
+项目地址：<a target="_blank" rel="noopener" href="https://github.com/fabianosrc/TermsrvPatcher">https://github.com/fabianosrc/TermsrvPatcher</a><br>
+项目作者：fabianosrc<br>
+开源协议：MIT</p>
+</blockquote>
+<p>保存以下代码为<code>termsrvPatcher.ps1</code>文件，使用“PowerShell（管理员）”运行，重启计算机即可。(支持Windows 11 24H2系统)</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-comment">#Requires -Version 5.1</span><br> <br><span class="hljs-comment">&lt;#PSScriptInfo</span><br><span class="hljs-comment"> </span><br><span class="hljs-comment">.VERSION 1.0</span><br><span class="hljs-comment"> </span><br><span class="hljs-comment">.GUID 41543292-9400-41d5-8bb8-5fe43f167a03</span><br><span class="hljs-comment"> </span><br><span class="hljs-comment">.AUTHOR Fabiano Silva</span><br><span class="hljs-comment"> </span><br><span class="hljs-comment">.COPYRIGHT Copyright (c) Fabiano Silva</span><br><span class="hljs-comment"> </span><br><span class="hljs-comment">.TAGS Windows PowerShell Multiple RDP</span><br><span class="hljs-comment"> </span><br><span class="hljs-comment">.PROJECTURI https://github.com/fabianosrc/TermsrvPatcher</span><br><span class="hljs-comment"> </span><br><span class="hljs-comment">#&gt;</span><br> <br><span class="hljs-comment">&lt;#</span><br><span class="hljs-comment"><span class="hljs-doctag">.SYNOPSIS</span></span><br><span class="hljs-comment">    Patch termsrv.dll so that multiple remote users can open an RDP session on a non-Windows Server computer</span><br><span class="hljs-comment"><span class="hljs-doctag">.DESCRIPTION</span></span><br><span class="hljs-comment">    This script patches the termsrv.dll file to allow multiple simultaneous sessions via</span><br><span class="hljs-comment">    Remote Desktop Connection (RDP) on non-Windows Server computers</span><br><span class="hljs-comment"><span class="hljs-doctag">.LINK</span></span><br><span class="hljs-comment">    http://woshub.com/how-to-allow-multiple-rdp-sessions-in-windows-10</span><br><span class="hljs-comment">    https://www.mysysadmintips.com/windows/clients/545-multiple-rdp-remote-desktop-sessions-in-windows-10</span><br><span class="hljs-comment">#&gt;</span><br> <br><span class="hljs-comment"># Self-elevate the script so with a UAC prompt since this script needs to be run as an Administrator in order to function properly</span><br><span class="hljs-keyword">if</span> (<span class="hljs-operator">-Not</span> ([<span class="hljs-type">Security.Principal.WindowsPrincipal</span>][<span class="hljs-type">Security.Principal.WindowsIdentity</span>]::GetCurrent()).IsInRole([<span class="hljs-type">Security.Principal.WindowsBuiltInRole</span>]<span class="hljs-string">&#x27;Administrator&#x27;</span>)) &#123;<br>    <span class="hljs-keyword">switch</span> ((<span class="hljs-built_in">Get-Culture</span>).Name) &#123;<br>        <span class="hljs-string">&#x27;pt-BR&#x27;</span> &#123; <span class="hljs-built_in">Write-Host</span> <span class="hljs-string">&#x27;Você não executou este script como Administrador. Este script será executado automaticamente como Administrador.&#x27;</span> <span class="hljs-literal">-ForegroundColor</span> Green &#125;<br>        Default &#123; <span class="hljs-built_in">Write-Host</span> <span class="hljs-string">&#x27;You didn&#x27;</span><span class="hljs-string">&#x27;t run this script as an Administrator. This script will self elevate to run as an Administrator and continue.&#x27;</span> <span class="hljs-literal">-ForegroundColor</span> Green &#125;<br>    &#125;<br> <br>    <span class="hljs-built_in">Start-Sleep</span> <span class="hljs-literal">-Milliseconds</span> <span class="hljs-number">2500</span><br>    <span class="hljs-built_in">Start-Process</span> PowerShell.exe <span class="hljs-literal">-ArgumentList</span> (<span class="hljs-string">&quot;-NoProfile -ExecutionPolicy Bypass -File `&quot;&#123;0&#125;`&quot;&quot;</span> <span class="hljs-operator">-f</span> <span class="hljs-variable">$PSCommandPath</span>) <span class="hljs-literal">-Verb</span> RunAs<br>    <span class="hljs-keyword">Exit</span><br>&#125;<br> <br><span class="hljs-variable">$OSArchitecture</span> = (<span class="hljs-built_in">Get-CimInstance</span> <span class="hljs-literal">-ClassName</span> Win32_OperatingSystem).OSArchitecture<br> <br><span class="hljs-variable">$termsrvDllFile</span> = <span class="hljs-string">&quot;<span class="hljs-variable">$env:SystemRoot</span>\System32\termsrv.dll&quot;</span><br><span class="hljs-variable">$termsrvDllCopy</span> = <span class="hljs-string">&quot;<span class="hljs-variable">$env:SystemRoot</span>\System32\termsrv.dll.copy&quot;</span><br><span class="hljs-variable">$termsrvPatched</span> = <span class="hljs-string">&quot;<span class="hljs-variable">$env:SystemRoot</span>\System32\termsrv.dll.patched&quot;</span><br> <br><span class="hljs-variable">$patterns</span> = <span class="hljs-selector-tag">@</span>&#123;<br>    Pattern = [<span class="hljs-type">regex</span>]<span class="hljs-string">&#x27;39 81 3C 06 00 00 0F (?:[0-9A-F]&#123;2&#125; )&#123;4&#125;00&#x27;</span><br>    Win24H2 = [<span class="hljs-type">regex</span>]<span class="hljs-string">&#x27;8B 81 38 06 00 00 39 81 3C 06 00 00 75&#x27;</span><br>&#125;<br> <br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Get-OSInfo</span></span> &#123;<br>    <span class="hljs-variable">$OSInfo</span> = <span class="hljs-built_in">Get-ItemProperty</span> <span class="hljs-literal">-Path</span> <span class="hljs-string">&#x27;HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion&#x27;</span><br> <br>    [<span class="hljs-type">PSCustomObject</span>]<span class="hljs-selector-tag">@</span>&#123;<br>        CurrentBuild = <span class="hljs-variable">$OSInfo</span>.CurrentBuild<br>        BuildRevision = <span class="hljs-variable">$OSInfo</span>.UBR<br>        FullOSBuild = <span class="hljs-string">&quot;<span class="hljs-variable">$</span>(<span class="hljs-variable">$OSInfo</span>.CurrentBuild).<span class="hljs-variable">$</span>(<span class="hljs-variable">$OSInfo</span>.UBR)&quot;</span><br>        DisplayVersion = <span class="hljs-variable">$OSInfo</span>.DisplayVersion<br>        InstallationType = <span class="hljs-variable">$OSInfo</span>.InstallationType<br>    &#125;<br>&#125;<br> <br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Get-OSVersion</span></span> &#123;<br>    [<span class="hljs-type">version</span>]<span class="hljs-variable">$OSVersion</span> = [<span class="hljs-type">System.Environment</span>]::OSVersion.Version<br>    <span class="hljs-variable">$installationType</span> = (<span class="hljs-built_in">Get-OSInfo</span>).InstallationType<br> <br>    <span class="hljs-keyword">if</span> (<span class="hljs-variable">$OSVersion</span>.Major <span class="hljs-operator">-eq</span> <span class="hljs-number">6</span> <span class="hljs-operator">-and</span> <span class="hljs-variable">$OSVersion</span>.Minor <span class="hljs-operator">-eq</span> <span class="hljs-number">1</span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;Windows 7&#x27;</span><br>    &#125; <span class="hljs-keyword">elseif</span> (<span class="hljs-variable">$OSVersion</span>.Major <span class="hljs-operator">-eq</span> <span class="hljs-number">10</span> <span class="hljs-operator">-and</span> <span class="hljs-variable">$OSVersion</span>.Build <span class="hljs-operator">-lt</span> <span class="hljs-number">22000</span> <span class="hljs-operator">-and</span> <span class="hljs-variable">$installationType</span> <span class="hljs-operator">-eq</span> <span class="hljs-string">&#x27;Client&#x27;</span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;Windows 10&#x27;</span><br>    &#125; <span class="hljs-keyword">elseif</span> (<span class="hljs-variable">$OSVersion</span>.Major <span class="hljs-operator">-eq</span> <span class="hljs-number">10</span> <span class="hljs-operator">-and</span> <span class="hljs-variable">$OSVersion</span>.Build <span class="hljs-operator">-gt</span> <span class="hljs-number">22000</span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;Windows 11&#x27;</span><br>    &#125; <span class="hljs-keyword">elseif</span> (<span class="hljs-variable">$OSVersion</span>.Major <span class="hljs-operator">-eq</span> <span class="hljs-number">10</span> <span class="hljs-operator">-and</span> <span class="hljs-variable">$OSVersion</span>.Build <span class="hljs-operator">-lt</span> <span class="hljs-number">22000</span> <span class="hljs-operator">-and</span> <span class="hljs-variable">$installationType</span> <span class="hljs-operator">-eq</span> <span class="hljs-string">&#x27;Server&#x27;</span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;Windows Server 2016&#x27;</span><br>    &#125; <span class="hljs-keyword">elseif</span> (<span class="hljs-variable">$OSVersion</span>.Major <span class="hljs-operator">-eq</span> <span class="hljs-number">10</span> <span class="hljs-operator">-and</span> <span class="hljs-variable">$OSVersion</span>.Build <span class="hljs-operator">-eq</span> <span class="hljs-number">20348</span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;Windows Server 2022&#x27;</span><br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;Unsupported OS&#x27;</span><br>    &#125;<br>&#125;<br> <br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Update-Dll</span></span> &#123;<br>    <span class="hljs-function">[<span class="hljs-type">CmdletBinding</span>()]</span><br>    <span class="hljs-keyword">param</span> (<br>        [<span class="hljs-type">Parameter</span>(<span class="hljs-type">Mandatory</span>)]<br>        [<span class="hljs-type">regex</span>]<span class="hljs-variable">$InputPattern</span>,<br> <br>        [<span class="hljs-type">Parameter</span>(<span class="hljs-type">Mandatory</span>)]<br>        [<span class="hljs-built_in">string</span>]<span class="hljs-variable">$Replacement</span>,<br> <br>        [<span class="hljs-type">Parameter</span>(<span class="hljs-type">Mandatory</span>)]<br>        [<span class="hljs-built_in">string</span>]<span class="hljs-variable">$TermsrvDllAsText</span>,<br> <br>        [<span class="hljs-type">Parameter</span>(<span class="hljs-type">Mandatory</span>)]<br>        [<span class="hljs-built_in">string</span>]<span class="hljs-variable">$TermsrvDllAsFile</span>,<br> <br>        [<span class="hljs-type">Parameter</span>(<span class="hljs-type">Mandatory</span>)]<br>        [<span class="hljs-built_in">string</span>]<span class="hljs-variable">$TermsrvDllAsPatch</span>,<br> <br>        [<span class="hljs-type">Parameter</span>(<span class="hljs-type">Mandatory</span>)]<br>        [<span class="hljs-type">System.Security.AccessControl.FileSecurity</span>]<span class="hljs-variable">$TermsrvAclObject</span><br>    )<br> <br>    <span class="hljs-keyword">begin</span> &#123;<br>        <span class="hljs-variable">$match</span> = <span class="hljs-variable">$TermsrvDllAsText</span> <span class="hljs-operator">-match</span> <span class="hljs-variable">$InputPattern</span><br>        <span class="hljs-variable">$patch</span> = <span class="hljs-variable">$TermsrvDllAsText</span> <span class="hljs-operator">-match</span> <span class="hljs-variable">$Replacement</span><br>    &#125;<br> <br>    <span class="hljs-keyword">process</span> &#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-variable">$match</span>) &#123;<br>            <span class="hljs-built_in">Write-Host</span> <span class="hljs-string">&quot;`nPattern matching!`n&quot;</span> <span class="hljs-literal">-ForegroundColor</span> Green<br> <br>            <span class="hljs-variable">$dllAsTextReplaced</span> = <span class="hljs-variable">$TermsrvDllAsText</span> <span class="hljs-operator">-replace</span> <span class="hljs-variable">$InputPattern</span>, <span class="hljs-variable">$Replacement</span><br> <br>            <span class="hljs-comment"># Use the replaced string to create a byte array again.</span><br>            [<span class="hljs-built_in">byte</span>[]] <span class="hljs-variable">$dllAsBytesReplaced</span> = <span class="hljs-operator">-split</span> <span class="hljs-variable">$dllAsTextReplaced</span> <span class="hljs-operator">-replace</span> <span class="hljs-string">&#x27;^&#x27;</span>, <span class="hljs-string">&#x27;0x&#x27;</span><br> <br>            <span class="hljs-comment"># Create termsrv.dll.patched from the byte array.</span><br>            [<span class="hljs-type">System.IO.File</span>]::WriteAllBytes(<span class="hljs-variable">$TermsrvDllAsPatch</span>, <span class="hljs-variable">$dllAsBytesReplaced</span>)<br> <br>            fc.exe /b <span class="hljs-variable">$TermsrvDllAsPatch</span> <span class="hljs-variable">$TermsrvDllAsFile</span><br>            <span class="hljs-comment">&lt;#</span><br><span class="hljs-comment">            <span class="hljs-doctag">.DESCRIPTION</span></span><br><span class="hljs-comment">                Compare patched and original DLL (/b: binary comparison) and displays the differences between them.</span><br><span class="hljs-comment">            <span class="hljs-doctag">.NOTES</span></span><br><span class="hljs-comment">                Expected output something like:</span><br><span class="hljs-comment"> </span><br><span class="hljs-comment">                00098BA2: B8 8B</span><br><span class="hljs-comment">                00098BA3: 00 99</span><br><span class="hljs-comment">                00098BA4: 01 30</span><br><span class="hljs-comment">                00098BA5: 00 03</span><br><span class="hljs-comment">                00098BA7: 89 00</span><br><span class="hljs-comment">                00098BA8: 81 8B</span><br><span class="hljs-comment">                00098BA9: 38 B1</span><br><span class="hljs-comment">                00098BAA: 06 34</span><br><span class="hljs-comment">                00098BAB: 00 03</span><br><span class="hljs-comment">                00098BAD: 90 00</span><br><span class="hljs-comment">            #&gt;</span><br> <br>            <span class="hljs-built_in">Start-Sleep</span> <span class="hljs-literal">-Milliseconds</span> <span class="hljs-number">1500</span><br> <br>            <span class="hljs-comment"># Overwrite original DLL with patched version:</span><br>            <span class="hljs-built_in">Copy-Item</span> <span class="hljs-literal">-Path</span> <span class="hljs-variable">$TermsrvDllAsPatch</span> <span class="hljs-literal">-Destination</span> <span class="hljs-variable">$TermsrvDllAsFile</span> <span class="hljs-literal">-Force</span><br>        &#125; <span class="hljs-keyword">elseif</span> (<span class="hljs-variable">$patch</span>) &#123;<br>            <span class="hljs-built_in">Write-Host</span> <span class="hljs-string">&quot;The file is already patched. No changes are needed.`n&quot;</span> <span class="hljs-literal">-ForegroundColor</span> Green<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-built_in">Write-Host</span> <span class="hljs-string">&quot;The pattern was not found. Nothing will be changed.`n&quot;</span> <span class="hljs-literal">-ForegroundColor</span> Yellow<br>        &#125;<br> <br>        <span class="hljs-comment"># Restore original Access Control List (ACL):</span><br>        <span class="hljs-built_in">Set-Acl</span> <span class="hljs-literal">-Path</span> <span class="hljs-variable">$TermsrvDllAsFile</span> <span class="hljs-literal">-AclObject</span> <span class="hljs-variable">$TermsrvAclObject</span><br> <br>        <span class="hljs-comment"># Start services again...</span><br>        <span class="hljs-built_in">Start-Service</span> TermService <span class="hljs-literal">-PassThru</span><br>    &#125;<br>&#125;<br> <br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Stop-TermService</span></span> &#123;<br>    <span class="hljs-keyword">try</span> &#123;<br>        <span class="hljs-built_in">Stop-Service</span> <span class="hljs-literal">-Name</span> TermService <span class="hljs-literal">-Force</span> <span class="hljs-literal">-ErrorAction</span> Stop<br>    &#125; <span class="hljs-keyword">catch</span> &#123;<br>        <span class="hljs-built_in">Write-Warning</span> <span class="hljs-literal">-Message</span> <span class="hljs-variable">$_</span>.Exception.Message<br>        <span class="hljs-keyword">return</span><br>    &#125;<br> <br>    <span class="hljs-keyword">while</span> ((<span class="hljs-built_in">Get-Service</span> <span class="hljs-literal">-Name</span> TermService).Status <span class="hljs-operator">-ne</span> <span class="hljs-string">&#x27;Stopped&#x27;</span>) &#123;<br>        <span class="hljs-built_in">Start-Sleep</span> <span class="hljs-literal">-Milliseconds</span> <span class="hljs-number">500</span><br>    &#125;<br> <br>    <span class="hljs-built_in">Write-Host</span> <span class="hljs-string">&quot;`nThe Remote Desktop Services (TermService) has been stopped sucsessfully`n&quot;</span> <span class="hljs-literal">-ForegroundColor</span> Green<br>&#125;<br> <br><span class="hljs-built_in">Stop-TermService</span><br> <br><span class="hljs-comment"># Save Access Control List (ACL) of termsrv.dll file.</span><br><span class="hljs-variable">$termsrvDllAcl</span> = <span class="hljs-built_in">Get-Acl</span> <span class="hljs-literal">-Path</span> <span class="hljs-variable">$termsrvDllFile</span><br> <br><span class="hljs-built_in">Write-Host</span> <span class="hljs-string">&quot;Owner of termsrv.dll: <span class="hljs-variable">$</span>(<span class="hljs-variable">$termsrvDllAcl</span>.Owner)&quot;</span><br> <br><span class="hljs-comment"># Create a backup of the original termsrv.dll file.</span><br><span class="hljs-built_in">Copy-Item</span> <span class="hljs-literal">-Path</span> <span class="hljs-variable">$termsrvDllFile</span> <span class="hljs-literal">-Destination</span> <span class="hljs-variable">$termsrvDllCopy</span> <span class="hljs-literal">-Force</span><br> <br><span class="hljs-comment"># Take ownership of the DLL...</span><br>takeown.exe /F <span class="hljs-variable">$termsrvDllFile</span><br> <br><span class="hljs-comment"># Get Current logged in user (changed by .NET class, because in remote connection WMI Object cannot retrieve the user)</span><br><span class="hljs-variable">$currentUserName</span> = [<span class="hljs-type">System.Security.Principal.WindowsIdentity</span>]::GetCurrent().Name<br> <br><span class="hljs-comment"># Grant full control to the currently logged in user.</span><br>icacls.exe <span class="hljs-variable">$termsrvDllFile</span> /grant <span class="hljs-string">&quot;<span class="hljs-variable">$</span>(<span class="hljs-variable">$currentUserName</span>):F&quot;</span><br> <br><span class="hljs-comment"># Read termsrv.dll as byte array to modify bytes</span><br><span class="hljs-variable">$dllAsByte</span> = [<span class="hljs-type">System.IO.File</span>]::ReadAllBytes(<span class="hljs-variable">$termsrvDllFile</span>)<br> <br><span class="hljs-comment"># Convert the byte array to a string that represents each byte value as a hexadecimal value, separated by spaces</span><br><span class="hljs-variable">$dllAsText</span> = (<span class="hljs-variable">$dllAsByte</span> | <span class="hljs-built_in">ForEach-Object</span> &#123; <span class="hljs-variable">$_</span>.ToString(<span class="hljs-string">&#x27;X2&#x27;</span>) &#125;) <span class="hljs-operator">-join</span> <span class="hljs-string">&#x27; &#x27;</span><br> <br><span class="hljs-variable">$commonParams</span> = <span class="hljs-selector-tag">@</span>&#123;<br>    TermsrvDllAsText = <span class="hljs-variable">$dllAsText</span><br>    TermsrvDllAsFile = <span class="hljs-variable">$termsrvDllFile</span><br>    TermsrvDllAsPatch = <span class="hljs-variable">$termsrvPatched</span><br>    TermsrvAclObject = <span class="hljs-variable">$termsrvDllAcl</span><br>&#125;<br> <br><span class="hljs-keyword">switch</span> (<span class="hljs-built_in">Get-OSVersion</span>) &#123;<br>    <span class="hljs-string">&#x27;Windows 7&#x27;</span> &#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-variable">$OSArchitecture</span> <span class="hljs-operator">-eq</span> <span class="hljs-string">&#x27;64-bit&#x27;</span>) &#123;<br>            <span class="hljs-keyword">switch</span> ((<span class="hljs-built_in">Get-OSInfo</span>).FullOSBuild) &#123;<br>                <span class="hljs-string">&#x27;7601.23964&#x27;</span> &#123;<br>                    <span class="hljs-variable">$dllAsTextReplaced</span> = <span class="hljs-variable">$dllAsText</span> <span class="hljs-operator">-replace</span> <span class="hljs-string">&#x27;8B 87 38 06 00 00 39 87 3C 06 00 00 0F 84 2F C3 00 00&#x27;</span>, <span class="hljs-string">&#x27;B8 00 01 00 00 90 89 87 38 06 00 00 90 90 90 90 90 90&#x27;</span> `<br>                    <span class="hljs-operator">-replace</span> <span class="hljs-string">&#x27;4C 24 60 BB 01 00 00 00&#x27;</span>, <span class="hljs-string">&#x27;4C 24 60 BB 00 00 00 00&#x27;</span> `<br>                    <span class="hljs-operator">-replace</span> <span class="hljs-string">&#x27;83 7C 24 50 00 74 18 48 8D&#x27;</span>, <span class="hljs-string">&#x27;83 7C 24 50 00 EB 18 48 8D&#x27;</span><br>                &#125;<br>                <span class="hljs-string">&#x27;7601.24546&#x27;</span> &#123;<br>                    <span class="hljs-variable">$dllAsTextReplaced</span> = <span class="hljs-variable">$dllAsText</span> <span class="hljs-operator">-replace</span> <span class="hljs-string">&#x27;8B 87 38 06 00 00 39 87 3C 06 00 00 0F 84 3E C4 00 00&#x27;</span>, <span class="hljs-string">&#x27;B8 00 01 00 00 90 89 87 38 06 00 00 90 90 90 90 90 90&#x27;</span> `<br>                    <span class="hljs-operator">-replace</span> <span class="hljs-string">&#x27;4C 24 60 BB 01 00 00 00&#x27;</span>, <span class="hljs-string">&#x27;4C 24 60 BB 00 00 00 00&#x27;</span> `<br>                    <span class="hljs-operator">-replace</span> <span class="hljs-string">&#x27;83 7C 24 50 00 74 43 48 8D&#x27;</span>, <span class="hljs-string">&#x27;83 7C 24 50 00 EB 18 48 8D&#x27;</span><br>                &#125;<br>                Default &#123;<br>                    <span class="hljs-variable">$dllAsTextReplaced</span> = <span class="hljs-variable">$dllAsText</span> <span class="hljs-operator">-replace</span> <span class="hljs-string">&#x27;8B 87 38 06 00 00 39 87 3C 06 00 00 0F 84 3E C4 00 00&#x27;</span>, <span class="hljs-string">&#x27;B8 00 01 00 00 90 89 87 38 06 00 00 90 90 90 90 90 90&#x27;</span> `<br>                    <span class="hljs-operator">-replace</span> <span class="hljs-string">&#x27;4C 24 60 BB 01 00 00 00&#x27;</span>, <span class="hljs-string">&#x27;4C 24 60 BB 00 00 00 00&#x27;</span> `<br>                    <span class="hljs-operator">-replace</span> <span class="hljs-string">&#x27;83 7C 24 50 00 74 43 48 8D&#x27;</span>, <span class="hljs-string">&#x27;83 7C 24 50 00 EB 18 48 8D&#x27;</span><br>                &#125;<br>            &#125;<br>        &#125;<br> <br>        <span class="hljs-comment"># Use the replaced string to create a byte array again.</span><br>        [<span class="hljs-built_in">byte</span>[]] <span class="hljs-variable">$dllAsBytesReplaced</span> = <span class="hljs-operator">-split</span> <span class="hljs-variable">$dllAsTextReplaced</span> <span class="hljs-operator">-replace</span> <span class="hljs-string">&#x27;^&#x27;</span>, <span class="hljs-string">&#x27;0x&#x27;</span><br> <br>        <span class="hljs-comment"># Create termsrv.dll.patched from the byte array.</span><br>        [<span class="hljs-type">System.IO.File</span>]::WriteAllBytes(<span class="hljs-variable">$termsrvPatched</span>, <span class="hljs-variable">$dllAsBytesReplaced</span>)<br> <br>        fc.exe /B <span class="hljs-variable">$termsrvPatched</span> <span class="hljs-variable">$termsrvDllFile</span><br>        <span class="hljs-comment">&lt;#</span><br><span class="hljs-comment">        <span class="hljs-doctag">.DESCRIPTION</span></span><br><span class="hljs-comment">            Compares termsrv.dll with tersrv.dll.patched and displays the differences between them.</span><br><span class="hljs-comment">        <span class="hljs-doctag">.NOTES</span></span><br><span class="hljs-comment">            Expected output something like:</span><br><span class="hljs-comment"> </span><br><span class="hljs-comment">            00098BA2: B8 8B</span><br><span class="hljs-comment">            00098BA3: 00 99</span><br><span class="hljs-comment">            00098BA4: 01 30</span><br><span class="hljs-comment">            00098BA5: 00 03</span><br><span class="hljs-comment">            00098BA7: 89 00</span><br><span class="hljs-comment">            00098BA8: 81 8B</span><br><span class="hljs-comment">            00098BA9: 38 B1</span><br><span class="hljs-comment">            00098BAA: 06 34</span><br><span class="hljs-comment">            00098BAB: 00 03</span><br><span class="hljs-comment">            00098BAD: 90 00</span><br><span class="hljs-comment">        #&gt;</span><br> <br>        <span class="hljs-built_in">Start-Sleep</span> <span class="hljs-literal">-Milliseconds</span> <span class="hljs-number">1500</span><br> <br>        <span class="hljs-comment"># Overwrite original DLL with patched version:</span><br>        <span class="hljs-built_in">Copy-Item</span> <span class="hljs-literal">-Path</span> <span class="hljs-variable">$termsrvPatched</span> <span class="hljs-literal">-Destination</span> <span class="hljs-variable">$termsrvDllFile</span> <span class="hljs-literal">-Force</span><br> <br>        <span class="hljs-comment"># Restore original Access Control List (ACL):</span><br>        <span class="hljs-built_in">Set-Acl</span> <span class="hljs-literal">-Path</span> <span class="hljs-variable">$termsrvDllFile</span> <span class="hljs-literal">-AclObject</span> <span class="hljs-variable">$termsrvDllAcl</span><br> <br>        <span class="hljs-built_in">Start-Sleep</span> <span class="hljs-literal">-Milliseconds</span> <span class="hljs-number">2500</span><br> <br>        <span class="hljs-comment"># Start services again...</span><br>        <span class="hljs-built_in">Start-Service</span> TermService <span class="hljs-literal">-PassThru</span><br>    &#125;<br>    <span class="hljs-string">&#x27;Windows 10&#x27;</span> &#123;<br>        <span class="hljs-built_in">Update-Dll</span> @commonParams <span class="hljs-literal">-InputPattern</span> <span class="hljs-variable">$patterns</span>.Pattern <span class="hljs-literal">-Replacement</span> <span class="hljs-string">&#x27;B8 00 01 00 00 89 81 38 06 00 00 90&#x27;</span><br>    &#125;<br>    <span class="hljs-string">&#x27;Windows 11&#x27;</span> &#123;<br>        <span class="hljs-keyword">if</span> ((<span class="hljs-built_in">Get-OSInfo</span>).DisplayVersion <span class="hljs-operator">-eq</span> <span class="hljs-string">&#x27;23H2&#x27;</span>) &#123;<br>            <span class="hljs-built_in">Update-Dll</span> @commonParams <span class="hljs-literal">-InputPattern</span> <span class="hljs-variable">$patterns</span>.Pattern <span class="hljs-literal">-Replacement</span> <span class="hljs-string">&#x27;B8 00 01 00 00 89 81 38 06 00 00 90&#x27;</span><br>        &#125; <span class="hljs-keyword">elseif</span> ((<span class="hljs-built_in">Get-OSInfo</span>).DisplayVersion <span class="hljs-operator">-eq</span> <span class="hljs-string">&#x27;24H2&#x27;</span>) &#123;<br>            <span class="hljs-built_in">Update-Dll</span> @commonParams <span class="hljs-literal">-InputPattern</span> <span class="hljs-variable">$patterns</span>.Win24H2 <span class="hljs-literal">-Replacement</span> <span class="hljs-string">&#x27;B8 00 01 00 00 89 81 38 06 00 00 90 EB&#x27;</span><br>        &#125;<br>    &#125;<br>    <span class="hljs-string">&#x27;Windows Server 2016&#x27;</span> &#123;<br>        <span class="hljs-built_in">Update-Dll</span> @commonParams <span class="hljs-literal">-InputPattern</span> <span class="hljs-variable">$patterns</span>.Pattern <span class="hljs-literal">-Replacement</span> <span class="hljs-string">&#x27;B8 00 01 00 00 89 81 38 06 00 00 90&#x27;</span><br>    &#125;<br>    <span class="hljs-string">&#x27;Windows Server 2022&#x27;</span> &#123;<br>        <span class="hljs-built_in">Update-Dll</span> @commonParams <span class="hljs-literal">-InputPattern</span> <span class="hljs-variable">$patterns</span>.Pattern <span class="hljs-literal">-Replacement</span> <span class="hljs-string">&#x27;B8 00 01 00 00 89 81 38 06 00 00 90&#x27;</span><br>    &#125;<br>    <span class="hljs-string">&#x27;Unsupported OS&#x27;</span> &#123;<br>        <span class="hljs-built_in">Write-Host</span> <span class="hljs-string">&#x27;Unable to get OS Version&#x27;</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>fly6022<br>
+        <strong>本文链接：</strong><a href="https://blog.kuri.ink/posts/Windows%EF%BC%9A%E9%80%9A%E8%BF%87TermsrvPatcher%E5%AE%9E%E7%8E%B0%E5%A4%9A%E8%B4%A6%E6%88%B7%E5%90%8C%E6%97%B6%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95/" title="https:&#x2F;&#x2F;blog.kuri.ink&#x2F;posts&#x2F;Windows%EF%BC%9A%E9%80%9A%E8%BF%87TermsrvPatcher%E5%AE%9E%E7%8E%B0%E5%A4%9A%E8%B4%A6%E6%88%B7%E5%90%8C%E6%97%B6%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;blog.kuri.ink&#x2F;posts&#x2F;Windows%EF%BC%9A%E9%80%9A%E8%BF%87TermsrvPatcher%E5%AE%9E%E7%8E%B0%E5%A4%9A%E8%B4%A6%E6%88%B7%E5%90%8C%E6%97%B6%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>除特殊说明以外，本文采用 <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh" target="_blank"> 署名-非商业性使用 4.0 国际 (CC BY-NC 4.0) </a> 协议进行许可，转载请注明原出处。
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/Windows/" rel="tag">Windows</a>
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div id="gitalk"></div>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '7792e6798da4d5db5d2d',
+        clientSecret: 'dabb45aab64c13a9e848c95dcc0b380dbe01c593',
+        id: decodeURI(window.location.pathname),
+        repo: 'fly6022-blog.github.io',
+        owner: 'fly6022-blog',
+        admin: 'fly6022'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont iconfont icontop"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+     
+    <div id="nexmoe-search-space">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-container">
+                    <input class="search-input" type="text" placeholder="搜索" oninput="sinput();">
+                </div>
+                <a class="search-close" onclick="sclose();">×</a>
+            </div>
+            <div class="search-body"></div>
+        </div>
+    </div>
+
+    	<script src="/lib/lazysizes/lazysizes@5.1.0.min.js"></script>
+	<script src="/lib/mdui_043tiny/js/mdui.js"></script>
+	<script src="/lib/jQuery/jQuery@3.5.1.min.js"></script>
+	<script src="/lib/fancybox/jquery.fancybox.min.js"></script>
+	<script src="/lib/aplayer@1.10.0/aplayer.min.js" type="text/javascript"></script>
+	<script src="/lib/meting/meting.min.js" type="text/javascript"></script>
+	<script>
+		!function(p){"use strict";!function(t){var s=window,e=document,i=p,c="".concat("https:"===e.location.protocol?"https://":"http://","sdk.51.la/js-sdk-pro.min.js"),n=e.createElement("script"),r=e.getElementsByTagName("script")[0];n.type="text/javascript",n.setAttribute("charset","UTF-8"),n.async=!0,n.src=c,n.id="LA_COLLECT",i.d=n;var o=function(){s.LA.ids.push(i)};s.LA?s.LA.ids&&o():(s.LA=p,s.LA.ids=[],o()),r.parentNode.insertBefore(n,r)}()}({id:"JEOD145Z95thC4GS",ck:"JEOD145Z95thC4GS"});
+	</script>
+
+	<script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+	<script>
+	  if (window.mermaid) {
+		mermaid.initialize({theme: 'forest'});
+	  }
+	</script>
+  
+
+ 
+
+<script async src="/js/app.js?v=1755420172832"></script>
+
+
+
+<script src="/lib/justifiedGallery/jquery.justifiedGallery@3.8.1.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+
+
+    
+
+
+
+
+
+</body>
+</html>
