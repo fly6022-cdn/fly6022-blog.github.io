@@ -33,9 +33,9 @@
     <% } %>
     <link rel="stylesheet" href="/css/style.css" /> 
     <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css" />
-    <link rel="stylesheet" href="/lib/iconfont/iconfont.css" />
+    <link rel="stylesheet" href="<%= theme.iconfont %>" />
     <!--<%- css_auto_version('/lib/mdui_043tiny/css/mdui.css') %>
-    <%- css_auto_version('/lib/iconfont/iconfont.css') %>-->
+    <%- css_auto_version('https://kuri.ink/assets/css/iconfont.css') %>-->
     <!--<%- css_auto_version('css/style') %>
     <% if (theme.function.darkmode) { %>
         <%- css_auto_version('css/dark') %>
@@ -96,7 +96,7 @@
                           <% const toc_obj = toc(page.content, {list_number: true}); %>
                           <% if (toc_obj.length > 0) { %>
                               <button class="mdui-fab catalog" style="overflow:unset;">
-                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <i class="nexmoefont iconfont iconblog"></i>
                                   <div class="nexmoe-toc">
                                       <%- toc_obj %>
                                   </div>
@@ -105,7 +105,7 @@
                           
                       <%} %>
                     
-                      <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                      <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont iconfont icontop"></i></button></a>
                   </div>
               </div>
             </div>

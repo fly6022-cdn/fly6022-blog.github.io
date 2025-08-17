@@ -17,6 +17,7 @@ imageCDN: # 图片 CDN 功能
   to: https://imageurl.kuri.ink/images # 图片 CDN 域名
   
 # 附加图标库 使用说明：https://docs.nexmoe.com/config/icon
+iconfont: //at.alicdn.com/t/c/font_1994852_i5g7by5jje.css
 iconlib: //at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css
 
 search: 
@@ -32,18 +33,19 @@ cdn: # 这里可以修改站点使用的库的CDN
 menu:
   回到首页: 
     - /
-    - icon-home
+    - iconfont iconMinecraft
   Me & Blog:
     - /about.html
-    - icon-info-circle
+    - iconfont iconaboutme
+  摄影:
+    - /gallery.html
+    - iconfont iconcarema
   友情链接: 
-    - /links.html # 使用说明：https://docs.nexmoe.com/article/py
+    - /links.html
+    - iconfont iconlink
   请杯咖啡:
     - /donate.html
-    - icon-coffee
-  # 友链接力:
-    # - https://travellings.link
-    # - fa fa-subway
+    - iconfont icondonate
 
 widgets:
 - search
@@ -59,22 +61,22 @@ maxTagcloud: 0  # 标签云组件显示的标签数量，0 表示不限制
 social:
   哔哩哔哩:
     - https://space.bilibili.com/191078710
-    - icon-bilibili
+    - iconfont iconbili
     - rgb(231, 106, 141)
     - rgba(231, 106, 141, .1)
   GitHub:
     - https://github.com/fly6022
-    - icon-github
+    - iconfont icongithub
     - rgb(25, 23, 23)
     - rgba(25, 23, 23, .1)
   知乎:
     - https://www.zhihu.com/people/fly_6022
-    - icon-zhihu
+    - iconfont iconzhihu
     - rgb(30, 136, 229)
     - rgba(30, 136, 229, .1)
   RSS:
     - /atom.xml
-    - icon-rss
+    - iconfont iconrss
     - rgb(247, 132, 34)
     - rgba(247, 132, 34, .1)
 

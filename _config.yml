@@ -140,8 +140,11 @@ markdown:
       options: warning
     - name: markdown-it-container
       options: danger
+    - name: '@renbaoshuo/markdown-it-katex'
+      options:
+        skipDelimitersCheck: true
   anchors:
-    level: 2
+    level: 1
     collisionSuffix: ""
     permalink: false
     permalinkClass: "header-anchor"
@@ -149,18 +152,6 @@ markdown:
     permalinkSymbol: "¶"
     case: 0
     separator: "-"
-
-mathjax:
-  tags: none # or 'ams' or 'all'
-  single_dollars: true # enable single dollar signs as in-line math delimiters
-  cjk_width: 0.9 # relative CJK char width
-  normal_width: 0.6 # relative normal (monospace) width
-  append_css: true # add CSS to pages rendered by MathJax
-  every_page: false # if true, every page will be rendered by MathJax regardless the `mathjax` setting in Front-matter
-  packages: # extra packages to load
-  extension_options: {}
-    # you can put your extension options here
-    # see http://docs.mathjax.org/en/latest/options/input/tex.html#tex-extension-options for more detail
 
 # mermaid chart
 mermaid: ## mermaid url https://github.com/knsv/mermaid
@@ -193,11 +184,3 @@ backup:
   message: Backup
   repository:
     github: git@github.com:fly6022-cdn/fly6022-blog.github.io.git,backup
-
-autoprefixer:
-  exclude:
-    - '*.min.css'
-  browsers:
-    - 'last 2 versions'
-    - '>5%'
-    - 'ie >= 9'
