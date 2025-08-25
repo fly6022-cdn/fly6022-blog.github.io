@@ -5,7 +5,7 @@
 @import "https://fonts.googleapis.com/css?family=Literata:400,700,800";
 @import "https://fonts.googleapis.com/css?family=Fira+Code:400,700";
 @font-face {
-  font-family: 'PlusJakartaSans-Medium';
+  font-family: 'Plus Jakarta Sans';
   src: url("https://kuri.ink/assets/fonts/PlusJakartaSans-Medium.ttf");
 }
 @font-face {
@@ -144,7 +144,7 @@ article {
 }
 article p {
   line-height: 24px;
-  font-family: 'Literata', 'PlusJakartaSans-Medium', Noto Serif SC;
+  font-family: 'Literata', Noto Serif SC;
 }
 article code {
   background-color: rgba(27,31,35,0.05);
@@ -308,7 +308,7 @@ article img.lazyloaded {
   opacity: 1;
 }
 article h1 {
-  font-family: "mingchao";
+  font-family: 'Literata', Noto Serif SC;
 }
 article h2,
 article h3,
@@ -545,7 +545,7 @@ article ul {
 }
 article ul li {
   position: relative;
-  padding: 10px 0;
+  padding: 3px 0;
   padding-left: 25px;
   line-height: 1rem;
 }
@@ -817,7 +817,7 @@ body {
   margin: auto !important;
 }
 strong {
-  font-family: "PlusJakartaSans-Medium", Inter, Noto Sans SC;
+  font-family: "Plus Jakarta Sans", Inter, Noto Sans SC;
 }
 .medium-zoom-overlay {
   z-index: 9999;
@@ -852,7 +852,7 @@ strong {
 }
 #nexmoe-header {
   margin-left: -240px;
-  font-family: "PlusJakartaSans-Medium";
+  font-family: "Plus Jakarta Sans";
 }
 #nexmoe-header .mdui-drawer {
   left: unset;
@@ -905,7 +905,7 @@ strong {
 #nexmoe-header .nexmoe-count div span {
   color: #363636;
   display: block;
-  font-family: "PlusJakartaSans-Medium", Noto Sans SC;
+  font-family: "Plus Jakarta Sans", Noto Sans SC;
 }
 #nexmoe-header .nexmoe-search input {
   border: none !important;
@@ -958,7 +958,7 @@ strong {
 }
 #nexmoe-header .nexmoe-list .nexmoe-list-item .mdui-list-item-content {
   margin-left: 0px;
-  font-family: "PlusJakartaSans-Medium", Noto Sans SC;
+  font-family: "Plus Jakarta Sans", Noto Sans SC;
   font-weight: 300;
 }
 #nexmoe-header .nexmoe-widget-wrap {
@@ -1142,7 +1142,7 @@ strong {
   z-index: 1;
   margin: 0;
   padding: 25px;
-  font-family: "PlusJakartaSans-Medium", Noto Sans SC;
+  font-family: "Plus Jakarta Sans", Noto Sans SC;
   font-weight: 700;
   text-shadow: 0 1px 3px rgba(0,0,0,0.251);
 }
@@ -1168,7 +1168,7 @@ strong {
 #nexmoe-content .nexmoe-post .nexmoe-post-meta {
   margin: 25px 0px;
   font-size: 0;
-  font-family: "PlusJakartaSans-Medium", Noto Sans SC;
+  font-family: "Plus Jakarta Sans", Noto Sans SC;
 }
 #nexmoe-content .nexmoe-post .nexmoe-post-meta a {
   border-radius: 20px;
