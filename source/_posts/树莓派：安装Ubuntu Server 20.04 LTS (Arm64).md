@@ -13,12 +13,12 @@ tags:
 
 date: 2021/5/29 19:03:17
 ---
-树莓派安装 Ubuntu Server 20.04 LTS (Arm64)
+树莓派安装 Ubuntu Server 20.04 LTS (Arm64; 版本代号: focal)
 
 <!--more-->
 
 !!! info
-    本教程仅适用于 Raspberry Pi 4B，安装的Ubuntu版本为Ubuntu Server 20.04 LTS (Arm64)
+    本教程仅适用于 Raspberry Pi 4B，安装的Ubuntu版本为Ubuntu Server 20.04 LTS (Arm64; 版本代号: focal)
 
 ## 需要准备
 

@@ -23,34 +23,138 @@ const chizaobook = new Chizaobook({container: "chizaobook", packageSource:"https
 
 ### 🤗 好朋友们
 
-<ul>
-<li><a target="_blank" rel="noopener" href="https://sunbossrs.github.io/" title="耀日庄主"><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.kuri.ink/images/links/sunbossrs.jpg" alt="耀日庄主" class="lazyload"></a></li>
-<li><a target="_blank" rel="noopener" href="https://tianiel.top" title="MOXUAN"><img data-fancybox="gallery" data-sizes="auto" data-src="https://q1.qlogo.cn/g?b=qq&amp;nk=615207910&amp;s=640" alt="MOXUAN" class="lazyload"></a></li>
-<li><a target="_blank" rel="noopener" href="https://9527dhx.top/" title="9527"><img data-fancybox="gallery" data-sizes="auto" data-src="https://gcore.jsdelivr.net/gh/9527DHX/img@main/9527-500px.png" alt="9527" class="lazyload"></a></li>
-<li><a target="_blank" rel="noopener" href="https://kaeshi.top/" title="Yang"><img data-fancybox="gallery" data-sizes="auto" data-src="https://i.loli.net/2020/03/10/UvP5SMEWYayFbiV.jpg" alt="Yang" class="lazyload"></a></li>
-<li><a target="_blank" rel="noopener" href="https://uuhhoooo.space/" title="UUHHOOOO"><img data-fancybox="gallery" data-sizes="auto" data-src="https://uuhhoooo.space/wp-content/uploads/2024/08/%E5%A4%B4%E5%83%8F%E6%96%B02_%E7%94%BB%E6%9D%BF-1.png" alt="UUHHOOOO" class="lazyload"></a></li>
-<li><a target="_blank" rel="noopener" href="https://p.cnedge.net/" title="PONYJUN 的雅舍"><img data-fancybox="gallery" data-sizes="auto" data-src="http://q.qlogo.cn/headimg_dl?dst_uin=1504322099&amp;spec=640&amp;img_type=jpg" alt="PONYJUN 的雅舍" class="lazyload"></a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.jonjs.cn/" title="Jonjs"><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.kuri.ink/images/links/jonjs.jpg" alt="Jonjs" class="lazyload"></a></li>
-<li><a target="_blank" rel="noopener" href="https://xding.top/" title="小丁的博客"><img data-fancybox="gallery" data-sizes="auto" data-src="https://xding.top/face.png" alt="小丁的博客" class="lazyload"></a></li>
-</ul>
+{% links %}
+[
+    {
+        "nickname": "Tianiel",
+        "logo": "https://q1.qlogo.cn/g?b=qq&nk=615207910&s=640",
+        "link": "https://tianiel.top/",
+        "class": "好朋友们"
+    },
+    {
+        "nickname": "Yang",
+        "logo": "https://kaeshi.top/_next/image?url=%2Favatar.jpg&w=1080&q=75",
+        "link": "https://kaeshi.top/",
+        "class": "好朋友们"
+    },
+    {
+        "nickname": "9527DHX",
+        "logo": "https://gcore.jsdelivr.net/gh/9527DHX/img@main/9527-500px.png",
+        "link": "https://9527dhx.top/",
+        "class": "好朋友们"
+    },
+    {
+        "nickname": "UUHHOOOO",
+        "logo": "https://uuhhoooo.space/wp-content/uploads/2024/08/%E5%A4%B4%E5%83%8F%E6%96%B02_%E7%94%BB%E6%9D%BF-1.png",
+        "link": "https://uuhhoooo.space/",
+        "class": "好朋友们"
+    },
+    {
+        "nickname": "PONYJUN",
+        "logo": "http://q.qlogo.cn/headimg_dl?dst_uin=1504322099&amp;spec=640&amp;img_type=jpg",
+        "link": "https://p.cnedge.net/",
+        "class": "好朋友们"
+    },
+    {
+        "nickname": "Jonjs",
+        "logo": "https://imageurl.kuri.ink/images/links/jonjs.jpg",
+        "link": "https://blog.jonjs.cn/",
+        "class": "好朋友们"
+    },
+    {
+        "nickname": "SunbossRS",
+        "logo": "https://imageurl.kuri.ink/images/links/sunbossrs.jpg",
+        "link": "https://sunbossrs.github.io/",
+        "class": "好朋友们"
+    },
+    {
+        "nickname": "小丁的屋舍",
+        "logo": "https://xding.top/face.png",
+        "link": "https://xding.top/",
+        "class": "好朋友们"
+    }
+]
+{% endlinks %}
 
 ### 📔 个人博客
 
-<ul>
-<li><a target="_blank" rel="noopener" href="https://atlinker.cn" title="Link"><img data-fancybox="gallery" data-sizes="auto" data-src="https://atlinker.cn/avatar/avatar.png" alt="Link" class="lazyload"></a></li>
-<li><a target="_blank" rel="noopener" href="https://www.fghrsh.net" title="FGHRSH"><img data-fancybox="gallery" data-sizes="auto" data-src="https://fp1.fghrsh.net/2020/01/19/18a92e19f933ec444501df4a564d40ca.png!q90.600p.jpeg" alt="FGHRSH" class="lazyload"></a></li>
-<li><a target="_blank" rel="noopener" href="https://www.puddingkc.com/" title="PuddingKC"><img data-fancybox="gallery" data-sizes="auto" data-src="https://www.puddingkc.com/_next/image?url=https%3A%2F%2Fwww.puddingkc.com%2Fapi%2Fv2%2Fobjects%2Favatar%2F2cfgqfbuk0clj9t0md.webp&w=640&q=75" alt="PuddingKC" class="lazyload"></a></li>
-<li><a target="_blank" rel="noopener" href="https://www.azusemisa.top" title="Islauso"><img data-fancybox="gallery" data-sizes="auto" data-src="https://cdn.jsdelivr.net/gh/xiao-lin52/cdn-assets/images/avatar.webp" alt="Islauso" class="lazyload"></a></li>
-<li><a target="_blank" rel="noopener" href="https://lovemen.cc/" title="橘纸柚"><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.kuri.ink/images/links/jzy.jpg" alt="橘纸柚" class="lazyload"></a></li>
-<li><a target="_blank" rel="noopener" href="https://luotianyi.vc/" title="Luminous"><img data-fancybox="gallery" data-sizes="auto" data-src="https://static.lty.fun/weblogo/my.jpg" alt="Luminous" class="lazyload"></a></li>
-<li><a target="_blank" rel="noopener" href="https://tsukisou.ink/" title="DrBlack"><img data-fancybox="gallery" data-sizes="auto" data-src="https://imageurl.kuri.ink/images/links/drblack.jpg" alt="DrBlack" class="lazyload"></a></li>
-</ul>
+{% links %}
+[
+    {
+        "nickname": "PuddingKC",
+        "logo": "https://www.puddingkc.com/_next/image?url=https%3A%2F%2Fwww.puddingkc.com%2Fapi%2Fv2%2Fobjects%2Favatar%2F2cfgqfbuk0clj9t0md.webp&w=640&q=75",
+        "link": "https://www.puddingkc.com/",
+        "class": "个人博客"
+    },
+    {
+        "nickname": "Link",
+        "logo": "https://atlinker.cn/avatar/avatar.png",
+        "link": "https://atlinker.cn/",
+        "class": "个人博客"
+    },
+    {
+        "nickname": "FGHRSH",
+        "logo": "https://fp1.fghrsh.net/2017/10/11/d383a9ad4318c5b4332fe02845f5323a.jpg",
+        "link": "https://www.fghrsh.net/",
+        "class": "个人博客"
+    },
+    {
+        "nickname": "土土博客",
+        "logo": "https://bu.dusays.com/2025/06/08/684490849e31f.png",
+        "link": "https://www.zzzzhi.com/",
+        "class": "个人博客"
+    },
+    {
+        "nickname": "蓝小柠的博客",
+        "logo": "https://cloudcache.bleshi.com/links.jpg",
+        "link": "https://bleshi.com/",
+        "class": "个人博客"
+    },
+    {
+        "nickname": "橘纸柚",
+        "logo": "https://lovemen.cc/usr/hotlink-ok/avatar.jpg",
+        "link": "https://lovemen.cc/",
+        "class": "个人博客"
+    },
+    {
+        "nickname": "Luminous",
+        "logo": "https://cdn.luotianyi.vc/wp-content/uploads/2020-02-13_09-22-57.jpg",
+        "link": "https://luotianyi.vc/",
+        "class": "个人博客"
+    },
+    {
+        "nickname": "DrBlack",
+        "logo": "https://m.360buyimg.com/babel/jfs/t1/51618/6/20696/27187/636bdcfcEfd72101c/14cec5230373963e.jpg",
+        "link": "https://tsukisou.ink/",
+        "class": "个人博客"
+    },
+    {
+        "nickname": "Islauso",
+        "logo": "https://www.azusemisa.top/img/avatar.webp",
+        "link": "https://www.azusemisa.top/",
+        "class": "个人博客"
+    }
+]
+{% endlinks %}
 
 ### 💻 官方网站
 
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.rxgzs.cn/" title="RX Studio"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s2.ax1x.com/2020/02/12/1bQCQS.th.jpg" alt="RX Studio" class="lazyload"></a></li>
-</ul>
+{% links %}
+[
+    {
+        "nickname": "RX Studio",
+        "logo": "https://s2.ax1x.com/2020/02/12/1bQCQS.th.jpg",
+        "link": "https://blog.rxgzs.cn/",
+        "class": "官方网站"
+    },
+    {
+        "nickname": "Cnedge",
+        "logo": "https://cnedge.net/wp-content/uploads/2022/03/cnedge-%E7%B4%AB%E8%89%B2%E6%B8%90%E5%8F%98.png",
+        "link": "https://gw.cnedge.net/",
+        "class": "官方网站"
+    }
+]
+{% endlinks %}
 
 ### 🔍 项目/工具
 
@@ -60,8 +164,13 @@ const chizaobook = new Chizaobook({container: "chizaobook", packageSource:"https
 
 <small>
 
-```markdown
-[![fly6022](https://imageurl.kuri.ink/images/logo.png)](https://blog.kuri.ink/ "fly6022")
+```json
+    {
+        "nickname": "fly6022",
+        "logo": "https://imageurl.kuri.ink/images/logo.png",
+        "link": "https://blog.kuri.ink/",
+        "des": "The older you get, the less you cry."
+    }
 ```
 
 </small>
