@@ -1,6 +1,6 @@
 avatar: https://imageurl.kuri.ink/images/logo.png # 网站 Logo
 background: # 既是博客的背景，又是文章默认头图
-  path: https://api.ee123.net/img/bingimg/dayimg.jpg
+  path: https://bing.img.run/uhd.php
   width: 1920
   height: 1080
 favicon:
